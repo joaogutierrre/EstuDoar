@@ -25,11 +25,19 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbAddAccount', () => {
-  test('should call LoadAccountByEmail with correct value', async () => {
+  test('should call LoadAccountByEmailRepository with correct value', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
     const accountData = mockAddAccountParams()
     await sut.add(accountData)
     expect(loadAccountByEmailRepositorySpy.data).toBe(accountData.email)
+  });
+
+  test('should throw if LoadAccountByEmailRepository throws', async () => {
+    const { sut, loadAccountByEmailRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByEmailRepositorySpy, 'loadByEmail').mockImplementationOnce(throwError)
+    const accountData = mockAddAccountParams()
+    const promise = sut.add(accountData)
+    await expect(promise).rejects.toThrow()
   });
 
   test('should call Hasher with correct value', async () => {
