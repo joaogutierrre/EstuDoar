@@ -1,6 +1,6 @@
 import { AddAccountRepositorySpy } from './../../../test/mock-db-account';
 import { throwError } from './../../../../domain/test/test-helper';
-import { mockAddAccountParams } from './../../../../domain/test/mock-account';
+import { mockAddAccountParams, mockAccountModel } from './../../../../domain/test/mock-account';
 import { DbAddAccount } from './db-add-account';
 import { HasherSpy } from './../../../test/mock-criptography';
 
@@ -55,5 +55,12 @@ describe('DbAddAccount', () => {
     const accountData = mockAddAccountParams()
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
+  });
+
+  test('should return an account on success', async () => {
+    const { sut, addAccountRepositorySpy } = makeSut()
+    const accountData = mockAddAccountParams()
+    const account = await sut.add(accountData)
+    expect(account).toEqual(mockAccountModel())
   });
 });
