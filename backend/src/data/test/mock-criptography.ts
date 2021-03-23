@@ -1,10 +1,10 @@
 import { Hasher } from './../protocols/criptography/hasher';
 
 export class HasherSpy implements Hasher {
-  value: string
+  data: string
   result: string = 'hashed_password'
-  async hash (value: string): Promise<string> {
-    this.value = value
+  async hash (data: string): Promise<string> {
+    this.data = data
     return this.result
   }
 }
