@@ -21,6 +21,6 @@ describe('DbAddAccount', () => {
     const { sut, hasherSpy } = makeSut()
     const accountData = mockAddAccountParams()
     await sut.add(accountData)
-    expect(hasherSpy.value).toBe('any_password')
+    expect(hasherSpy.value).toBe(accountData.password)
   });
 });
