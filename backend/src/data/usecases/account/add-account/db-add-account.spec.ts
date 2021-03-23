@@ -58,7 +58,7 @@ describe('DbAddAccount', () => {
   });
 
   test('should return an account on success', async () => {
-    const { sut, addAccountRepositorySpy } = makeSut()
+    const { sut } = makeSut()
     const accountData = mockAddAccountParams()
     const account = await sut.add(accountData)
     expect(account).toEqual(mockAccountModel())
