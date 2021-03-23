@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:staged": "jest",
+    "test:verbose": "npm test -- --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch"
   },
   "keywords": [],
