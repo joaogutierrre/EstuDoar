@@ -1,0 +1,41 @@
+@media (max-width: 800px) {
+    .hero-container {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1509062522246-3755977927d7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1404&q=80);
+      /* Set a specific height */
+      height: 50%;
+      width: 100%;
+      /* Position and center the image to scale nicely on all screens */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+  
+      color: rgb(236, 240, 241);
+  
+    }
+    .hero-container h1 {
+        padding-top: 10%;
+        font-size: 2.5em;
+        margin-bottom: 3%;
+    }
+  
+    .hero-container p {
+        font-size: 1.3em;
+    }
+    .hero-container button {
+      margin: 3%;
+      padding: 5%;
+    }
+  
+    .hero-buttons-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .hero-buttons-container button {
+      width: 80%;
+      font-size: 1.3em;
+      max-width: 300px;
+    }
+  }

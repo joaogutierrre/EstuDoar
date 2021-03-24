@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import Hero from '../components/Hero'
 import './Home.css'
 
 class Home extends Component {
     render() {
         return(
             <div className='home'>
-                <section className='hero-container'>
-                    <h1>Bem-Vindo <br /> a <br />Estudoar</h1>
-                    <p>auxiliando a educação ao seu redor</p>
-                    <div className='hero-buttons-container'>
-                        <button type='button' className='register'>Cadastre-se</button>
-                        <button type='button'>Já sou Cadastrado</button>
-                    </div>
+                <Hero />
+                <section className='brand-phrase'>
+                    <h2>
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                    </h2>
                 </section>
+                <div className='students-image'/>
+                
             </div>
         );
     }
