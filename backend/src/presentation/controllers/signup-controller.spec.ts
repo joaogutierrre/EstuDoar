@@ -1,3 +1,4 @@
+import { ValidationSpy } from './../test/mock-validation';
 import { Authentication } from './../../domain/usecases/account/authentication';
 import { EmailInUseError } from './../errors/email-in-use-error';
 import { ServerError } from './../errors/server-error';
@@ -19,16 +20,19 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
-  authentication: AuthenticationSpy
+  authenticationSpy: AuthenticationSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = () => {
   const addAccountSpy = new AddAccountSpy()
-  const authentication = new AuthenticationSpy()
-  const sut = new SignUpController(addAccountSpy, authentication)
+  const authenticationSpy = new AuthenticationSpy()
+  const validationSpy = new ValidationSpy()
+  const sut = new SignUpController(addAccountSpy, authenticationSpy, validationSpy)
   return {
     sut,
-    addAccountSpy
+    addAccountSpy,
+    validationSpy
   }
 }
 
@@ -67,6 +71,13 @@ describe('SignUpController', () => {
     const { sut } = makeSut()
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token'} ))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token'}))
+  });
+  
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(validationSpy.data).toEqual(httpRequest.body)
   });
 });
