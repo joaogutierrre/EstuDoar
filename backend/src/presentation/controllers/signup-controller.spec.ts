@@ -33,7 +33,8 @@ const makeSut = () => {
   return {
     sut,
     addAccountSpy,
-    validationSpy
+    validationSpy,
+    authenticationSpy
   }
 }
 
@@ -88,5 +89,15 @@ describe('SignUpController', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  });
+
+  test('should call Authentication with correct values', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(authenticationSpy.data).toEqual({
+      email: 'any_email@email.com',
+      password: 'any_password'
+    })
   });
 });
