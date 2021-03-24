@@ -7,7 +7,8 @@
     "test": "jest",
     "test:staged": "jest",
     "test:verbose": "npm test -- --passWithNoTests --runInBand",
-    "test:unit": "npm test -- --watch"
+    "test:unit": "npm test -- --watch",
+    "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
