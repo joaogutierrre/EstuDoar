@@ -32,4 +32,10 @@ describe('Name of the group', () => {
     const isValid = sut.isValid('any_email@email.com')
     expect(isValid).toBe(false)
   });
+
+  test('should returns false if validator returns false', () => {
+    const { sut } = makeSut()
+    const isValid = sut.isValid('any_email@email.com')
+    expect(isValid).toBe(true)
+  });
 });
