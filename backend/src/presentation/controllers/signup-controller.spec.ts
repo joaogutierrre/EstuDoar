@@ -1,8 +1,9 @@
+import { MissingParamError } from './../errors/missing-param-error';
 import { ValidationSpy } from './../test/mock-validation';
 import { Authentication } from './../../domain/usecases/account/authentication';
 import { EmailInUseError } from './../errors/email-in-use-error';
 import { ServerError } from './../errors/server-error';
-import { serverError, forbidden, ok } from './../helpers/http/http-helper';
+import { serverError, forbidden, ok, badRequest } from './../helpers/http/http-helper';
 import { HttpRequest } from './../protocols/http';
 import { AddAccountSpy, AuthenticationSpy } from './../test/mock-account';
 import { SignUpController } from './signup-controller';
@@ -79,5 +80,13 @@ describe('SignUpController', () => {
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(validationSpy.data).toEqual(httpRequest.body)
+  });
+
+  test('should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    jest.spyOn(validationSpy, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 });
