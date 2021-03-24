@@ -1,3 +1,4 @@
+import { throwError } from './../../domain/test/test-helper';
 import { MissingParamError } from './../errors/missing-param-error';
 import { ValidationSpy } from './../test/mock-validation';
 import { Authentication } from './../../domain/usecases/account/authentication';
@@ -99,5 +100,13 @@ describe('SignUpController', () => {
       email: 'any_email@email.com',
       password: 'any_password'
     })
+  });
+
+  test('should return 500 if Authentication throws', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    jest.spyOn(authenticationSpy, 'auth'). mockImplementationOnce(throwError)
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   });
 });
