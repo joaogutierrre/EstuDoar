@@ -1,5 +1,6 @@
+import { EmailInUseError } from './../errors/email-in-use-error';
 import { ServerError } from './../errors/server-error';
-import { serverError } from './../helpers/http/http-helper';
+import { serverError, forbidden } from './../helpers/http/http-helper';
 import { HttpRequest } from './../protocols/http';
 import { AddAccountSpy } from './../test/mock-account';
 import { SignUpController } from './signup-controller';
@@ -49,5 +50,13 @@ describe('SignUpController', () => {
       cpf: 'any_cpf',
       password: 'any_password'
     })
+  });
+
+  test('should returns 403 if AddAccount returns null', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    jest.spyOn(addAccountSpy, 'add').mockReturnValueOnce(null)
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   });
 });
