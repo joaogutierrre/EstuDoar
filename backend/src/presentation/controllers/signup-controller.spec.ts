@@ -1,8 +1,9 @@
+import { Authentication } from './../../domain/usecases/account/authentication';
 import { EmailInUseError } from './../errors/email-in-use-error';
 import { ServerError } from './../errors/server-error';
-import { serverError, forbidden } from './../helpers/http/http-helper';
+import { serverError, forbidden, ok } from './../helpers/http/http-helper';
 import { HttpRequest } from './../protocols/http';
-import { AddAccountSpy } from './../test/mock-account';
+import { AddAccountSpy, AuthenticationSpy } from './../test/mock-account';
 import { SignUpController } from './signup-controller';
 
 const mockRequest = (): HttpRequest => ({
@@ -18,11 +19,13 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
+  authentication: AuthenticationSpy
 }
 
 const makeSut = () => {
   const addAccountSpy = new AddAccountSpy()
-  const sut = new SignUpController(addAccountSpy)
+  const authentication = new AuthenticationSpy()
+  const sut = new SignUpController(addAccountSpy, authentication)
   return {
     sut,
     addAccountSpy
@@ -58,5 +61,12 @@ describe('SignUpController', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
+  });
+
+  test('should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token'} ))
   });
 });
