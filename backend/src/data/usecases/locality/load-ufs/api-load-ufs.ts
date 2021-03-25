@@ -8,7 +8,7 @@ export class ApiLoadUfs implements LoadUfs {
   ) {}
 
   async load (): Promise<UfsModel> {
-    this.loadUfsService.loadAllUfs()
-    return null
+    const ufs = await this.loadUfsService.loadAllUfs()
+    return ufs
   }
 }
