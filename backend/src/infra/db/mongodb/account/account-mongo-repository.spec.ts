@@ -1,4 +1,4 @@
-import { MongoHelper } from './../../../helpers/mongo-helper';
+import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository';
 import { mockAddAccountParams } from './../../../../domain/test/mock-account';
 import { Collection } from "mongodb";
