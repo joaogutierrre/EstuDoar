@@ -30,4 +30,11 @@ describe('ApiLoadUfs', () => {
     const promise = sut.load()
     expect(promise).rejects.toThrow()
   });
+
+  test('should return null if LoadUfsService returns null', async () => {
+    const { sut, loadUfsServiceSpy } = makeSut()
+    jest.spyOn(loadUfsServiceSpy, 'loadAllUfs').mockReturnValueOnce(null)
+    const ufs = await sut.load()
+    expect(ufs).toBeNull()
+  });
 });
