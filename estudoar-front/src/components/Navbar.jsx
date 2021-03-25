@@ -35,7 +35,7 @@ class Navbar extends Component {
                     </Link>
                 </div>
                 <div className='menu-icon' onClick={this.handleClick}>
-                    <AiOutlineMenu className={click ? 'fas fa-times' : 'fas fa-bars'} value={{ color: 'blue', size: '500px' }}/>
+                    <AiOutlineMenu className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item'>
