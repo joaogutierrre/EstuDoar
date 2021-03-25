@@ -1,7 +1,7 @@
-import { Authentication, AuthenticationParams } from './../../domain/usecases/account/authentication';
-import { mockAccountModel } from './../../domain/test/mock-account';
-import { AccountModel } from './../../domain/model/account';
-import { AddAccount, AddAccountParams } from './../../domain/usecases/account/add-account';
+import { Authentication, AuthenticationParams } from '../../domain/usecases/account/authentication';
+import { mockAccountModel } from '../../domain/test/mock-account';
+import { AccountModel } from '../../domain/model/account';
+import { AddAccount, AddAccountParams } from '../../domain/usecases/account/add-account';
 
 export class AddAccountSpy implements AddAccount {
   data: object

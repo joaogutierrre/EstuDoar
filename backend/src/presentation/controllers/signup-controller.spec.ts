@@ -1,3 +1,4 @@
+import { mockAccountModel } from './../../domain/test/mock-account';
 import { throwError } from '../../domain/test/test-helper';
 import { MissingParamError } from '../errors/missing-param-error';
 import { ValidationSpy } from '../test/mock-validation';
@@ -22,20 +23,20 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
-  authenticationSpy: AuthenticationSpy
+  //authenticationSpy: AuthenticationSpy
   validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
-  const authenticationSpy = new AuthenticationSpy()
+  //const authenticationSpy = new AuthenticationSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new SignUpController(addAccountSpy, authenticationSpy, validationSpy)
+  const sut = new SignUpController(addAccountSpy, validationSpy)
   return {
     sut,
     addAccountSpy,
     validationSpy,
-    authenticationSpy
+    //authenticationSpy
   }
 }
 
@@ -74,7 +75,7 @@ describe('SignUpController', () => {
     const { sut } = makeSut()
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token'}))
+    expect(httpResponse).toEqual(ok(mockAccountModel()))
   });
   
   test('should call Validation with correct values', async () => {
@@ -92,6 +93,7 @@ describe('SignUpController', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 
+  /*
   test('should call Authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
     const httpRequest = mockRequest()
@@ -109,4 +111,5 @@ describe('SignUpController', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
   });
+  */
 });

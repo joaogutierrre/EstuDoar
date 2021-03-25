@@ -1,4 +1,4 @@
-import { Validation } from './../protocols/validation';
+import { Validation } from '../protocols/validation';
 
 export class ValidationSpy implements Validation {
   data: any
