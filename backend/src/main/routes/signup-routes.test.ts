@@ -1,4 +1,4 @@
-import { MongoHelper } from './../../infra/helpers/mongo-helper';
+import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper';
 import request from 'supertest'
 import app from '../config/app'
 
@@ -22,6 +22,7 @@ describe('SignUp Routes', () => {
       .send({
         name: 'any_name',
         email: 'any_email@email.com',
+        cpf: '11111111111',
         password: '123',
         passwordConfirmation: '123'
       })
