@@ -43,4 +43,17 @@ describe('AccountMongoRepository', () => {
       expect(account.password).toBe(accountParams.password)
     })
   });
+
+  describe('loadByEmail()', () => {
+    test('should return an account on loadByEmail success', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne(mockAddAccountParams())
+      const account = await sut.loadByEmail('any_email@email.com')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.password).toBe('any_password')
+    });
+  });
 });
