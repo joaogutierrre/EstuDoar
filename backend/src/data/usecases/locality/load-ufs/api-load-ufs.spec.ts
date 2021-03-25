@@ -37,4 +37,20 @@ describe('ApiLoadUfs', () => {
     const ufs = await sut.load()
     expect(ufs).toBeNull()
   });
+
+  test('should return a list of ufs on success', async () => {
+    const { sut } = makeSut()
+    const ufs = await sut.load()
+    expect(ufs).toEqual({
+      ufs: [{
+        id: 1,
+        acronym: 'SP',
+        name: 'São Paulo'
+      }, {
+        id: 2,
+        acronym: 'RJ',
+        name: 'Rio de Janeiro'
+      }]
+    })
+  });
 });
