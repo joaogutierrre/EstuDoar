@@ -1,12 +1,12 @@
-import { throwError } from './../../domain/test/test-helper';
-import { MissingParamError } from './../errors/missing-param-error';
-import { ValidationSpy } from './../test/mock-validation';
-import { Authentication } from './../../domain/usecases/account/authentication';
-import { EmailInUseError } from './../errors/email-in-use-error';
-import { ServerError } from './../errors/server-error';
-import { serverError, forbidden, ok, badRequest } from './../helpers/http/http-helper';
-import { HttpRequest } from './../protocols/http';
-import { AddAccountSpy, AuthenticationSpy } from './../test/mock-account';
+import { throwError } from '../../domain/test/test-helper';
+import { MissingParamError } from '../errors/missing-param-error';
+import { ValidationSpy } from '../test/mock-validation';
+import { Authentication } from '../../domain/usecases/account/authentication';
+import { EmailInUseError } from '../errors/email-in-use-error';
+import { ServerError } from '../errors/server-error';
+import { serverError, forbidden, ok, badRequest } from '../helpers/http/http-helper';
+import { HttpRequest } from '../protocols/http';
+import { AddAccountSpy, AuthenticationSpy } from '../test/mock-account';
 import { SignUpController } from './signup-controller';
 
 const mockRequest = (): HttpRequest => ({
@@ -26,7 +26,7 @@ type SutTypes = {
   validationSpy: ValidationSpy
 }
 
-const makeSut = () => {
+const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
   const authenticationSpy = new AuthenticationSpy()
   const validationSpy = new ValidationSpy()
