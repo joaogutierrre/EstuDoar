@@ -1,6 +1,6 @@
 import { UfsModel, CitiesModel } from './../model/locality';
 
-export const mockLoadUfs = (): UfsModel => ({
+export const mockUfsModel = (): UfsModel => ({
   ufs: [{
     id: 1,
     acronym: 'SP',
