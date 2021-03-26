@@ -1,3 +1,4 @@
+import { mockCitiesModel } from './../../../../domain/test/mock-locality';
 import { throwError } from './../../../../domain/test/test-helper';
 import { LoadCitiesByUfService } from './../../../protocols/service/load-cities-by-uf-service';
 import { ApiLoadCitiesByUf } from './api-load-cities-by-uf';
@@ -42,14 +43,6 @@ describe('ApiLoadCitiesByUf', () => {
   test('should return a list of ufs on success', async () => {
     const { sut } = makeSut()
     const cities = await sut.load('any_uf')
-    expect(cities).toEqual({
-      cities: [{
-        id: 1,
-        name: 'Santos'
-      }, {
-        id: 2,
-        name: 'São Paulo'
-      }]
-    })
+    expect(cities).toEqual(mockCitiesModel())
   });
 });

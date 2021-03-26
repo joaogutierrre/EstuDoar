@@ -1,4 +1,4 @@
-import { mockLoadUfs } from './../../domain/test/mock-locality';
+import { mockUfsModel } from './../../domain/test/mock-locality';
 import { LoadUfsSpy } from './../test/mock-locality';
 import { ServerError } from './../errors/server-error';
 import { serverError, forbidden, ok } from './../helpers/http/http-helper';
@@ -37,6 +37,6 @@ describe('LoadUfsController', () => {
   test('should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
-    expect(httpResponse).toEqual(ok(mockLoadUfs()))
+    expect(httpResponse).toEqual(ok(mockUfsModel()))
   });
 });
