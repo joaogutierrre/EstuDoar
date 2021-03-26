@@ -1,4 +1,4 @@
-import { mockAccountModel } from './../../domain/test/mock-account';
+import { mockAccountModel } from '../../domain/test/mock-account';
 import { throwError } from '../../domain/test/test-helper';
 import { MissingParamError } from '../errors/missing-param-error';
 import { ValidationSpy } from '../test/mock-validation';
