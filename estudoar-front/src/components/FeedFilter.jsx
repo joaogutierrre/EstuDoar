@@ -4,23 +4,22 @@ class FeedFilter extends Component {
   render() {
     return (
       <div>
-        <h1>Form</h1>
         <form>
-          <label>
+          <label htmlFor="states">
             Estados
-            <select>
-              <option value={null}>Selecione o Estado</option>
+            <select id="states">
+              <option value={ null }>Selecione o Estado</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="cities">
             Cidades
-            <select>
+            <select id="cities">
               <option value="all">Todas as Cidades</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="schools">
             Escolas
-            <select>
+            <select id="schools">
               <option value="all">Todas as Escolas</option>
             </select>
           </label>
