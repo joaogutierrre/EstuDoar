@@ -8,7 +8,7 @@ export class ApiLoadCitiesByUf implements LoadCitiesByUf {
   ) {}
 
   async load (uf: string): Promise<CitiesModel> {
-    await this.loadCitiesByUfService.loadCitiesByUf(uf)
-    return null
+    const cities = await this.loadCitiesByUfService.loadCitiesByUf(uf)
+    return cities
   }
 }
