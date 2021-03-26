@@ -31,4 +31,11 @@ describe('ApiLoadCitiesByUf', () => {
     const promise = sut.load('any_uf')
     expect(promise).rejects.toThrow()
   });
+
+  test('should return null if LoadUfsService returns null', async () => {
+    const { sut, loadCitiesByUfServiceSpy } = makeSut()
+    jest.spyOn(loadCitiesByUfServiceSpy, 'loadCitiesByUf').mockReturnValueOnce(null)
+    const cities = await sut.load('any_uf')
+    expect(cities).toBeNull()
+  });
 });
