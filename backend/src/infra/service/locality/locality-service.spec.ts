@@ -36,5 +36,16 @@ describe('LocalityService', () => {
       const cities = await sut.loadCitiesByUf('any_uf')
       expect(cities).toBe(null)
     });
+
+    test('should return a list of cities if axios returns status code 200', async () => {
+      const { sut } = makeSut()
+      jest.spyOn(axios, 'get').mockReturnValueOnce(Promise.resolve({
+        data: {
+          statusCode: 200
+        }
+      }))
+      const cities = await sut.loadCitiesByUf('any_uf')
+      expect(cities).toBeTruthy()
+    });
   });
 });
