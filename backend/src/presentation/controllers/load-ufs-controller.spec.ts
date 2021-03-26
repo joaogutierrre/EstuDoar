@@ -26,4 +26,10 @@ describe('LoadUfsController', () => {
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
   });
+
+  test('should call LoadUfs', async () => {
+    const { sut, loadUfsSpy } = makeSut()
+    await sut.handle({})
+    expect(loadUfsSpy.wasCalled).toBe(true)
+  });
 });
