@@ -1,4 +1,4 @@
-import { serverError } from './../helpers/http/http-helper';
+import { serverError, ok } from './../helpers/http/http-helper';
 import { ServerError } from './../errors/server-error';
 import { HttpRequest, HttpResponse } from './../protocols/http';
 import { Controller } from './../protocols/controller';
@@ -12,7 +12,8 @@ export class LoadUfsController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      await this.loadUfs.load()
+      const ufs = await this.loadUfs.load()
+      return ok(ufs)
     } catch (error) {
       return serverError(new ServerError(error))
     }
