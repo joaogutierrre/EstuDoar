@@ -1,4 +1,4 @@
-import { HashComparerSpy } from './../../../test/mock-criptography';
+import { HashComparerSpy, EncrypterSpy } from './../../../test/mock-criptography';
 import { throwError } from './../../../../domain/test/test-helper';
 import { mockAuthenticationParams } from './../../../../domain/test/mock-account';
 import { LoadAccountByEmailRepositorySpy } from './../../../test/mock-db-account';
@@ -8,16 +8,19 @@ type SutTypes = {
   sut: DbAuthentication
   loadAccountByEmailRepositorySpy: LoadAccountByEmailRepositorySpy
   hashComparerSpy: HashComparerSpy
+  encrypterSpy: EncrypterSpy
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositorySpy = new LoadAccountByEmailRepositorySpy()
   const hashComparerSpy = new HashComparerSpy()
-  const sut = new DbAuthentication(loadAccountByEmailRepositorySpy, hashComparerSpy)
+  const encrypterSpy = new EncrypterSpy()
+  const sut = new DbAuthentication(loadAccountByEmailRepositorySpy, hashComparerSpy, encrypterSpy)
   return {
     sut,
     loadAccountByEmailRepositorySpy,
-    hashComparerSpy
+    hashComparerSpy,
+    encrypterSpy
   }
 }
 
@@ -61,5 +64,11 @@ describe('DbAuthentication', () => {
     jest.spyOn(hashComparerSpy, 'compare').mockReturnValueOnce(Promise.resolve(false))
     const accessToken = await sut.auth(mockAuthenticationParams())
     await expect(accessToken).toBeNull()
+  });
+
+  test('should call Encrypter with correct value', async () => {
+    const { sut, encrypterSpy } = makeSut()
+    await sut.auth(mockAuthenticationParams())
+    expect(encrypterSpy.data).toBe('any_id')
   });
 });
