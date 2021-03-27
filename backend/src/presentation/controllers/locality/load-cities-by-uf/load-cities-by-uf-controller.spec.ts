@@ -31,4 +31,10 @@ describe('LoadCitiesByUf Controller', () => {
     const promise = sut.handle(mockRequest())
     expect(promise).rejects.toThrow()
   });
+
+  test('should call LoadCitiesByUf with correct value', async () => {
+    const { sut, loadCitiesByUfSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(loadCitiesByUfSpy.data).toBe('any_uf')
+  });
 });
