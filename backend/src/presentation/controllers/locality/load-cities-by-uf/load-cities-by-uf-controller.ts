@@ -12,7 +12,7 @@ export class LoadCitiesByUfController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { uf } = httpRequest.body
+      const { uf } = httpRequest.params
       const cities = await this.loadCitiesByUf.load(uf)
       if (!cities) {
         return serviceUnavaible(new ServiceUnavaibleError())

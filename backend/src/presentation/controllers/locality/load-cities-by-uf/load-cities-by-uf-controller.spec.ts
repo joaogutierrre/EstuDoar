@@ -7,7 +7,7 @@ import { LoadCitiesByUfSpy } from './../../../test/mock-locality';
 import { LoadCitiesByUfController } from './load-cities-by-uf-controller';
 
 const mockRequest = (): HttpRequest => ({
-  body: {
+  params: {
     uf: 'any_uf'
   }
 })
