@@ -1,6 +1,6 @@
 import { LoginController } from './login-controller';
 import { ServerError } from './../../../errors/server-error';
-import { serverError, unauthorized } from './../../../helpers/http/http-helper';
+import { serverError, unauthorized, ok } from './../../../helpers/http/http-helper';
 import { AuthenticationSpy } from './../../../test/mock-account';
 import { HttpRequest } from './../../../protocols/http';
 
@@ -52,5 +52,12 @@ describe('LoginController', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(unauthorized())
+  })
+
+  test('should return 200 if valid credentials are provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 });
