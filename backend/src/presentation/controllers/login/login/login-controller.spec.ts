@@ -1,6 +1,6 @@
 import { LoginController } from './login-controller';
 import { ServerError } from './../../../errors/server-error';
-import { serverError } from './../../../helpers/http/http-helper';
+import { serverError, unauthorized } from './../../../helpers/http/http-helper';
 import { AuthenticationSpy } from './../../../test/mock-account';
 import { HttpRequest } from './../../../protocols/http';
 
@@ -36,7 +36,7 @@ describe('LoginController', () => {
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
   });
 
-  test('should call AddAccount with correct values', async () => {
+  test('should call Authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
@@ -45,4 +45,12 @@ describe('LoginController', () => {
       password: 'any_password'
     })
   });
+
+  test('should return 401 if invalid credentials are provided', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(null)
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(unauthorized())
+  })
 });
