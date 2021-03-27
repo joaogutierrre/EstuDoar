@@ -1,0 +1,35 @@
+.feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-list {
+    width: 90%;
+    max-width: 1240px;
+    margin: 20px auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+}
+
+@media only screen and (min-width: 560px) {
+    .card-list {
+      grid-template-columns: 1fr 1fr;
+    }  
+}
+
+@media only screen and (min-width: 800px) {
+    .card-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
