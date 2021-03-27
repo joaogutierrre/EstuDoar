@@ -9,7 +9,7 @@ export class DbLoadCategory implements LoadCategories {
     ){}
 
     async load(): Promise<CategoryModel[]> {
-        await this.loadCategoryRepository.loadByCategory()
+        await this.loadCategoryRepository.loadCategory()
         return null
     }
 
