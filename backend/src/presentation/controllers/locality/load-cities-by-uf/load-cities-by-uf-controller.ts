@@ -4,10 +4,12 @@ import { Controller } from './../../../protocols/controller';
 
 export class LoadCitiesByUfController implements Controller {
   constructor (
-    private readonly LoadCitiesByUf: LoadCitiesByUf
+    private readonly loadCitiesByUf: LoadCitiesByUf
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    const { uf } = httpRequest.body
+    await this.loadCitiesByUf.load(uf)
     return null
   }
 }
