@@ -1,6 +1,7 @@
 import { throwError } from './../../../domain/test/test-helper';
 import { JwtAdapter } from './jwt-adapter';
 import jsonwebtoken from 'jsonwebtoken'
+import { access } from 'node:fs';
 
 jest.mock('jsonwebtoken', () => ({
   async sign (): Promise<string> {
@@ -33,6 +34,12 @@ describe('JwtAdapter', () => {
       jest.spyOn(jsonwebtoken, 'sign').mockImplementationOnce(throwError)
       const promise = sut.encrypt('any_id')
       expect(promise).rejects.toThrow()
+    });
+
+    test('should return a token on sign success', async () => {
+      const { sut } = makeSut()
+      const accessToken = await sut.encrypt('any_id')
+      expect(accessToken).toBe('any_token')
     });
   });
 });
