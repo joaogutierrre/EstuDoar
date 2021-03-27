@@ -1,3 +1,4 @@
+import { ValidationSpy } from './../../../test/mock-validation';
 import { LoginController } from './login-controller';
 import { ServerError } from './../../../errors/server-error';
 import { serverError, unauthorized, ok } from './../../../helpers/http/http-helper';
@@ -14,14 +15,17 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: LoginController
   authenticationSpy: AuthenticationSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const authenticationSpy = new AuthenticationSpy()
-  const sut = new LoginController(authenticationSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new LoginController(authenticationSpy, validationSpy)
   return {
     sut,
-    authenticationSpy
+    authenticationSpy,
+    validationSpy
   }
 }
 
@@ -60,4 +64,11 @@ describe('LoginController', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
+
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(validationSpy.data).toEqual(httpRequest.body)
+  });
 });
