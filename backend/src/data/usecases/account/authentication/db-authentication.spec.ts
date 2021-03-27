@@ -95,4 +95,10 @@ describe('DbAuthentication', () => {
     const promise = sut.auth(mockAuthenticationParams())
     await expect(promise).rejects.toThrow()
   });
+
+  test('should return an accessToken on success', async () => {
+    const { sut } = makeSut()
+    const accessToken = await sut.auth(mockAuthenticationParams())
+    expect(accessToken).toBe('any_token')
+  });
 });
