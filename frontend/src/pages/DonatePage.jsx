@@ -1,40 +1,42 @@
 import React, { Component } from 'react';
-
+import './DonatePage.css'
 class DonatePage extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            schoolSupplies: [
-                {
-                    name: 'Caderno',
-                    quantity: 3,
-                    donated: 0,
-                },
-                {
-                    name: 'Caderno',
-                    quantity: 3,
-                    donated: 0,
-                },
-                {
-                    name: 'Caderno',
-                    quantity: 3,
-                    donated: 0,
-                },
-            ]
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      schoolSupplies: [
+        {
+          name: 'Caderno',
+          quantity: 3,
+          donated: 0,
+        },
+        {
+          name: 'Caderno',
+          quantity: 3,
+          donated: 0,
+        },
+        {
+          name: 'Caderno',
+          quantity: 3,
+          donated: 0,
+        },
+      ],
+    };
+  }
   render() {
-      const { schoolSupplies } = this.state;
-      const itensList = schoolSupplies.map((item, index) => (
-          <div className='item-container' key={index}>
-          <li>{item.quantity} x {item.name}</li>
-          <button>+</button>
-          <button>-</button>
-          <span>0</span>
-          </div>
-      ));
+    const { schoolSupplies } = this.state;
+    const itemsList = schoolSupplies.map((item, index) => (
+      <div className="item-container" key={index}>
+        <li>
+          {item.quantity} x {item.name}
+        </li>
+        <button className="round-button green">+</button>
+        <button className="round-button red">-</button>
+        <span>0</span>
+      </div>
+    ));
     return (
-      <div>
+      <div className="donate-page">
         <div className="image-container">
           <img
             src="https://images.unsplash.com/photo-1499323888381-7fd102a793de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"
@@ -55,11 +57,9 @@ class DonatePage extends Component {
             deleniti corporis.
           </p>
         </div>
-        <div className="donation-list-container">
-            <h3>Lista de Materiais</h3>
-          <ul>
-            {itensList}
-          </ul>
+        <div className="list-container">
+          <h3>Lista de Materiais</h3>
+          <ul>{itemsList}</ul>
         </div>
         <div className="button-container">
           <button>Finalizar Doação</button>
