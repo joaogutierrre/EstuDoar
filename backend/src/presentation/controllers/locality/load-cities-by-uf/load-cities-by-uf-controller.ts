@@ -1,3 +1,6 @@
+import { ServiceUnavaibleError } from './../../../errors/service-unavaible-error';
+import { ServerError } from './../../../errors/server-error';
+import { ok, serverError, serviceUnavaible } from './../../../helpers/http/http-helper';
 import { LoadCitiesByUf } from './../../../../domain/usecases/locality/load-cities-by-uf';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -8,8 +11,15 @@ export class LoadCitiesByUfController implements Controller {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { uf } = httpRequest.body
-    await this.loadCitiesByUf.load(uf)
-    return null
+    try {
+      const { uf } = httpRequest.body
+      const cities = await this.loadCitiesByUf.load(uf)
+      if (!cities) {
+        return serviceUnavaible(new ServiceUnavaibleError())
+      }
+      return ok(cities)
+    } catch (error) {
+      return serverError(new ServerError(error))
+    }
   }
 }
