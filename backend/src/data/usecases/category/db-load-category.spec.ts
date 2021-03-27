@@ -1,6 +1,6 @@
 import { LoadCategoryRepositorySpy } from "../../test/mock-load-category";
 import { DbLoadCategory } from "./db-load-category";
-import { mockCategoryModel } from './../../../domain/test/mock-category'
+import {throwError} from './../../../domain/test/test-helper';
 
 type SutTypes = {
     sut: DbLoadCategory
@@ -19,9 +19,15 @@ const makeSut = (): SutTypes => {
 describe('DbLoadCategory', () => {
     test('should call LoadCategoryRepository', async () => {
         const { sut, loadCategoryRepositorySpy } = makeSut()
-        const loadByCategorySpy = jest.spyOn(loadCategoryRepositorySpy, 'loadByCategory')
-        await sut.load() 
-        expect(loadByCategorySpy).toHaveBeenCalled()
+        const loadCategorySpy = jest.spyOn(loadCategoryRepositorySpy, 'loadCategory')
+        await sut.load()
+        expect(loadCategorySpy).toHaveBeenCalled()
     });
 
+    test('should throw if LoadCategoryRepository throws', async () => {
+        const { sut, loadCategoryRepositorySpy } = makeSut()
+        jest.spyOn(loadCategoryRepositorySpy, 'loadCategory').mockImplementationOnce(throwError)
+        const promise = sut.load()
+        await expect(promise).rejects.toThrow()
+    });
 });
