@@ -1,5 +1,4 @@
-import { CategoryModel } from "../../model/category";
-
-export interface LoadCategories{
-    load: () => Promise<CategoryModel[]>
+import { CategoriesModel } from "../../model/category";
+export interface LoadCategories {
+    load: () => Promise<CategoriesModel>
 }
