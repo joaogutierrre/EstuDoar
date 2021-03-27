@@ -1,5 +1,5 @@
 import { ServerError } from './../../../errors/server-error';
-import { serverError, unauthorized } from './../../../helpers/http/http-helper';
+import { serverError, unauthorized, ok } from './../../../helpers/http/http-helper';
 import { Authentication } from './../../../../domain/usecases/account/authentication';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -16,7 +16,7 @@ export class LoginController implements Controller {
       if (!accessToken) {
         return unauthorized()
       }
-      return null
+      return ok({ accessToken })
     } catch (error) {
       return serverError(error)
     } 
