@@ -24,7 +24,7 @@ export class HashComparerSpy implements HashComparer {
 
 export class EncrypterSpy implements Encrypter {
   data: string
-  result: string = 'encrypted_data'
+  result: string = 'any_token'
   async encrypt (data: string): Promise<string> {
     this.data = data
     return this.result

@@ -1,3 +1,4 @@
+import { UpdateAccessTokenRepository } from './../protocols/db/update-access-token-repository';
 import { LoadAccountByEmailRepository } from './../protocols/db/load-account-by-email-repository';
 import { mockAccountModel } from './../../domain/test/mock-account';
 import { AddAccountRepository } from './../protocols/db/add-account-repository';
@@ -23,5 +24,15 @@ export class LoadAccountByEmailRepositorySpy implements LoadAccountByEmailReposi
     const fakeAccount = mockAccountModel()
     this.result = fakeAccount
     return fakeAccount
+  }
+}
+
+export class UpdateAccessTokenRepositorySpy implements UpdateAccessTokenRepository {
+  id: string
+  accessToken: string
+  async updateAccessToken (id: string, accessToken: string): Promise<void> {
+    this.id = id
+    this.accessToken = accessToken
+    return Promise.resolve(null)
   }
 }
