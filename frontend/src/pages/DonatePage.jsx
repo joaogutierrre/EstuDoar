@@ -1,7 +1,38 @@
 import React, { Component } from 'react';
 
 class DonatePage extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            schoolSupplies: [
+                {
+                    name: 'Caderno',
+                    quantity: 3,
+                    donated: 0,
+                },
+                {
+                    name: 'Caderno',
+                    quantity: 3,
+                    donated: 0,
+                },
+                {
+                    name: 'Caderno',
+                    quantity: 3,
+                    donated: 0,
+                },
+            ]
+        }
+    }
   render() {
+      const { schoolSupplies } = this.state;
+      const itensList = schoolSupplies.map((item, index) => (
+          <div className='item-container' key={index}>
+          <li>{item.quantity} x {item.name}</li>
+          <button>+</button>
+          <button>-</button>
+          <span>0</span>
+          </div>
+      ));
     return (
       <div>
         <div className="image-container">
@@ -25,12 +56,9 @@ class DonatePage extends Component {
           </p>
         </div>
         <div className="donation-list-container">
+            <h3>Lista de Materiais</h3>
           <ul>
-            <li>Caderno</li>
-            <li>Caderno</li>
-            <li>Caderno</li>
-            <li>Caderno</li>
-            <li>Caderno</li>
+            {itensList}
           </ul>
         </div>
         <div className="button-container">
