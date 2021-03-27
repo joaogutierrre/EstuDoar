@@ -1,3 +1,4 @@
+import { mockUfsModel } from './../../../../domain/test/mock-locality';
 import { throwError } from './../../../../domain/test/test-helper';
 import { ApiLoadUfs } from './api-load-ufs';
 import { LoadUfsServiceSpy } from './../../../test/mock-locality';
@@ -41,16 +42,6 @@ describe('ApiLoadUfs', () => {
   test('should return a list of ufs on success', async () => {
     const { sut } = makeSut()
     const ufs = await sut.load()
-    expect(ufs).toEqual({
-      ufs: [{
-        id: 1,
-        acronym: 'SP',
-        name: 'São Paulo'
-      }, {
-        id: 2,
-        acronym: 'RJ',
-        name: 'Rio de Janeiro'
-      }]
-    })
+    expect(ufs).toEqual(mockUfsModel())
   });
 });
