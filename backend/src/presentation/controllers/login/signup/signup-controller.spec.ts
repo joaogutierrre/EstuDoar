@@ -54,7 +54,7 @@ describe('SignUpController', () => {
   test('should call AddAccount with correct values', async () => {
     const { sut, addAccountSpy } = makeSut()
     const httpRequest = mockRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(addAccountSpy.data).toEqual({
       name: 'any_name',
       email: 'any_email@email.com',

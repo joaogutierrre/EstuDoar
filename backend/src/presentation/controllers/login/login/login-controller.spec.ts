@@ -35,4 +35,14 @@ describe('LoginController', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
   });
+
+  test('should call AddAccount with correct values', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(authenticationSpy.data).toEqual({
+      email: 'any_email@email.com',
+      password: 'any_password'
+    })
+  });
 });
