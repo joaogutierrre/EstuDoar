@@ -1,3 +1,4 @@
+import { throwError } from './../../../../domain/test/test-helper';
 import { DbLoadAccountByToken } from './db-load-account-by-token';
 import { DecrypterSpy } from './../../../test/mock-criptography';
 type SutTypes = {
@@ -19,5 +20,12 @@ describe('DbLoadAccountByToken', () => {
     const { sut, decrypterSpy } = makeSut()
     await sut.load('any_token', 'any_role')
     expect(decrypterSpy.data).toBe('any_token')
+  });
+
+  test('should throw if Decrypter throws', async () => {
+    const { sut, decrypterSpy } = makeSut()
+    jest.spyOn(decrypterSpy, 'decrypt').mockImplementationOnce(throwError)
+    const promise = sut.load('any_token', 'any_role')
+    await expect(promise).rejects.toThrow()
   });
 });
