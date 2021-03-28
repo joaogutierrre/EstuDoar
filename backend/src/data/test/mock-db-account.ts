@@ -1,7 +1,8 @@
-import { UpdateAccessTokenRepository } from './../protocols/db/update-access-token-repository';
-import { LoadAccountByEmailRepository } from './../protocols/db/load-account-by-email-repository';
+import { LoadAccountByTokenRepository } from './../protocols/db/account/load-account-by-token-repository';
+import { UpdateAccessTokenRepository } from '../protocols/db/account/update-access-token-repository';
+import { LoadAccountByEmailRepository } from '../protocols/db/account/load-account-by-email-repository';
 import { mockAccountModel } from './../../domain/test/mock-account';
-import { AddAccountRepository } from './../protocols/db/add-account-repository';
+import { AddAccountRepository } from '../protocols/db/account/add-account-repository';
 import { AccountModel } from './../../domain/model/account';
 import { AddAccountParams } from './../../domain/usecases/account/add-account';
 
@@ -34,5 +35,17 @@ export class UpdateAccessTokenRepositorySpy implements UpdateAccessTokenReposito
     this.id = id
     this.accessToken = accessToken
     return Promise.resolve(null)
+  }
+}
+
+export class LoadAccountByTokenRepositorySpy implements LoadAccountByTokenRepository {
+  token: string
+  role: string
+  result: object
+  async loadByToken (token: string, role?: string): Promise<AccountModel> {
+    this.token = token
+    this.role = role
+    this.result = mockAccountModel()
+    return mockAccountModel()
   }
 }

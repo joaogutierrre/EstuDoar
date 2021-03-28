@@ -1,17 +1,21 @@
+import { LoadAccountByTokenRepositorySpy } from './../../../test/mock-db-account';
 import { throwError } from './../../../../domain/test/test-helper';
 import { DbLoadAccountByToken } from './db-load-account-by-token';
 import { DecrypterSpy } from './../../../test/mock-criptography';
 type SutTypes = {
   sut: DbLoadAccountByToken
   decrypterSpy: DecrypterSpy
+  loadAccountByTokenRepositorySpy: LoadAccountByTokenRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
   const decrypterSpy = new DecrypterSpy()
-  const sut = new DbLoadAccountByToken(decrypterSpy)
+  const loadAccountByTokenRepositorySpy = new LoadAccountByTokenRepositorySpy()
+  const sut = new DbLoadAccountByToken(decrypterSpy, loadAccountByTokenRepositorySpy)
   return {
     sut,
-    decrypterSpy
+    decrypterSpy,
+    loadAccountByTokenRepositorySpy
   }
 }
 
@@ -34,5 +38,12 @@ describe('DbLoadAccountByToken', () => {
     jest.spyOn(decrypterSpy, 'decrypt').mockReturnValueOnce(null)
     const account = await sut.load('any_token', 'any_role')
     expect(account).toBe(null)
+  });
+
+  test('should call LoadAccountByTokenRepository with correct values', async () => {
+    const { sut, loadAccountByTokenRepositorySpy } = makeSut()
+    await sut.load('any_value', 'any_role')
+    expect(loadAccountByTokenRepositorySpy.token).toBe('any_value')
+    expect(loadAccountByTokenRepositorySpy.role).toBe('any_role')
   });
 });
