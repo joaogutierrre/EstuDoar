@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DashboardStudentCard from '../components/DashboardStudentCard';
+import RegisterStudent from './RegisterStudent';
 import './StudentDashboard.css'
 
 class StudentDashboard extends Component {
@@ -8,6 +9,7 @@ class StudentDashboard extends Component {
             <div className="dashboard-container">
                 <DashboardStudentCard />
                 <button>Adicionar Estudante</button>
+                <RegisterStudent />
             </div>
         )
     }
