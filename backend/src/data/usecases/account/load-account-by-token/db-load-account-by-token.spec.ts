@@ -1,3 +1,4 @@
+import { mockAccountModel } from './../../../../domain/test/mock-account';
 import { LoadAccountByTokenRepositorySpy } from './../../../test/mock-db-account';
 import { throwError } from './../../../../domain/test/test-helper';
 import { DbLoadAccountByToken } from './db-load-account-by-token';
@@ -59,5 +60,11 @@ describe('DbLoadAccountByToken', () => {
     jest.spyOn(loadAccountByTokenRepositorySpy, 'loadByToken').mockReturnValueOnce(null)
     const account = await sut.load('any_token', 'any_role')
     expect(account).toBe(null)
+  });
+
+  test('should return an account on success', async () => {
+    const { sut } = makeSut()
+    const account = await sut.load('any_token', 'any_role')
+    expect(account).toEqual(mockAccountModel())
   });
 });
