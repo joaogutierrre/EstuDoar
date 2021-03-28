@@ -1,7 +1,8 @@
+import { mockStudentModel } from './../../../../domain/test/mock-student';
 import { MissingParamError } from './../../../errors/missing-param-error';
 import { ValidationSpy } from './../../../test/mock-validation';
 import { HttpRequest } from './../../../protocols/http';
-import { serverError, badRequest } from './../../../helpers/http/http-helper';
+import { serverError, badRequest, ok } from './../../../helpers/http/http-helper';
 import { AddStudentController } from './add-student-controller';
 import { AddStudentSpy } from './../../../test/mock-student';
 
@@ -65,5 +66,12 @@ describe('AddStudentController', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  });
+
+  test('should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok(mockStudentModel()))
   });
 });
