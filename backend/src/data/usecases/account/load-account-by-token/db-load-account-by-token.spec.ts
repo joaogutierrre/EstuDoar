@@ -28,4 +28,11 @@ describe('DbLoadAccountByToken', () => {
     const promise = sut.load('any_token', 'any_role')
     await expect(promise).rejects.toThrow()
   });
+
+  test('should return null if Decrypter returns null', async () => {
+    const { sut, decrypterSpy } = makeSut()
+    jest.spyOn(decrypterSpy, 'decrypt').mockReturnValueOnce(null)
+    const account = await sut.load('any_token', 'any_role')
+    expect(account).toBe(null)
+  });
 });
