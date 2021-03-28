@@ -39,4 +39,11 @@ describe('AddStudentController', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
   });
+
+  test('should call AddStudent with correct values', async () => {
+    const { sut, addStudentSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(addStudentSpy.data).toEqual(mockRequest().body)
+  });
 });
