@@ -75,7 +75,7 @@ describe('SignUpController', () => {
     const { sut } = makeSut()
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok(mockAccountModel()))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   });
   
   test('should call Validation with correct values', async () => {
