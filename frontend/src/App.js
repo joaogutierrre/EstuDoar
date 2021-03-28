@@ -8,9 +8,9 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Home />
       <Switch>
-        <Route exact path="/"></Route>
+        <Route exact path="/"><Home /></Route>
+        <Route path='/donation-feed'><DonationFeed /></Route>
       </Switch>
     </div>
   );

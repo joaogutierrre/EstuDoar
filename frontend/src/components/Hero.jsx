@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 
 class Hero extends Component {
@@ -13,8 +14,12 @@ class Hero extends Component {
         </div>
 
         <div className="hero-buttons-container">
-          <button type="button">Cadastre-se</button>
-          <button type="button">Já sou Cadastrado</button>
+          <Link to=''>
+          <button type="button">Quero Receber uma Doação</button>
+          </Link>
+          <Link to='/donation-feed'>
+          <button type="button">Quero Doar</button>
+          </Link>
         </div>
       </section>
     );
