@@ -23,20 +23,20 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
-  //authenticationSpy: AuthenticationSpy
+  authenticationSpy: AuthenticationSpy
   validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addAccountSpy = new AddAccountSpy()
-  //const authenticationSpy = new AuthenticationSpy()
+  const authenticationSpy = new AuthenticationSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new SignUpController(addAccountSpy, validationSpy)
+  const sut = new SignUpController(addAccountSpy, authenticationSpy, validationSpy)
   return {
     sut,
     addAccountSpy,
     validationSpy,
-    //authenticationSpy
+    authenticationSpy
   }
 }
 
@@ -93,7 +93,7 @@ describe('SignUpController', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 
-  /*
+  
   test('should call Authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
     const httpRequest = mockRequest()
@@ -103,7 +103,7 @@ describe('SignUpController', () => {
       password: 'any_password'
     })
   });
-
+  /*
   test('should return 500 if Authentication throws', async () => {
     const { sut, authenticationSpy } = makeSut()
     jest.spyOn(authenticationSpy, 'auth'). mockImplementationOnce(throwError)
