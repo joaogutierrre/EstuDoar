@@ -1,0 +1,27 @@
+.history-container {
+    width: 90%;
+    max-width: 1240px;
+    margin: 20px auto;
+
+    display: grid;
+
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+    grid-template-columns: 1fr;
+}
+
+.history-image-container img {
+    width: 100%;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 700px) {
+    .history-container {
+      grid-template-columns: 1fr 1fr;
+    }  
+}
