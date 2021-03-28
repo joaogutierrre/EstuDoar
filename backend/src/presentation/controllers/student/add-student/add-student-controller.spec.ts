@@ -1,6 +1,7 @@
+import { MissingParamError } from './../../../errors/missing-param-error';
 import { ValidationSpy } from './../../../test/mock-validation';
 import { HttpRequest } from './../../../protocols/http';
-import { serverError } from './../../../helpers/http/http-helper';
+import { serverError, badRequest } from './../../../helpers/http/http-helper';
 import { AddStudentController } from './add-student-controller';
 import { AddStudentSpy } from './../../../test/mock-student';
 
@@ -56,5 +57,13 @@ describe('AddStudentController', () => {
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(validationSpy.data).toEqual(mockRequest().body)
+  });
+
+  test('should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    jest.spyOn(validationSpy, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 });
