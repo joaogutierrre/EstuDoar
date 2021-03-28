@@ -1,6 +1,6 @@
 import { throwError } from './../../../../domain/test/test-helper';
 import { AddStudentRepositorySpy } from './../../../test/mock-db-student';
-import { mockAddStudentParams } from './../../../../domain/test/mock-student';
+import { mockAddStudentParams, mockStudentModel } from './../../../../domain/test/mock-student';
 import { DbAddStudent } from './db-add-student';
 
 
@@ -30,5 +30,11 @@ describe('DbAddStudent', () => {
     jest.spyOn(addStudentRepositorySpy, 'add').mockImplementationOnce(throwError)
     const promise = sut.add(mockAddStudentParams())
     await expect(promise).rejects.toThrow()
+  });
+
+  test('should return a student model on success', async () => {
+    const { sut } = makeSut()
+    const student = await sut.add(mockAddStudentParams())
+    expect(student).toEqual(mockStudentModel())
   });
 });
