@@ -46,4 +46,11 @@ describe('DbLoadAccountByToken', () => {
     expect(loadAccountByTokenRepositorySpy.token).toBe('any_value')
     expect(loadAccountByTokenRepositorySpy.role).toBe('any_role')
   });
+
+  test('should throw if Decrypter throws', async () => {
+    const { sut, loadAccountByTokenRepositorySpy } = makeSut()
+    jest.spyOn(loadAccountByTokenRepositorySpy, 'loadByToken').mockImplementationOnce(throwError)
+    const promise = sut.load('any_token', 'any_role')
+    await expect(promise).rejects.toThrow()
+  });
 });
