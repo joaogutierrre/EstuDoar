@@ -1,7 +1,7 @@
 import { MongoHelper } from './../helpers/mongo-helper';
 import { AddStudentParams } from './../../../../domain/usecases/student/add-student';
 import { StudentModel } from './../../../../domain/model/student';
-import { AddStudentRepository } from './../../../../data/protocols/db/add-student-repository';
+import { AddStudentRepository } from '../../../../data/protocols/db/student/add-student-repository';
 
 export class StudentMongoRepository implements AddStudentRepository {
   async add (data: AddStudentParams): Promise<StudentModel> {
