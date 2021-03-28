@@ -1,3 +1,4 @@
+import { ValidationSpy } from './../../../test/mock-validation';
 import { HttpRequest } from './../../../protocols/http';
 import { serverError } from './../../../helpers/http/http-helper';
 import { AddStudentController } from './add-student-controller';
@@ -18,14 +19,17 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: AddStudentController
   addStudentSpy: AddStudentSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const addStudentSpy = new AddStudentSpy()
-  const sut = new AddStudentController(addStudentSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new AddStudentController(addStudentSpy, validationSpy)
   return {
     sut,
-    addStudentSpy
+    addStudentSpy,
+    validationSpy
   }
 }
 
@@ -45,5 +49,12 @@ describe('AddStudentController', () => {
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(addStudentSpy.data).toEqual(mockRequest().body)
+  });
+
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(validationSpy.data).toEqual(mockRequest().body)
   });
 });
