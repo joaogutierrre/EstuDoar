@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import DonationFeed from './pages/DonationFeed';
 import Home from './pages/Home';
 import StudentDashboard from './pages/StudentDashboard';
+import RegisterStudent from './pages/RegisterStudent';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/"><Home /></Route>
         <Route path='/donation-feed'><DonationFeed /></Route>
+        <Route path='/student-dashboard/add-student'><RegisterStudent /></Route>
         <Route path='/student-dashboard'><StudentDashboard /></Route>
       </Switch>
     </div>

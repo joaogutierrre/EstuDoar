@@ -12,12 +12,7 @@ class RegisterStudent extends Component {
                 id: '',
                 name: '',
                 quantity: '',
-            },
-            {
-                id: '',
-                name: '',
-                quantity: '',
-            },],
+            }],
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);

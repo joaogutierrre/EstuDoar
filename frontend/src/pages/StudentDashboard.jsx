@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DashboardStudentCard from '../components/DashboardStudentCard';
-import RegisterStudent from './RegisterStudent';
 import './StudentDashboard.css'
 
 class StudentDashboard extends Component {
@@ -8,8 +8,9 @@ class StudentDashboard extends Component {
         return(
             <div className="dashboard-container">
                 <DashboardStudentCard />
-                <button>Adicionar Estudante</button>
-                <RegisterStudent />
+                <Link to="/student-dashboard/add-student">
+                    <button>Adicionar Estudante</button>
+                </Link>
             </div>
         )
     }
