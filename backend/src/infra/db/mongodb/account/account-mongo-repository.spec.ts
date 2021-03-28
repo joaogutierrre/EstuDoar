@@ -3,6 +3,17 @@ import { AccountMongoRepository } from './account-mongo-repository';
 import { mockAddAccountParams } from './../../../../domain/test/mock-account';
 import { Collection } from "mongodb";
 
+type SutTypes = {
+  sut: AccountMongoRepository
+}
+
+const makeSut = (): SutTypes => {
+  const sut = new AccountMongoRepository()
+  return {
+    sut
+  }
+}
+
 let accountCollection: Collection
 
 describe('AccountMongoRepository', () => {
@@ -18,17 +29,6 @@ describe('AccountMongoRepository', () => {
     accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-
-  type SutTypes = {
-    sut: AccountMongoRepository
-  }
-
-  const makeSut = (): SutTypes => {
-    const sut = new AccountMongoRepository()
-    return {
-      sut
-    }
-  }
 
   describe('add()', () => {
     test('should return an account on add success', async () => {
