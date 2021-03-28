@@ -1,0 +1,16 @@
+.profile-image-container img{
+    border-radius: 50%;
+    width: 15vh;
+    margin: 10px;
+}
+
+.dash-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-container {
+    text-align: center;
+    margin: 10px;
+}
