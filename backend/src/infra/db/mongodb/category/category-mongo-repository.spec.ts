@@ -31,16 +31,20 @@ describe('CategoryMongoRepository', () => {
 
     describe('loadCategory()', () => {
         test('should return a category on loadCategory success', async () => {
+            await categoryCollection.insertMany([{
+                code: '1',
+                name: 'caneta'
+            }, {
+                code: '2',
+                name: 'livro'
+            }])
             const { sut } = makeSut()
-            
             const category = await sut.loadCategory()
             expect(category).toBeTruthy()
             expect(category[0].id).toBeTruthy()
-            expect(category[0].code).toBe('any_code')
-            expect(category[0].name).toBe('any_name')
-            
+            expect(category[0].code).toBe('1')
+            expect(category[0].name).toBe('caneta')
         })
-
     });
 }
 )

@@ -11,7 +11,7 @@ export class DbLoadCategory implements LoadCategories {
     async load(): Promise<CategoriesModel> {
         const categories = await this.loadCategoryRepository.loadCategory()
         if (categories) {
-            return categories
+            return { categories }
         }
         return null
     }
