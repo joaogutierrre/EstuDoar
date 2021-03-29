@@ -1,3 +1,4 @@
+import { throwError } from './../../../../domain/test/test-helper';
 import { LoadStudentsByAccountRepositorySpy } from '../../../test/mock-db-student';
 import { DbLoadStudentsByAccount } from './db-load-students-by-account';
 
@@ -20,5 +21,12 @@ describe('DbLoadStudents', () => {
     const { sut, loadStudentsByAccountRepositorySpy } = makeSut()
     await sut.load('any_id')
     expect(loadStudentsByAccountRepositorySpy.data).toBe('any_id')
+  });
+
+  test('should throw if LoadStudentsByAccountRepository throws', async () => {
+    const { sut, loadStudentsByAccountRepositorySpy } = makeSut()
+    jest.spyOn(loadStudentsByAccountRepositorySpy, 'loadStudentsByAccount').mockImplementationOnce(throwError)
+    const promise = sut.load('any_id')
+    await expect(promise).rejects.toThrow()
   });
 });
