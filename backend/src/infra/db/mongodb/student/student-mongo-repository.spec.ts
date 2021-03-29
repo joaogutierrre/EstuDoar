@@ -80,5 +80,11 @@ describe('StudentMongoRepository', () => {
       expect(students[1].id).toBeTruthy()
       expect(students[1].name).toBe('other_name')
     });
+
+    test('should return an empty list', async () => {
+      const { sut } = makeSut()
+      const students = await sut.loadStudentsByAccount('any_id')
+      expect(students.length).toBe(0)
+    });
   });
 });
