@@ -6,6 +6,10 @@ import { access } from 'node:fs';
 jest.mock('jsonwebtoken', () => ({
   async sign (): Promise<string> {
     return 'any_token'
+  },
+
+  async verify (): Promise<string> {
+    return 'any_value'
   }
 }))
 
@@ -40,6 +44,30 @@ describe('JwtAdapter', () => {
       const { sut } = makeSut()
       const accessToken = await sut.encrypt('any_id')
       expect(accessToken).toBe('any_token')
+    });
+  });
+
+  describe('decrypt()', () => {
+    test('should call verify with correct values', async () => {
+      const { sut } = makeSut()
+      const verifySpy = jest.spyOn(jsonwebtoken, 'verify')
+      await sut.decrypt('any_token')
+      expect(verifySpy).toHaveBeenCalledWith('any_token', 'secret')
+    });
+
+    test('should return a decrypted value on verify success', async () => {
+      const { sut } = makeSut()
+      const value = await sut.decrypt('any_token')
+      expect(value).toBe('any_value')
+    });
+
+    test('should throw if verify throws', async () => {
+      const { sut } = makeSut()
+      jest.spyOn(jsonwebtoken, 'verify').mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const promise = sut.decrypt('any_token')
+      await expect(promise).rejects.toThrow()
     });
   });
 });

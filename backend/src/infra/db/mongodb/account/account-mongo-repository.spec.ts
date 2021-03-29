@@ -3,6 +3,17 @@ import { AccountMongoRepository } from './account-mongo-repository';
 import { mockAddAccountParams } from './../../../../domain/test/mock-account';
 import { Collection } from "mongodb";
 
+type SutTypes = {
+  sut: AccountMongoRepository
+}
+
+const makeSut = (): SutTypes => {
+  const sut = new AccountMongoRepository()
+  return {
+    sut
+  }
+}
+
 let accountCollection: Collection
 
 describe('AccountMongoRepository', () => {
@@ -18,17 +29,6 @@ describe('AccountMongoRepository', () => {
     accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-
-  type SutTypes = {
-    sut: AccountMongoRepository
-  }
-
-  const makeSut = (): SutTypes => {
-    const sut = new AccountMongoRepository()
-    return {
-      sut
-    }
-  }
 
   describe('add()', () => {
     test('should return an account on add success', async () => {
@@ -53,6 +53,7 @@ describe('AccountMongoRepository', () => {
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
       expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
       expect(account.password).toBe('any_password')
     });
 
@@ -74,5 +75,82 @@ describe('AccountMongoRepository', () => {
       expect(account).toBeTruthy()
       expect(account.accessToken).toBe('any_token')
     });
+  });
+
+  describe('loadByToken()', () => {
+    test('should return an account on loadByToken without role success', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token'
+      })
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
+      expect(account.password).toBe('any_password')
+    });
+
+    test('should return an account on loadByToken with admin role', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'admin'
+      })
+      const account = await sut.loadByToken('any_token', 'admin')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
+      expect(account.password).toBe('any_password')
+    });
+
+    test('should return an account on loadByToken if user is admin', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'admin'
+      })
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
+      expect(account.password).toBe('any_password')
+    })
+
+    test('should return null on loadByToken with invalid role', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token'
+      })
+      const account = await sut.loadByToken('any_token', 'admin')
+      expect(account).toBeFalsy()
+    })
+
+    test('should return null if loadByToken fails', async () => {
+      const { sut } = makeSut()
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeFalsy()
+    })
   });
 });

@@ -1,7 +1,7 @@
-import { UpdateAccessTokenRepository } from './../../../protocols/db/update-access-token-repository';
+import { UpdateAccessTokenRepository } from '../../../protocols/db/account/update-access-token-repository';
 import { Encrypter } from './../../../protocols/criptography/encrypter';
 import { HashComparer } from './../../../protocols/criptography/hash-comparer';
-import { LoadAccountByEmailRepository } from './../../../protocols/db/load-account-by-email-repository';
+import { LoadAccountByEmailRepository } from '../../../protocols/db/account/load-account-by-email-repository';
 import { Authentication, AuthenticationParams } from './../../../../domain/usecases/account/authentication';
 
 export class DbAuthentication implements Authentication {
