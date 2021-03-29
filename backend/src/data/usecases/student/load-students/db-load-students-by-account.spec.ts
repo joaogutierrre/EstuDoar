@@ -1,3 +1,4 @@
+import { mockStudentModelList } from './../../../../domain/test/mock-student';
 import { throwError } from './../../../../domain/test/test-helper';
 import { LoadStudentsByAccountRepositorySpy } from '../../../test/mock-db-student';
 import { DbLoadStudentsByAccount } from './db-load-students-by-account';
@@ -28,5 +29,11 @@ describe('DbLoadStudents', () => {
     jest.spyOn(loadStudentsByAccountRepositorySpy, 'loadStudentsByAccount').mockImplementationOnce(throwError)
     const promise = sut.load('any_id')
     await expect(promise).rejects.toThrow()
+  });
+
+  test('should return a list of students on success', async () => {
+    const { sut } = makeSut()
+    const students = await sut.load('any_id')
+    expect(students).toEqual(mockStudentModelList())
   });
 });

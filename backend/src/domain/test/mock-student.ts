@@ -25,3 +25,8 @@ const mockItems = (): any => {
     quantity: 2
   }]
 }
+
+export const mockStudentModelList = (): StudentModel[] => ([
+  mockStudentModel(), 
+  mockStudentModel()
+])
