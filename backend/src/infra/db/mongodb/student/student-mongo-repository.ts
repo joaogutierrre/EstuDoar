@@ -18,6 +18,6 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
       accountId: accountId
     })
     .toArray()
-    return students && MongoHelper.mapCollection(students)
+    return MongoHelper.mapCollection(students)
   }
 }
