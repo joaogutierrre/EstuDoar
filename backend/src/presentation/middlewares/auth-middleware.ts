@@ -1,3 +1,5 @@
+import { forbidden } from './../helpers/http/http-helper';
+import { AccessDeniedError } from './../errors/access-email-error';
 import { HttpRequest, HttpResponse } from './../protocols/http';
 import { LoadAccountByToken } from './../../domain/usecases/account/load-account-by-token';
 import { Middleware } from './../protocols/middleware';
@@ -16,6 +18,6 @@ export class AuthMiddleware implements Middleware {
         await this.loadAccountByToken.load(accessToken, this.role)
       }
     }
-    return null
+    return forbidden(new AccessDeniedError())
   }
 }
