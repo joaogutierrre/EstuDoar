@@ -1,6 +1,6 @@
 import { mockStudentModelList } from './../../../../domain/test/mock-student';
 import { InvalidParamError } from './../../../errors/invalid-param-error';
-import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
+import { serverError, forbidden, ok, noContent } from './../../../helpers/http/http-helper';
 import { LoadStudentsByAccountSpy } from './../../../test/mock-student';
 import { LoadStudentsByAccountController } from './load-students-by-account-controller';
 import { HttpRequest } from './../../../protocols/http';
@@ -51,5 +51,12 @@ describe('LoadStudentsByAccount Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(mockStudentModelList()))
+  });
+
+  test('should return 204 if LoadStudentsByAccount returns an empyt list', async () => {
+    const { sut, loadStudentsByAccountSpy } = makeSut()
+    jest.spyOn(loadStudentsByAccountSpy, 'load').mockReturnValueOnce(Promise.resolve([]))
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(noContent())
   });
 });
