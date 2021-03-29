@@ -11,12 +11,12 @@ class DonatePage extends Component {
           donated: 0,
         },
         {
-          name: 'Caderno',
+          name: 'Lapis',
           quantity: 3,
           donated: 0,
         },
         {
-          name: 'Caderno',
+          name: 'Caneta',
           quantity: 3,
           donated: 0,
         },
@@ -25,16 +25,21 @@ class DonatePage extends Component {
   }
   render() {
     const { schoolSupplies } = this.state;
-    const itemsList = schoolSupplies.map((item, index) => (
+    const itemsList = schoolSupplies.map((item, index) => {
+      const maxDonateQuantity = [...Array(item.quantity - item.donated + 1).keys()];
+      return (
       <div className="item-container" key={index}>
-        <li>
-          {item.quantity} x {item.name}
+        <li className="supply-item">
+          {item.quantity} x {item.name}(s)
         </li>
-        <button className="round-button green">+</button>
-        <button className="round-button red">-</button>
-        <span>0</span>
+        <label className="supply-donate">
+          Doar:
+          <select>
+            {maxDonateQuantity.map((unit, index) => (<option key={index} value={unit}>{unit} Unidade(s)</option>))}
+          </select>
+        </label>
       </div>
-    ));
+    )});
     return (
       <div className="donate-page">
         <div className="image-container">
@@ -44,6 +49,7 @@ class DonatePage extends Component {
           />
         </div>
         <div className="about-student">
+          <h3>Bruna Souza</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
             inventore facere quia perspiciatis praesentium culpa labore aut,

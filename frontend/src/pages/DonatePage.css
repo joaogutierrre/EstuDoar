@@ -5,41 +5,44 @@
 }
 
 .list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 20px 0;
+}
+
+.supply-item {
+    margin-top: 15px;
 }
 
 .item-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     margin: 10px;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    background-color: #ecf0f1;
+    border: 2px solid #7f8c8d;
 }
 
-.round-button {
-    border-radius: 50%;
-    border: none;
-    margin: 5px;
-    padding: 10px;
-    color: white;
-}
-.green {
-    background-color: #4CAF50;
+.supply-donate{
+    margin: 20px;
 }
 
-.red {
-    background-color: #f44336;
+.image-container img {
+    width: 60vh;
+}
+
+.about-student {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media screen and (max-width: 960px) {
     .item-container {
-        margin: 50px;
         font-size: 3vh;
-    }
-
-    .round-button {
-        padding: 20px;
-        color: white;
-        margin: 0 10px;
     }
 }
 

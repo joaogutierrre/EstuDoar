@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <DonatePage />
       <Switch>
         <Route exact path="/"></Route>
       </Switch>
