@@ -4,10 +4,18 @@ import { Middleware } from './../protocols/middleware';
 
 export class AuthMiddleware implements Middleware {
   constructor (
-    private readonly loadAccountByToken: LoadAccountByToken
+    private readonly loadAccountByToken: LoadAccountByToken,
+    private readonly role?: string
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    const headers = httpRequest.headers
+    if (headers) {
+      const accessToken = headers['x-access-token']
+      if (accessToken) {
+        await this.loadAccountByToken.load(accessToken, this.role)
+      }
+    }
     return null
   }
 }
