@@ -94,5 +94,22 @@ describe('AccountMongoRepository', () => {
       expect(account.cpf).toBe('any_cpf')
       expect(account.password).toBe('any_password')
     });
+
+    test('should return an account on loadByToken with admin role', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'admin'
+      })
+      const account = await sut.loadByToken('any_token', 'admin')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.password).toBe('any_password')
+    });
   });
 });
