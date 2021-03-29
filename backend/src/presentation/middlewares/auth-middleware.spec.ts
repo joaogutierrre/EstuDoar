@@ -15,9 +15,9 @@ type SutTypes = {
   loadAccountByTokenSpy: LoadAccountByTokenSpy
 }
 
-const makeSut = (): SutTypes => {
+const makeSut = (role?: string): SutTypes => {
   const loadAccountByTokenSpy = new LoadAccountByTokenSpy()
-  const sut = new AuthMiddleware(loadAccountByTokenSpy)
+  const sut = new AuthMiddleware(loadAccountByTokenSpy, role)
   return {
     sut,
     loadAccountByTokenSpy
@@ -29,5 +29,13 @@ describe('AuthMiddleware', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
+  });
+
+  test('should call LoadAccountByToken with correct accessToken', async () => {
+    const role = "any_role"
+    const { sut, loadAccountByTokenSpy } = makeSut(role)
+    await sut.handle(mockRequest())
+    expect(loadAccountByTokenSpy.accessToken).toBe('any_token')
+    expect(loadAccountByTokenSpy.role).toBe(role)
   });
 });
