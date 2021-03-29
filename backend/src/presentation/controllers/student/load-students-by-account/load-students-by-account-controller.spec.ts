@@ -1,4 +1,5 @@
-import { serverError } from './../../../helpers/http/http-helper';
+import { InvalidParamError } from './../../../errors/invalid-param-error';
+import { serverError, forbidden } from './../../../helpers/http/http-helper';
 import { LoadStudentsByAccountSpy } from './../../../test/mock-student';
 import { LoadStudentsByAccountController } from './load-students-by-account-controller';
 import { HttpRequest } from './../../../protocols/http';
@@ -36,5 +37,12 @@ describe('LoadStudentsByAccount Controller', () => {
     const { sut, loadStudentsByAccountSpy } = makeSut()
     await sut.handle(mockRequest())
     expect(loadStudentsByAccountSpy.data).toBe(mockRequest().body.accountId)
+  });
+
+  test('should returns 403 if LoadStudentsByAccount returns null', async () => {
+    const { sut, loadStudentsByAccountSpy } = makeSut()
+    jest.spyOn(loadStudentsByAccountSpy, 'load').mockReturnValueOnce(null)
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('accountId')))
   });
 });
