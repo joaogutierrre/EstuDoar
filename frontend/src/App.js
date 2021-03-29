@@ -3,13 +3,15 @@ import './App.css';
 import Navbar from './components/Navbar';
 import DonatePage from './pages/DonatePage';
 import DonationFeed from './pages/DonationFeed';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path="/"></Route>
+        <Route exact path="/"><Home /></Route>
+        <Route path='/donation-feed'><DonationFeed /></Route>
       </Switch>
     </div>
   );
