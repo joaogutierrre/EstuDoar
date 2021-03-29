@@ -31,4 +31,10 @@ describe('LoadStudentsByAccount Controller', () => {
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   });
+
+  test('should call LoadStudentsByAccount with correct value', async () => {
+    const { sut, loadStudentsByAccountSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(loadStudentsByAccountSpy.data).toBe(mockRequest().body.accountId)
+  });
 });
