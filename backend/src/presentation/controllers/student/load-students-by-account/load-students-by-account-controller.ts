@@ -1,4 +1,5 @@
-import { serverError } from './../../../helpers/http/http-helper';
+import { InvalidParamError } from './../../../errors/invalid-param-error';
+import { serverError, forbidden } from './../../../helpers/http/http-helper';
 import { LoadStudentsByAccount } from './../../../../domain/usecases/student/load-students-by-account';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -11,7 +12,10 @@ export class LoadStudentsByAccountController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { accountId } = httpRequest.body
-      await this.loadStudentsByAccount.load(accountId)
+      const students = await this.loadStudentsByAccount.load(accountId)
+      if (!students) {
+        return forbidden(new InvalidParamError('accountId'))
+      }
       return null
     } catch (error) {
       return serverError(error)
