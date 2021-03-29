@@ -1,3 +1,4 @@
+import { LoadStudentsByAccountRepository } from './../protocols/db/student/load-students-by-account-repository';
 import { mockStudentModel } from './../../domain/test/mock-student';
 import { AddStudentParams } from './../../domain/usecases/student/add-student';
 import { StudentModel } from './../../domain/model/student';
@@ -10,5 +11,16 @@ export class AddStudentRepositorySpy implements AddStudentRepository {
     this.data = data
     this.result = mockStudentModel()
     return mockStudentModel()
+  }
+}
+
+export class LoadStudentsByAccountRepositorySpy implements LoadStudentsByAccountRepository {
+  data: string
+  result: object
+  async loadStudentsByAccount (accountId: string): Promise<StudentModel[]> {
+    this.data = accountId
+    return [
+      mockStudentModel(), mockStudentModel()
+    ]
   }
 }
