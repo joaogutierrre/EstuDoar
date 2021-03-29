@@ -100,4 +100,12 @@ describe('Student Routes', () => {
         .expect(403)
     })
   });
+
+  describe('GET /students', () => {
+    test('should return 403 on load students by account without accessToken', async () => {
+      await request(app)
+      .get('/api/students')
+      .expect(403)
+    });
+  });
 });
