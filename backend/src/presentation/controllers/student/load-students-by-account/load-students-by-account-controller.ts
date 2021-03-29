@@ -1,5 +1,5 @@
 import { InvalidParamError } from './../../../errors/invalid-param-error';
-import { serverError, forbidden } from './../../../helpers/http/http-helper';
+import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
 import { LoadStudentsByAccount } from './../../../../domain/usecases/student/load-students-by-account';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -16,7 +16,7 @@ export class LoadStudentsByAccountController implements Controller {
       if (!students) {
         return forbidden(new InvalidParamError('accountId'))
       }
-      return null
+      return ok(students)
     } catch (error) {
       return serverError(error)
     } 
