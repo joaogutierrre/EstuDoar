@@ -140,5 +140,11 @@ describe('AccountMongoRepository', () => {
       const account = await sut.loadByToken('any_token', 'admin')
       expect(account).toBeFalsy()
     })
+
+    test('should return null if loadByToken fails', async () => {
+      const { sut } = makeSut()
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeFalsy()
+    })
   });
 });
