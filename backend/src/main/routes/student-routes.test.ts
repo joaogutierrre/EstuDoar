@@ -104,8 +104,16 @@ describe('Student Routes', () => {
   describe('GET /students', () => {
     test('should return 403 on load students by account without accessToken', async () => {
       await request(app)
-      .get('/api/students')
-      .expect(403)
+        .get('/api/students')
+        .expect(403)
+    });
+
+    test('should return 204 on load students if have no students', async () => {
+      const accessToken = await makeAccessToken('parent')
+      await request(app)
+        .get('/api/students')
+        .set('x-access-token', accessToken)
+        .expect(204)
     });
   });
 });
