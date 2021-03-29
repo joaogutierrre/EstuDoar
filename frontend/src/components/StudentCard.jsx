@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './StudentCard.css';
 
 class StudentCard extends Component {
@@ -20,7 +21,9 @@ class StudentCard extends Component {
             <progress id="file" value="32" max="100" />
           </div>
           <div className="donate-button">
-            <button>Contribuir</button>
+            <Link to='/donation-feed/donate'>
+              <button>Contribuir</button>
+            </Link>
           </div>
         </div>
       </div>

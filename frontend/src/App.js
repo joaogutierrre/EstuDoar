@@ -11,6 +11,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/"><Home /></Route>
+        <Route path='/donation-feed/donate'><DonatePage /></Route>
         <Route path='/donation-feed'><DonationFeed /></Route>
       </Switch>
     </div>
