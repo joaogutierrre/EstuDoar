@@ -5,4 +5,5 @@ import { Router } from 'express';
 
 export default (router: Router): void => {
   router.post('/students', parentAuth, adaptRoute(makeAddStudentController()))
+  router.get('/students', parentAuth, adaptRoute(makeAddStudentController()))
 }
