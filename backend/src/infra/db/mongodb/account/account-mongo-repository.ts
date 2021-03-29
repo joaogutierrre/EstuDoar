@@ -38,10 +38,6 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
       $or: [{
         role
       }, {
-        role: 'donator'
-      }, {
-        role: 'parent'
-      }, {
         role: 'admin'
       }]
     })
