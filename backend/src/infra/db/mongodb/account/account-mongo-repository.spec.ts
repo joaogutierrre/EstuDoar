@@ -53,6 +53,7 @@ describe('AccountMongoRepository', () => {
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
       expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
       expect(account.password).toBe('any_password')
     });
 
@@ -100,6 +101,7 @@ describe('AccountMongoRepository', () => {
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@email.com',
+        cpf: 'any_cpf',
         password: 'any_password',
         accessToken: 'any_token',
         role: 'admin'
@@ -109,6 +111,7 @@ describe('AccountMongoRepository', () => {
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
       expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
       expect(account.password).toBe('any_password')
     });
 
@@ -117,6 +120,7 @@ describe('AccountMongoRepository', () => {
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@email.com',
+        cpf: 'any_cpf',
         password: 'any_password',
         accessToken: 'any_token',
         role: 'admin'
@@ -126,6 +130,45 @@ describe('AccountMongoRepository', () => {
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
       expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
+      expect(account.password).toBe('any_password')
+    })
+
+    test('should return an account on loadByToken if user is donator', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'donator'
+      })
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
+      expect(account.password).toBe('any_password')
+    })
+
+    test('should return an account on loadByToken if user is parent', async () => {
+      const { sut } = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@email.com',
+        cpf: 'any_cpf',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'parent'
+      })
+      const account = await sut.loadByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@email.com')
+      expect(account.cpf).toBe('any_cpf')
       expect(account.password).toBe('any_password')
     })
 
@@ -134,6 +177,7 @@ describe('AccountMongoRepository', () => {
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@email.com',
+        cpf: 'any_cpf',
         password: 'any_password',
         accessToken: 'any_token'
       })
