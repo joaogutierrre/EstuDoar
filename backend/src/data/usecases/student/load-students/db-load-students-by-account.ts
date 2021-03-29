@@ -8,7 +8,7 @@ export class DbLoadStudentsByAccount implements LoadStudentsByAccount {
   ) {}
 
   async load (accountId: string): Promise<StudentModel[]> {
-    await this.LoadStudentsByAccountRepository.loadStudentsByAccount(accountId)
-    return null
+    const students = await this.LoadStudentsByAccountRepository.loadStudentsByAccount(accountId)
+    return students
   }
 }
