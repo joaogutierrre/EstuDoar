@@ -58,5 +58,24 @@ describe('Student Routes', () => {
         })
         .expect(403)
     });
+
+    test('should return 200 on add student with valid accessToken', async () => {
+      const accessToken = await makeAccessToken()
+      await request(app)
+        .post('/api/students')
+        .set('x-access-token', accessToken)
+        .send({
+          name: 'any_name',
+          school: 'any_school',
+          items: [{
+            category: 'any_category',
+            quantity: 1
+          }, {
+            category: 'other_category',
+            quantity: 2
+          }]
+        })
+        .expect(200)
+    })
   });
 });
