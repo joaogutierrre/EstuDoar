@@ -1,5 +1,5 @@
-import { LoadStudentsByAccountRepositorySpy } from './../../../test/mock-db-student';
-import { DbLoadStudentsByAccount } from './db-load-students';
+import { LoadStudentsByAccountRepositorySpy } from '../../../test/mock-db-student';
+import { DbLoadStudentsByAccount } from './db-load-students-by-account';
 
 type SutTypes = {
   sut: DbLoadStudentsByAccount
