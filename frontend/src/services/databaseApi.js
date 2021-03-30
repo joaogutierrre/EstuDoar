@@ -1,6 +1,6 @@
 export async function getBrazilUFs() {
     try{
-        const response = await fetch('http://localhost:5050/api/ufs');
+        const response = await fetch('https://estudoar-ts-api.herokuapp.com/api/ufs');
         const ufs = await response.json();
         return ufs;
     }catch (error) {
@@ -10,7 +10,7 @@ export async function getBrazilUFs() {
 
 export async function getBrazilCitiesByUF(ufId) {
     try{
-        const response = await fetch(`http://localhost:5050/api/cities/${ufId}`);
+        const response = await fetch(`https://estudoar-ts-api.herokuapp.com/api/cities/${ufId}`);
         const cities = await response.json();
         return cities;
     } catch (error) {
