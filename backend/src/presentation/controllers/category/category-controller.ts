@@ -16,7 +16,7 @@ export class CategoryController implements Controller {
             if (error) {
                 return badRequest(error)
             }
-            const { code, name } = httpRequest.body
+
             const category = await this.loadCategories.load()
             return ok(category)
         } catch (error) {

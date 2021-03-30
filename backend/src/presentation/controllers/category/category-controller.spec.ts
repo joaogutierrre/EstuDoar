@@ -3,7 +3,7 @@ import { ValidationSpy } from "../../test/mock-validation";
 import { CategoryController } from "./category-controller";
 import { LoadCategoriesSpy } from '../../test/category/mock-category';
 import { ServerError } from "../../errors/server-error";
-import { serverError, forbidden, ok, badRequest } from '../../helpers/http/http-helper';
+import { serverError, ok } from '../../helpers/http/http-helper';
 import { mockCategoryModel } from './../../../domain/test/mock-category'
 
 const mockRequest = (): HttpRequest => ({
@@ -39,6 +39,13 @@ describe('CategoryController', () => {
         const httpRequest = mockRequest()
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse).toEqual(serverError(new ServerError(null)))
+    })
+
+    test('should call LoadCategory with correct values', async () => {
+        const { sut, loadCategoriesSpy } = makeSut()
+        const httpRequest = mockRequest()
+        const httpResponse = await sut.handle(httpRequest)
+        expect(loadCategoriesSpy.wasCalled).toBe(true)
     })
 
     test('should return 200 if valid data is provided', async () => {
