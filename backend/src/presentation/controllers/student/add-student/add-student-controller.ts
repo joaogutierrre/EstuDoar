@@ -16,7 +16,8 @@ export class AddStudentController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { accountId, name, school, items } = httpRequest.body
+      const { accountId } = httpRequest
+      const { name, school, items } = httpRequest.body
       const student = await this.addStudent.add({
         accountId,
         name,

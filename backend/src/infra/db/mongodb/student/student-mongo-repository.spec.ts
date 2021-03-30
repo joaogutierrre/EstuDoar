@@ -46,4 +46,45 @@ describe('StudentMongoRepository', () => {
       expect(student.items[1].quantity).toBe(studentParams.items[1].quantity)
     })
   });
+
+  describe('loadStudentsByAccount()', () => {
+    test('should return all students from an account', async () => {
+      await studentCollection.insertMany([{
+        accountId: 'any_id',
+        name: 'any_name',
+        school: 'any_school',
+        items: [{
+          category: 'any_category',
+          quantity: 'any_quantity'
+        }, {
+          category: 'any_category',
+          quantity: 'any_quantity'
+        }]
+      }, {
+        accountId: 'any_id',
+        name: 'other_name',
+        school: 'other_school',
+        items: [{
+          category: 'other_category',
+          quantity: 'other_quantity'
+        }, {
+          category: 'other_category',
+          quantity: 'other_quantity'
+        }]
+      }])
+      const { sut } = makeSut()
+      const students = await sut.loadStudentsByAccount('any_id')
+      expect(students.length).toBe(2)
+      expect(students[0].id).toBeTruthy()
+      expect(students[0].name).toBe('any_name')
+      expect(students[1].id).toBeTruthy()
+      expect(students[1].name).toBe('other_name')
+    });
+
+    test('should return an empty list', async () => {
+      const { sut } = makeSut()
+      const students = await sut.loadStudentsByAccount('any_id')
+      expect(students.length).toBe(0)
+    });
+  });
 });
