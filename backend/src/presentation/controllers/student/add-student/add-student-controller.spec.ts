@@ -7,8 +7,8 @@ import { AddStudentController } from './add-student-controller';
 import { AddStudentSpy } from './../../../test/mock-student';
 
 const mockRequest = (): HttpRequest => ({
+  accountId: 'any_id',
   body: {
-    accountId: 'any_id',
     name: 'any_name',
     school: 'any_school',
     items: [{
@@ -50,7 +50,15 @@ describe('AddStudentController', () => {
     const { sut, addStudentSpy } = makeSut()
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
-    expect(addStudentSpy.data).toEqual(mockRequest().body)
+    expect(addStudentSpy.data).toEqual({
+      accountId: 'any_id',
+      name: 'any_name',
+      school: 'any_school',
+      items: [{
+        category: 'any_category',
+        quantity: 'any_quantity'
+      }]
+    })
   });
 
   test('should call Validation with correct values', async () => {

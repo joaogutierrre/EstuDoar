@@ -11,7 +11,7 @@ export class LoadStudentsByAccountController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { accountId } = httpRequest.body
+      const { accountId } = httpRequest
       const students = await this.loadStudentsByAccount.load(accountId)
       if (!students) {
         return forbidden(new InvalidParamError('accountId'))

@@ -7,9 +7,7 @@ import { HttpRequest } from './../../../protocols/http';
 import { throwError } from './../../../../domain/test/test-helper';
 
 const mockRequest = (): HttpRequest => ({
-  body: {
-    accountId: 'any_id'
-  }
+  accountId: 'any_id'
 })
 
 type SutTypes = {
@@ -37,7 +35,7 @@ describe('LoadStudentsByAccount Controller', () => {
   test('should call LoadStudentsByAccount with correct value', async () => {
     const { sut, loadStudentsByAccountSpy } = makeSut()
     await sut.handle(mockRequest())
-    expect(loadStudentsByAccountSpy.data).toBe(mockRequest().body.accountId)
+    expect(loadStudentsByAccountSpy.data).toBe(mockRequest().accountId)
   });
 
   test('should returns 403 if LoadStudentsByAccount returns null', async () => {
