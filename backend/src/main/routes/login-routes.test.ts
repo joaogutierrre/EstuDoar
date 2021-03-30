@@ -28,6 +28,7 @@ describe('SignUp Routes', () => {
           name: 'any_name',
           email: 'any_email@email.com',
           cpf: '11111111111',
+          role: 'any_role',
           password: '123',
           passwordConfirmation: '123'
         })
@@ -42,6 +43,7 @@ describe('SignUp Routes', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         cpf: '11111111111',
+        role: 'any_role',
         password: password,
       })
       await request(app)

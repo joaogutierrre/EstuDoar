@@ -15,6 +15,7 @@ const mockRequest = (): HttpRequest => ({
     name: 'any_name',
     email: 'any_email@email.com',
     cpf: 'any_cpf',
+    role: 'any_role',
     password: 'any_password',
     passwordConfirmation: 'any_password'
   }
@@ -59,6 +60,7 @@ describe('SignUpController', () => {
       name: 'any_name',
       email: 'any_email@email.com',
       cpf: 'any_cpf',
+      role: 'any_role',
       password: 'any_password'
     })
   });

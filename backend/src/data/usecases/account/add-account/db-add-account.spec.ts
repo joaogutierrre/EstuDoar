@@ -73,6 +73,7 @@ describe('DbAddAccount', () => {
       name: 'any_name',
       email: 'any_email@email.com',
       cpf: 'any_cpf',
+      role: 'any_role',
       password: 'hashed_password'
     })
   });
