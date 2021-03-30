@@ -4,6 +4,7 @@ import { CategoryController } from "./category-controller";
 import { LoadCategoriesSpy } from '../../test/category/mock-category';
 import { ServerError } from "../../errors/server-error";
 import { serverError, forbidden, ok, badRequest } from '../../helpers/http/http-helper';
+import { mockCategoryModel } from './../../../domain/test/mock-category'
 
 const mockRequest = (): HttpRequest => ({
     body: {
@@ -31,7 +32,7 @@ const makeSut = (): SutTypes => {
 
 describe('CategoryController', () => {
     test('should return 500 if LoadCategory throws', async () => {
-        const { sut, loadCategoriesSpy} = makeSut()
+        const { sut, loadCategoriesSpy } = makeSut()
         jest.spyOn(loadCategoriesSpy, 'load').mockImplementationOnce(async () => {
             return Promise.reject(new Error())
         })
@@ -39,4 +40,11 @@ describe('CategoryController', () => {
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse).toEqual(serverError(new ServerError(null)))
     })
+
+    test('should return 200 if valid data is provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = mockRequest()
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse).toEqual(ok(mockCategoryModel()))
+    });
 })
