@@ -40,10 +40,14 @@ describe('StudentMongoRepository', () => {
       expect(student.accountId).toBe(studentParams.accountId)
       expect(student.name).toBe(studentParams.name)
       expect(student.school).toBe(studentParams.school)
+      expect(student.about).toBe(studentParams.about)
+      expect(student.image).toBe(studentParams.image)
       expect(student.items[0].category).toBe(studentParams.items[0].category)
       expect(student.items[0].quantity).toBe(studentParams.items[0].quantity)
+      expect(student.items[0].donated).toBe(studentParams.items[0].donated)
       expect(student.items[1].category).toBe(studentParams.items[1].category)
       expect(student.items[1].quantity).toBe(studentParams.items[1].quantity)
+      expect(student.items[1].donated).toBe(studentParams.items[1].donated)
     })
   });
 
@@ -53,23 +57,31 @@ describe('StudentMongoRepository', () => {
         accountId: 'any_id',
         name: 'any_name',
         school: 'any_school',
+        about: 'any_about',
+        image: 'any_image',
         items: [{
           category: 'any_category',
-          quantity: 'any_quantity'
+          quantity: 1,
+          donated: 0
         }, {
           category: 'any_category',
-          quantity: 'any_quantity'
+          quantity: 2,
+          donated: 0
         }]
       }, {
         accountId: 'any_id',
         name: 'other_name',
         school: 'other_school',
+        about: 'other_about',
+        image: 'other_image',
         items: [{
           category: 'other_category',
-          quantity: 'other_quantity'
+          quantity: 1,
+          donated: 0
         }, {
           category: 'other_category',
-          quantity: 'other_quantity'
+          quantity: 2,
+          donated: 0
         }]
       }])
       const { sut } = makeSut()

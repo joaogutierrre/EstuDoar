@@ -51,12 +51,16 @@ describe('Student Routes', () => {
         .send({
           name: 'any_name',
           school: 'any_school',
+          about: 'any_about',
+          image: 'any_image',
           items: [{
             category: 'any_category',
-            quantity: 1
+            quantity: 1,
+            donated: 0
           }, {
             category: 'other_category',
-            quantity: 2
+            quantity: 2,
+            donated: 0
           }]
         })
         .expect(403)
@@ -70,12 +74,16 @@ describe('Student Routes', () => {
         .send({
           name: 'any_name',
           school: 'any_school',
+          about: 'any_about',
+          image: 'any_image',
           items: [{
             category: 'any_category',
-            quantity: 1
+            quantity: 1,
+            donated: 0
           }, {
             category: 'other_category',
-            quantity: 2
+            quantity: 2,
+            donated: 0
           }]
         })
         .expect(200)
@@ -89,12 +97,16 @@ describe('Student Routes', () => {
         .send({
           name: 'any_name',
           school: 'any_school',
+          about: 'any_about',
+          image: 'any_image',
           items: [{
             category: 'any_category',
-            quantity: 1
+            quantity: 1,
+            donated: 0
           }, {
             category: 'other_category',
-            quantity: 2
+            quantity: 2,
+            donated: 0
           }]
         })
         .expect(403)

@@ -11,9 +11,12 @@ const mockRequest = (): HttpRequest => ({
   body: {
     name: 'any_name',
     school: 'any_school',
+    about: 'any_about',
+    image: 'any_image',
     items: [{
       category: 'any_category',
-      quantity: 'any_quantity'
+      quantity: 1,
+      donated: 0
     }]
   }
 })
@@ -54,9 +57,12 @@ describe('AddStudentController', () => {
       accountId: 'any_id',
       name: 'any_name',
       school: 'any_school',
+      about: 'any_about',
+      image: 'any_image',
       items: [{
         category: 'any_category',
-        quantity: 'any_quantity'
+        quantity: 1,
+        donated: 0
       }]
     })
   });
