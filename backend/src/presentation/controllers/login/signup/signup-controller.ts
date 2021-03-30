@@ -19,11 +19,12 @@ export class SignUpController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { name, email, cpf, password } = httpRequest.body
+      const { name, email, cpf, role, password } = httpRequest.body
       const account = await this.addAccount.add({
         name,
         email,
         cpf,
+        role,
         password
       })
       if (!account) {
