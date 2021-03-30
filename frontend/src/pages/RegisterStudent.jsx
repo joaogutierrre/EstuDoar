@@ -8,6 +8,7 @@ class RegisterStudent extends Component {
         this.state = {
             name: '',
             school: '',
+            about: '',
             supplyList: [{
                 id: '',
                 name: '',
@@ -21,7 +22,6 @@ class RegisterStudent extends Component {
     }
 
     setItem(index, event) {
-        console.log(index, event);
         const { supplyList } = this.state;
         const newSupply = [...supplyList];
         newSupply[index][event.target.name] = event.target.value;
@@ -57,7 +57,7 @@ class RegisterStudent extends Component {
     }
 
     render () {
-        const { name, school, supplyList } = this.state;
+        const { name, school, about, supplyList } = this.state;
         return(
             <form action="" className='student-register-form'>
                 <label>
@@ -67,6 +67,15 @@ class RegisterStudent extends Component {
                 <label>
                     Escola:
                     <input type="text" name="school" value={school} onChange={this.handleInputChange} />
+                </label>
+                <label>
+                    Sobre:
+                    <textarea 
+                        name="about" 
+                        value={about} 
+                        onChange={this.handleInputChange} 
+                        placeholder="Escreva um resumo sobre o estudante"    
+                    />
                 </label>
                 <div className="list-container">
                     {supplyList.map((item , index) => (
@@ -78,6 +87,7 @@ class RegisterStudent extends Component {
                     />))}
                 </div>
                 <button onClick={this.addItemToList}>Novo Item</button>
+                <button>Finalizar Cadastro</button>
             </form>
         )
     }
