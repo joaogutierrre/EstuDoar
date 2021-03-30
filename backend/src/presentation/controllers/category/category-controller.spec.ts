@@ -1,5 +1,4 @@
 import { HttpRequest } from "../../protocols/http";
-import { ValidationSpy } from "../../test/mock-validation";
 import { CategoryController } from "./category-controller";
 import { LoadCategoriesSpy } from '../../test/category/mock-category';
 import { ServerError } from "../../errors/server-error";
@@ -16,17 +15,14 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
     sut: CategoryController
     loadCategoriesSpy: LoadCategoriesSpy
-    validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
-    const validationSpy = new ValidationSpy
     const loadCategoriesSpy = new LoadCategoriesSpy()
-    const sut = new CategoryController(loadCategoriesSpy, validationSpy)
+    const sut = new CategoryController(loadCategoriesSpy)
     return {
         sut,
-        loadCategoriesSpy,
-        validationSpy,
+        loadCategoriesSpy
     }
 }
 
@@ -44,7 +40,7 @@ describe('CategoryController', () => {
     test('should call LoadCategory with correct values', async () => {
         const { sut, loadCategoriesSpy } = makeSut()
         const httpRequest = mockRequest()
-        const httpResponse = await sut.handle(httpRequest)
+        await sut.handle(httpRequest)
         expect(loadCategoriesSpy.wasCalled).toBe(true)
     })
 
