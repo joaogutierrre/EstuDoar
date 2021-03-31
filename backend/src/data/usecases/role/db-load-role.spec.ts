@@ -1,3 +1,4 @@
+import { throwError } from "../../../domain/test/test-helper";
 import { LoadRoleRepositorySpy } from "../../test/mock-load-role";
 import { DbLoadRole } from "./db-load-role";
 
@@ -21,5 +22,12 @@ describe('DbLoadRole', () => {
         const loadRoleSpy = jest.spyOn(loadRoleRepositorySpy, 'loadRole')
         await sut.load()
         expect(loadRoleSpy).toHaveBeenCalled()
+    })
+
+    test('should throw if LoadRoleRepository throws', async () => {
+        const { sut, loadRoleRepositorySpy } = makeSut()
+        jest.spyOn(loadRoleRepositorySpy, 'loadRole').mockImplementation(throwError)
+        const promise = sut.load()
+        await expect(promise).rejects.toThrow()
     })
 })
