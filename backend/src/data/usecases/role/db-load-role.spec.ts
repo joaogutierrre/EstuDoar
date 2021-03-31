@@ -1,3 +1,4 @@
+import { mockRoleModel } from "../../../domain/test/mock-role";
 import { throwError } from "../../../domain/test/test-helper";
 import { LoadRoleRepositorySpy } from "../../test/mock-load-role";
 import { DbLoadRole } from "./db-load-role";
@@ -37,5 +38,11 @@ describe('DbLoadRole', () => {
         const promise = await sut.load()
         await expect(promise).toBeNull()
     });
-    
+
+    test('should return a role on succes', async () => {
+        const { sut } = makeSut()
+        const promise = await sut.load()
+        expect(promise).toEqual(mockRoleModel())
+    });
+
 })
