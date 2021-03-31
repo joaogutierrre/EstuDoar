@@ -1,3 +1,4 @@
+import { ValidationSpy } from './../../../test/mock-validation';
 import { mockStudentModel } from './../../../../domain/test/mock-student';
 import { InvalidParamError } from './../../../errors/invalid-param-error';
 import { HttpRequest } from './../../../protocols/http';
@@ -29,14 +30,17 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: UpdateStudentByIdController
   updateStudentByIdSpy: UpdateStudentByIdSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const updateStudentByIdSpy = new UpdateStudentByIdSpy()
-  const sut = new UpdateStudentByIdController(updateStudentByIdSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new UpdateStudentByIdController(updateStudentByIdSpy, validationSpy)
   return {
     sut,
-    updateStudentByIdSpy
+    updateStudentByIdSpy,
+    validationSpy
   }
 }
 
@@ -81,5 +85,12 @@ describe('UpdateStudentById Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(mockStudentModel()))
+  });
+
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(validationSpy.data).toEqual(mockRequest().body)
   });
 });
