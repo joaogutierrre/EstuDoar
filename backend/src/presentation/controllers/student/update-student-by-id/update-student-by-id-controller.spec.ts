@@ -1,8 +1,9 @@
+import { mockStudentModel } from './../../../../domain/test/mock-student';
 import { InvalidParamError } from './../../../errors/invalid-param-error';
 import { HttpRequest } from './../../../protocols/http';
 import { UpdateStudentByIdSpy } from './../../../test/mock-student';
 import { UpdateStudentByIdController } from './update-student-by-id-controller';
-import { serverError, forbidden } from './../../../helpers/http/http-helper';
+import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
 import { throwError } from './../../../../domain/test/test-helper';
 
 const mockRequest = (): HttpRequest => ({
@@ -74,5 +75,11 @@ describe('UpdateStudentById Controller', () => {
     jest.spyOn(updateStudentByIdSpy, 'update').mockReturnValueOnce(null)
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('id')))
+  });
+
+  test('should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(mockStudentModel()))
   });
 });
