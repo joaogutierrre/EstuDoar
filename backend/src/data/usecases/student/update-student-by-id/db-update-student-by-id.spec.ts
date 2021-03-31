@@ -38,4 +38,11 @@ describe('DbUpdateStudentById', () => {
     const student = await sut.update(updateStudentParams)
     expect(student).toEqual(updateStudentParams)
   });
+
+  test('should return null if wrong id is provided', async () => {
+    const { sut, updateStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(updateStudentByIdRepositorySpy, 'updateById').mockReturnValueOnce(null)
+    const student = await sut.update(mockStudentModel())
+    expect(student).toBe(null)
+  });
 });
