@@ -2,16 +2,47 @@ import React, { Component } from 'react'
 import './DashboardStudentCard.css'
 
 class DashboardStudentCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            percent: 0,
+        }
+        this.setPercentDonated = this.setPercentDonated.bind(this);
+    }
+    setPercentDonated() {
+        const { items } = this.props
+        const totalItens = items.reduce((acc, currentValue) => acc += currentValue.quantity, 0);
+        const totalDonated = items.reduce((acc, currentValue) => acc += currentValue.donated, 0);
+        const percent = (totalDonated * 100) / totalItens;
+        this.setState({ percent });
+    }
+
+    componentDidMount(){
+        this.setPercentDonated();
+    }
+
     render() {
+        const { percent } = this.state;
+        const {name, image} = this.props;
         return(
-            <div className="dash-card">
-                <div className="profile-image-container">
-                    <img src="https://images.unsplash.com/photo-1499323888381-7fd102a793de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80" alt=""/>
+            <div className="card-container">
+                <div className="image-container">
+                    <img
+                        src= { image }
+                        alt="Foto do Estudante"
+                    />
                 </div>
-                <p>Bruna Souza</p>
-                <div className="info-container">
-                    <p>Doados</p>
-                    <p>4/10</p>
+                <div className="card-content">
+                    <div className="student-name">
+                        <h3>{ name }</h3>
+                    </div>
+                    <div className="list-progress-bar">
+                        <p>{percent}% Concluído</p>
+                        <progress id="file" value="32" max="100" />
+                    </div>
+                    <div className="donate-button">
+                        <button>Ver Lista</button>
+                    </div>
                 </div>
             </div>
         );
