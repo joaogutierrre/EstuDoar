@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 
 class SelectSchoolSupply extends Component {
     render() {
-        const { setItem, removeItem, value } = this.props;
+        const { setItem, removeItem, value, categories } = this.props;
+        const optionsList = categories.map((category) => <option value={category.id} key={category.id}>{category.name}</option>)
         return(
             <div>
                 <select name="name" onChange={setItem}>
-                        <option value="caderno">Caderno</option>
-                        <option value="lapis">Lapis</option>
-                        <option value="livro">Livro</option>
+                    {optionsList}
                 </select>
                 <label>
                     Quantidade:

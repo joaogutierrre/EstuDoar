@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SelectSchoolSupply from '../components/SelectSchoolSupply';
 import './RegisterStudent.css';
+import * as database from '../services/databaseApi'
 
 class RegisterStudent extends Component {
     constructor(props){
@@ -14,11 +15,13 @@ class RegisterStudent extends Component {
                 name: '',
                 quantity: '',
             }],
+            supplyCategories: [],
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);
         this.setItem = this.setItem.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.getSupplyCategories = this.getSupplyCategories.bind(this);
     }
 
     setItem(index, event) {
@@ -56,8 +59,16 @@ class RegisterStudent extends Component {
         });
     }
 
+    getSupplyCategories(){
+        database.getSchoolSupplyCategories().then(({ categories }) => this.setState({ supplyCategories: categories }));
+    }
+
+    componentDidMount(){
+        this.getSupplyCategories();
+    }
+
     render () {
-        const { name, school, about, supplyList } = this.state;
+        const { name, school, about, supplyList, supplyCategories } = this.state;
         return(
             <form action="" className='student-register-form'>
                 <label>
@@ -84,6 +95,7 @@ class RegisterStudent extends Component {
                         removeItem={event => this.removeItemFromList(index, event)}
                         key={index} 
                         value={item}
+                        categories={supplyCategories}
                     />))}
                 </div>
                 <button onClick={this.addItemToList}>Novo Item</button>
