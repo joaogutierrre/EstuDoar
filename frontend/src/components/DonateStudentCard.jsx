@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './StudentCard.css';
+import './DonateStudentCard.css';
 
-class StudentCard extends Component {
+class DonateStudentCard extends Component {
   render() {
     return (
       <div className="card-container">
@@ -31,4 +31,4 @@ class StudentCard extends Component {
   }
 }
 
-export default StudentCard;
+export default DonateStudentCard;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FeedFilter from '../components/FeedFilter';
-import StudentCard from '../components/StudentCard';
+import DonateStudentCard from '../components/DonateStudentCard';
 import './DonationFeed.css'
 class DonationFeed extends Component {
   render() {
@@ -10,11 +10,11 @@ class DonationFeed extends Component {
           <FeedFilter />
         </section>
         <section className="card-list">
-          <StudentCard />
-          <StudentCard />
-          <StudentCard />
-          <StudentCard />
-          <StudentCard />
+          <DonateStudentCard />
+          <DonateStudentCard />
+          <DonateStudentCard />
+          <DonateStudentCard />
+          <DonateStudentCard />
         </section>
       </div>
     );
