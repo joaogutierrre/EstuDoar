@@ -1,10 +1,11 @@
+import { MissingParamError } from './../../../errors/missing-param-error';
 import { ValidationSpy } from './../../../test/mock-validation';
 import { mockStudentModel } from './../../../../domain/test/mock-student';
 import { InvalidParamError } from './../../../errors/invalid-param-error';
 import { HttpRequest } from './../../../protocols/http';
 import { UpdateStudentByIdSpy } from './../../../test/mock-student';
 import { UpdateStudentByIdController } from './update-student-by-id-controller';
-import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
+import { serverError, forbidden, ok, badRequest } from './../../../helpers/http/http-helper';
 import { throwError } from './../../../../domain/test/test-helper';
 
 const mockRequest = (): HttpRequest => ({
@@ -89,8 +90,14 @@ describe('UpdateStudentById Controller', () => {
 
   test('should call Validation with correct values', async () => {
     const { sut, validationSpy } = makeSut()
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
+    await sut.handle(mockRequest())
     expect(validationSpy.data).toEqual(mockRequest().body)
+  });
+
+  test('should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    jest.spyOn(validationSpy, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 });
