@@ -25,7 +25,7 @@ export class LoadStudentsByAccountRepositorySpy implements LoadStudentsByAccount
   }
 }
 
-export class UpdateStudentsByIdRepositorySpy implements UpdateStudentByIdRepository {
+export class UpdateStudentByIdRepositorySpy implements UpdateStudentByIdRepository {
   data: object
   result: object
   async updateById (data: UpdateStudentParams): Promise<StudentModel> {

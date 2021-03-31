@@ -1,14 +1,14 @@
-import { UpdateStudentsByIdRepositorySpy } from './../../../test/mock-db-student';
+import { UpdateStudentByIdRepositorySpy } from './../../../test/mock-db-student';
 import { StudentModel } from './../../../../domain/model/student';
 import { UpdateStudentById, UpdateStudentParams } from './../../../../domain/usecases/student/update-student-by-id';
 
 export class DbUpdateStudentById implements UpdateStudentById {
   constructor (
-    private readonly updateStudentsByIdRepository: UpdateStudentsByIdRepositorySpy
+    private readonly updateStudentsByIdRepository: UpdateStudentByIdRepositorySpy
   ) {}
 
   async update (data: UpdateStudentParams): Promise<StudentModel> {
-    await this.updateStudentsByIdRepository.updateById(data)
-    return null
+    const student = await this.updateStudentsByIdRepository.updateById(data)
+    return student
   }
 }
