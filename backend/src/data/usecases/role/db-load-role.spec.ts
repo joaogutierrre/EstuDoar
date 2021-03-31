@@ -22,12 +22,20 @@ describe('DbLoadRole', () => {
         const loadRoleSpy = jest.spyOn(loadRoleRepositorySpy, 'loadRole')
         await sut.load()
         expect(loadRoleSpy).toHaveBeenCalled()
-    })
+    });
 
     test('should throw if LoadRoleRepository throws', async () => {
         const { sut, loadRoleRepositorySpy } = makeSut()
         jest.spyOn(loadRoleRepositorySpy, 'loadRole').mockImplementation(throwError)
         const promise = sut.load()
         await expect(promise).rejects.toThrow()
-    })
+    });
+
+    test('should return null if LoadRolesRepository returns null', async () => {
+        const { sut, loadRoleRepositorySpy } = makeSut()
+        jest.spyOn(loadRoleRepositorySpy, 'loadRole').mockReturnValueOnce(null)
+        const promise = await sut.load()
+        await expect(promise).toBeNull()
+    });
+    
 })
