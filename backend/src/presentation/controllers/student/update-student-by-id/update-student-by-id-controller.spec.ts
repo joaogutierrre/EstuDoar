@@ -45,4 +45,26 @@ describe('UpdateStudentById Controller', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(serverError(new Error()))
   });
+
+  test('should call UpdateStudentById with correct value', async () => {
+    const { sut, updateStudentByIdSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(updateStudentByIdSpy.data).toEqual({
+      accountId: 'any_id',
+      id: 'any_id',
+      name: 'any_name',
+      school: 'any_school',
+      about: 'any_about',
+      image: 'any_image',
+      items: [{
+        category: 'any_category',
+        quantity: 1,
+        donated: 0
+      }, {
+        category: 'other_category',
+        quantity: 2,
+        donated: 0
+      }]
+    })
+  });
 });
