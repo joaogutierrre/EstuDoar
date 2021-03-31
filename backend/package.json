@@ -21,7 +21,7 @@
     "@shelf/jest-mongodb": "^1.2.3",
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^3.0.0",
-    "@types/jest": "^26.0.21",
+    "@types/jest": "^26.0.22",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/mongodb": "^3.6.10",
     "@types/node": "^14.14.35",
