@@ -1,5 +1,7 @@
 import { StudentModel } from './../../model/student';
 
+export type UpdateStudentParams = StudentModel
+
 export interface UpdateStudentById {
-  update: (id: string) => Promise<StudentModel>
+  update: (data: UpdateStudentParams) => Promise<StudentModel>
 }
