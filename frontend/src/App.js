@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/"><Home /></Route>
-        <Route path='/donation-feed/donate'><DonatePage /></Route>
+        <Route path="/donation-feed/donate/:id" render={ (props) => <DonatePage { ...props } /> }/>
         <Route path='/donation-feed'><DonationFeed /></Route>
         <Route path='/student-dashboard/add-student'><RegisterStudent /></Route>
         <Route path="/student-dashboard/:id" render={ (props) => <StudentList { ...props } /> }/>
