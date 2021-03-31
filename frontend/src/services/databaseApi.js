@@ -17,3 +17,13 @@ export async function getBrazilCitiesByUF(ufId) {
         throw new Error('Failed to fetch API and get cities');
     }
 }
+
+export async function getSchoolSupplyCategories(){
+    try{
+        const response = await fetch('https://estudoar-ts-api.herokuapp.com/api/category');
+        const categories = await response.json();
+        return categories;
+    } catch(error) {
+        throw new Error('Failed to fetch API and get School Supply Categories');
+    }
+}
