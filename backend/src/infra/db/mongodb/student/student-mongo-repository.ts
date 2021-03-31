@@ -4,6 +4,7 @@ import { MongoHelper } from './../helpers/mongo-helper';
 import { AddStudentParams } from './../../../../domain/usecases/student/add-student';
 import { StudentModel } from './../../../../domain/model/student';
 import { AddStudentRepository } from '../../../../data/protocols/db/student/add-student-repository';
+import { ObjectId } from 'bson';
 
 export class StudentMongoRepository implements AddStudentRepository, LoadStudentsByAccountRepository {
   async add (data: AddStudentParams): Promise<StudentModel> {
@@ -25,7 +26,7 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
   async updateById (data: UpdateStudentParams): Promise<StudentModel> {
     const studentCollection = await MongoHelper.getCollection('students')
     const student = await studentCollection.findOneAndUpdate({
-      _id: data.id,
+      _id: new ObjectId(data.id),
       accountId: data.accountId
     }, {
       $set: {
