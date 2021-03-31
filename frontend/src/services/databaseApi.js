@@ -27,3 +27,27 @@ export async function getSchoolSupplyCategories(){
         throw new Error('Failed to fetch API and get School Supply Categories');
     }
 }
+
+export async function handleLogin(email, password) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        email,
+        password
+    });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+    try{
+        const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/login", requestOptions)
+        const accessToken = await response.json();
+        return accessToken;
+    } catch (Error) {
+        throw new Error('Login Failed');
+    }
+}
