@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './DashboardStudentCard.css'
 
 class DashboardStudentCard extends Component {
@@ -23,7 +24,7 @@ class DashboardStudentCard extends Component {
 
     render() {
         const { percent } = this.state;
-        const {name, image} = this.props;
+        const {name, image, items, id} = this.props;
         return(
             <div className="card-container">
                 <div className="image-container">
@@ -41,7 +42,17 @@ class DashboardStudentCard extends Component {
                         <progress id="file" value="32" max="100" />
                     </div>
                     <div className="donate-button">
+                      <Link
+                          data-testid="product-detail-link"
+                          to={ {
+                                pathname: `/student-dashboard/${id}`,
+                                state: {
+                                        items,
+                                      },
+                              }}
+                      >
                         <button>Ver Lista</button>
+                      </Link>
                     </div>
                 </div>
             </div>
