@@ -14,16 +14,16 @@ class FeedFilter extends Component {
         selectCitie: '',
         selectSchool: '',
       }
-      this.setUFsList = this.setUFsList.bind(this);
-      this.setCitiesList = this.setCitiesList.bind(this);
+      this.getUFsList = this.getUFsList.bind(this);
+      this.getCitiesList = this.getCitiesList.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    setUFsList(){
+    getUFsList(){
       database.getBrazilUFs().then((ufs) => this.setState({ ufs }));
     }
 
-    setCitiesList(){
+    getCitiesList(){
       const { selectUFId } = this.state;
       database.getBrazilCitiesByUF(selectUFId).then((cities) => this.setState({ cities }));
       this.setState({newData: false})
@@ -40,13 +40,13 @@ class FeedFilter extends Component {
     }
 
     componentDidMount() {
-      this.setUFsList();
+      this.getUFsList();
     }
     
   render() {
     const { ufs, cities, selectUFId, selectCitie, newData } = this.state;
     if (selectUFId && newData) {
-      this.setCitiesList();
+      this.getCitiesList();
     }
     return (
       <div>

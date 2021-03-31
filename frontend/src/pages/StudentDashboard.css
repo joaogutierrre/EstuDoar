@@ -1,0 +1,12 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+
+.add-student-button {
+    
+}
+
