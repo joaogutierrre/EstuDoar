@@ -1,4 +1,5 @@
-import { serverError } from './../../../helpers/http/http-helper';
+import { InvalidParamError } from './../../../errors/invalid-param-error';
+import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
 import { UpdateStudentById } from './../../../../domain/usecases/student/update-student-by-id';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -12,7 +13,7 @@ export class UpdateStudentByIdController implements Controller {
     try {
       const { accountId } = httpRequest
       const { id, name, school, about, image, items } = httpRequest.body
-      await this.updateStudentById.update({
+      const student = await this.updateStudentById.update({
         accountId,
         id,
         name,
@@ -21,7 +22,10 @@ export class UpdateStudentByIdController implements Controller {
         image,
         items
       })
-      return null
+      if (!student) {
+        return forbidden(new InvalidParamError('id'))
+      }
+      return ok(student)
     } catch (error) {
       return serverError(error)
     }
