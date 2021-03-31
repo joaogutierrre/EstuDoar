@@ -49,7 +49,6 @@ class Login extends Component {
         <input
           id="input-email"
           name="email"
-          data-testid="email-input"
           type="email"
           value={ email }
           onChange={ this.handleInputChange }
@@ -58,7 +57,6 @@ class Login extends Component {
         <input
           id="input-password"
           name="password"
-          data-testid="password-input"
           type="password"
           value={ password }
           onChange={ this.handleInputChange }
