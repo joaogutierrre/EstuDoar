@@ -128,4 +128,28 @@ describe('Student Routes', () => {
         .expect(204)
     });
   });
+
+  describe('PUT /students', () => {
+    test('should return 403 on update student by id without accessToken', async () => {
+      await request(app)
+        .put('/api/students')
+        .send({
+          id: 'any_id',
+          name: 'any_name',
+          school: 'any_school',
+          about: 'any_about',
+          image: 'any_image',
+          items: [{
+            category: 'any_category',
+            quantity: 1,
+            donated: 0
+          }, {
+            category: 'other_category',
+            quantity: 2,
+            donated: 0
+          }]
+        })
+        .expect(403)
+    });
+  });
 });
