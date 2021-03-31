@@ -14,7 +14,7 @@ class Hero extends Component {
         </div>
 
         <div className="hero-buttons-container">
-          <Link to='/student-dashboard'>
+          <Link to='/student-login'>
           <button type="button">Quero Receber uma Doação</button>
           </Link>
           <Link to='/donation-feed'>

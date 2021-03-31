@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import StudentDashboard from './pages/StudentDashboard';
 import RegisterStudent from './pages/RegisterStudent';
 import StudentList from './pages/StudentList';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/"><Home /></Route>
+        <Route path='/student-login'><Login /></Route>
         <Route path='/donation-feed'><DonationFeed /></Route>
         <Route path='/student-dashboard/add-student'><RegisterStudent /></Route>
         <Route path="/student-dashboard/:id" render={ (props) => <StudentList { ...props } /> }/>
