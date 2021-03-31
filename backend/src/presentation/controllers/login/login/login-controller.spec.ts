@@ -3,7 +3,7 @@ import { ValidationSpy } from './../../../test/mock-validation';
 import { LoginController } from './login-controller';
 import { ServerError } from './../../../errors/server-error';
 import { serverError, unauthorized, ok, badRequest } from './../../../helpers/http/http-helper';
-import { AuthenticationSpy } from './../../../test/mock-account';
+import { AuthenticationSpy } from './../../../test/account/mock-account';
 import { HttpRequest } from './../../../protocols/http';
 
 const mockRequest = (): HttpRequest => ({

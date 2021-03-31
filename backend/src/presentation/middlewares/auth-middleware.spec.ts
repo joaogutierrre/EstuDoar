@@ -1,5 +1,5 @@
 import { throwError } from './../../domain/test/test-helper';
-import { LoadAccountByTokenSpy } from './../test/mock-account';
+import { LoadAccountByTokenSpy } from './../test/account/mock-account';
 import { AccessDeniedError } from './../errors/access-email-error';
 import { forbidden, ok, serverError } from './../helpers/http/http-helper';
 import { HttpRequest } from './../protocols/http';
