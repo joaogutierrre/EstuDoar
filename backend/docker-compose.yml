@@ -13,10 +13,12 @@ services:
     build: .
     restart: always
     image: estudoar-ts-api
-    command: npm start
+    command: npm run debug
     volumes:
       - ./dist:/usr/src/estudoar-ts-api/dist
+      - ./package.json:/usr/src/estudoar-ts-api/package.json
     ports:
       - "5050:5050"
+      - "9222:9222"
     links:
       - mongo
