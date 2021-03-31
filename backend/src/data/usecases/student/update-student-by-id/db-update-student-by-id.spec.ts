@@ -1,3 +1,4 @@
+import { throwError } from './../../../../domain/test/test-helper';
 import { mockStudentModel } from './../../../../domain/test/mock-student';
 import { UpdateStudentsByIdRepositorySpy } from './../../../test/mock-db-student';
 import { DbUpdateStudentById } from './db-update-student-by-id';
@@ -22,5 +23,12 @@ describe('DbUpdateStudentById', () => {
     const updateStudentParams = mockStudentModel()
     await sut.update(updateStudentParams)
     expect(updateStudentsByIdRepositorySpy.data).toEqual(updateStudentParams)
+  });
+
+  test('should throw if UpdateStudentByIdRepository throws', async () => {
+    const { sut, updateStudentsByIdRepositorySpy } = makeSut()
+    jest.spyOn(updateStudentsByIdRepositorySpy, 'updateById').mockImplementationOnce(throwError)
+    const promise = sut.update(mockStudentModel())
+    await expect(promise).rejects.toThrow()
   });
 });
