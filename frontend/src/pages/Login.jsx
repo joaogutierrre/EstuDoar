@@ -37,8 +37,13 @@ class Login extends Component {
     event.preventDefault();
     const { email, password } = this.state;
     database.handleLogin(email, password)
-    .then(({ accessToken }) => localStorage.setItem('estudoar', accessToken))
-    .then(this.setState({ loggedIn: true }));
+    .then( ( response ) => {
+        if(Object.keys(response)[0] !== "error")
+        {
+            localStorage.setItem('estudoar', response.accessToken)
+            this.setState({ loggedIn: true });
+        }
+    })
   }
 
   render() {
