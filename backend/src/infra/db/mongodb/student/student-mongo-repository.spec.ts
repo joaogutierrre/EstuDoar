@@ -109,5 +109,11 @@ describe('StudentMongoRepository', () => {
       expect(updatedStudent).toBeTruthy()
       expect(updatedStudent.name).toBe('new_name')
     });
+
+    test('should return null on updateById fails', async () => {
+      const { sut } = makeSut()
+      const updatedStudent = await sut.updateById(mockStudentModel())
+      expect(updatedStudent).toBe(null)
+    });
   });
 });
