@@ -1,5 +1,5 @@
 import { CategoryModel } from './../../domain/model/category';
-import { LoadCategoryRepository } from './../protocols/db/load-category-repository';
+import { LoadCategoryRepository } from '../protocols/db/category/load-category-repository';
 import { CategoriesModel } from '../../domain/model/category';
 import { mockCategoryModel } from './../../domain/test/mock-category';
 

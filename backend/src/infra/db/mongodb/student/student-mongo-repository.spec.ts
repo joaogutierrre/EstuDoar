@@ -1,4 +1,4 @@
-import { mockAddStudentParams } from './../../../../domain/test/mock-student';
+import { mockAddStudentParams, mockStudentModel } from './../../../../domain/test/mock-student';
 import { StudentMongoRepository } from './student-mongo-repository';
 import { MongoHelper } from './../helpers/mongo-helper';
 import { Collection } from "mongodb";
@@ -97,6 +97,23 @@ describe('StudentMongoRepository', () => {
       const { sut } = makeSut()
       const students = await sut.loadStudentsByAccount('any_id')
       expect(students.length).toBe(0)
+    });
+  });
+
+  describe('updateById()', () => {
+    test('should return an student on updateById success', async () => {
+      const { sut } = makeSut()
+      const student = await sut.add(mockAddStudentParams())
+      student.name = 'new_name'
+      const updatedStudent = await sut.updateById(student)
+      expect(updatedStudent).toBeTruthy()
+      expect(updatedStudent.name).toBe('new_name')
+    });
+
+    test('should return null on updateById fails', async () => {
+      const { sut } = makeSut()
+      const updatedStudent = await sut.updateById(mockStudentModel())
+      expect(updatedStudent).toBe(null)
     });
   });
 });
