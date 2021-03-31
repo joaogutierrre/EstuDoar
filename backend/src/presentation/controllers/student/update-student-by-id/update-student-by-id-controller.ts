@@ -1,6 +1,6 @@
 import { Validation } from './../../../protocols/validation';
 import { InvalidParamError } from './../../../errors/invalid-param-error';
-import { serverError, forbidden, ok } from './../../../helpers/http/http-helper';
+import { serverError, forbidden, ok, badRequest } from './../../../helpers/http/http-helper';
 import { UpdateStudentById } from './../../../../domain/usecases/student/update-student-by-id';
 import { HttpRequest, HttpResponse } from './../../../protocols/http';
 import { Controller } from './../../../protocols/controller';
@@ -13,7 +13,10 @@ export class UpdateStudentByIdController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest.body)
+      if (error) {
+        return badRequest(error)
+      }
       const { accountId } = httpRequest
       const { id, name, school, about, image, items } = httpRequest.body
       const student = await this.updateStudentById.update({

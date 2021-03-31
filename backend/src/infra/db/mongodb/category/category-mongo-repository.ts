@@ -1,4 +1,4 @@
-import { LoadCategoryRepository } from "../../../../data/protocols/db/load-category-repository";
+import { LoadCategoryRepository } from "../../../../data/protocols/db/category/load-category-repository";
 import { CategoryModel } from './../../../../domain/model/category';
 import { MongoHelper } from "../helpers/mongo-helper";
 
