@@ -32,4 +32,11 @@ describe('DeleteStudentByIdController', () => {
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(serverError(new Error()))
   });
+
+  test('should call DeleteStudentById with correct values', async () => {
+    const { sut, deleteStudentByIdSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(deleteStudentByIdSpy.accountId).toBe('any_accountId')
+    expect(deleteStudentByIdSpy.id).toBe('any_id')
+  });
 });
