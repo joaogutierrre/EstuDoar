@@ -1,8 +1,9 @@
-import { HttpRequest } from './../../../protocols/http';
-import { DeleteStudentByIdSpy } from './../../../test/mock-student';
-import { serverError } from './../../../helpers/http/http-helper';
-import { throwError } from './../../../../domain/test/test-helper';
-import { DeleteStudentByIdController } from './delete-student-by-id';
+import { ValidationSpy } from '../../../test/mock-validation';
+import { HttpRequest } from '../../../protocols/http';
+import { DeleteStudentByIdSpy } from '../../../test/mock-student';
+import { serverError } from '../../../helpers/http/http-helper';
+import { throwError } from '../../../../domain/test/test-helper';
+import { DeleteStudentByIdController } from './delete-student-by-id-controller';
 
 const mockRequest = (): HttpRequest => ({
   accountId: 'any_accountId',
@@ -14,14 +15,17 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: DeleteStudentByIdController
   deleteStudentByIdSpy: DeleteStudentByIdSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const deleteStudentByIdSpy = new DeleteStudentByIdSpy()
-  const sut = new DeleteStudentByIdController(deleteStudentByIdSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new DeleteStudentByIdController(deleteStudentByIdSpy, validationSpy)
   return {
     sut,
-    deleteStudentByIdSpy
+    deleteStudentByIdSpy,
+    validationSpy
   }
 }
 
@@ -38,5 +42,11 @@ describe('DeleteStudentByIdController', () => {
     await sut.handle(mockRequest())
     expect(deleteStudentByIdSpy.accountId).toBe('any_accountId')
     expect(deleteStudentByIdSpy.id).toBe('any_id')
+  });
+
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(validationSpy.data).toEqual(mockRequest().body)
   });
 });
