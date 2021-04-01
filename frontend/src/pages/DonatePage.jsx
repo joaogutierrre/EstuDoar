@@ -1,11 +1,43 @@
 import React, { Component } from 'react';
+import students from '../fakeStudents';
 import './DonatePage.css'
 class DonatePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      student: {},
+      answer: {}
+    };
+
+    this.getStudent = this.getStudent.bind(this);
+    this.setItemDonated = this.setItemDonated.bind(this);
+  }
+
+  setItemDonated(index, event) {
+    const { answer } = this.state;
+    console.log(index, event.target.value);
+    answer.items[index].donated += parseInt(event.target.value); 
+    console.log("Answer", answer);
+    this.setState({answer})
+}
+
+  getStudent() {
+    const { location } = this.props;
+    const { student } = location.state;
+    const newStudent =student 
+    this.setState({answer: newStudent});
+  }
+
+componentDidMount() {
+  this.getStudent();
+}
+
   render() {
     const { location } = this.props;
     const { student } = location.state;
-    const { name, about, school, image } = student;
-    const itemsList = student.items.map((item, index) => {
+    console.log(student);
+    const { name, about, school, items, image } = student;
+    const itemsList = items.map((item, index) => {
       const maxDonateQuantity = [...Array(item.quantity - item.donated + 1).keys()];
       return (
       <div className="item-container" key={index}>
@@ -14,7 +46,7 @@ class DonatePage extends Component {
         </li>
         <label className="supply-donate">
           Doar:
-          <select>
+          <select onChange={event => this.setItemDonated(index, event)}>
             {maxDonateQuantity.map((unit, index) => (<option key={index} value={unit}>{unit} Unidade(s)</option>))}
           </select>
         </label>

@@ -21,9 +21,10 @@ class DonationFeed extends Component {
   }
 
   render() {
-    const cardsList = students.map((student) => (
+    const cardsList = students.map((student, index) => (
       <DonateStudentCard 
         student={student}
+        key={index}
       />
     ));
     return (
