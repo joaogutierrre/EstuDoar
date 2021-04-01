@@ -94,7 +94,7 @@ export async function handleLogin(email, password) {
         const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/login", requestOptions)
         const accessToken = await response.json();
         return accessToken;
-    } catch (Error) {
+    } catch (error) {
         console.log('error, Login', error)
     }
 }
