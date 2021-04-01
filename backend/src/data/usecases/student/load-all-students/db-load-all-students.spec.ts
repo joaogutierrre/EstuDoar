@@ -1,3 +1,4 @@
+import { throwError } from './../../../../domain/test/test-helper';
 import { LoadAllStudentsRepositorySpy } from './../../../test/mock-db-student';
 import { DbLoadAllStudents } from './db-load-all-students';
 import { mockLoadAllStudentsParams } from './../../../../domain/test/mock-student';
@@ -21,5 +22,12 @@ describe('DbLoadAllStudents', () => {
     const loadAllStudentsParams = mockLoadAllStudentsParams()
     await sut.load(loadAllStudentsParams)
     expect(loadAllStudentsRepositorySpy.data).toEqual(loadAllStudentsParams)
+  });
+
+  test('should throw if LoadAllStudentsRepository throws', async () => {
+    const { sut, loadAllStudentsRepositorySpy } = makeSut()
+    jest.spyOn(loadAllStudentsRepositorySpy, 'loadAllStudents').mockImplementationOnce(throwError)
+    const promise = sut.load(mockLoadAllStudentsParams())
+    await expect(promise).rejects.toThrow()
   });
 });
