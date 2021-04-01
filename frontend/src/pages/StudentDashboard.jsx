@@ -16,7 +16,9 @@ class StudentDashboard extends Component {
     getStudents(){
         const accessToken = localStorage.getItem("estudoar");
         database.getStudents(accessToken).then((students) => {
-            this.setState({students});
+            if(students){
+                this.setState({students});
+            } 
         });
     }
 
