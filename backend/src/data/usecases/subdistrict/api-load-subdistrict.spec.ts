@@ -30,4 +30,11 @@ describe('ApiLoadSubdistrict', () => {
         const promise = sut.load()
         await expect(promise).rejects.toThrow()
     });
+
+    test('should return null if LoadRolesRepository returns null', async () => {
+        const { sut, loadSubdistrictRepositorySpy } = makeSut()
+        jest.spyOn(loadSubdistrictRepositorySpy, 'loadSubdistrict').mockReturnValueOnce(null)
+        const promise = await sut.load()
+        await expect(promise).toBeNull()
+    });
 })
