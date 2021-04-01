@@ -1,4 +1,5 @@
-import { serverError } from './../../../helpers/http/http-helper';
+import { mockStudentModelList } from './../../../../domain/test/mock-student';
+import { serverError, ok } from './../../../helpers/http/http-helper';
 import { throwError } from './../../../../domain/test/test-helper';
 import { LoadAllStudentsSpy } from './../../../test/mock-student';
 import { LoadAllStudentsController } from './load-all-students-controller';
@@ -39,5 +40,11 @@ describe('LoadAllStudents Controller', () => {
     const { sut, loadAllStudentsSpy } = makeSut()
     await sut.handle(mockRequest())
     expect(loadAllStudentsSpy.data).toEqual(mockRequest().body)
+  });
+
+  test('should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(mockStudentModelList()))
   });
 });
