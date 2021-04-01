@@ -11,7 +11,7 @@ export const mockAddStudentParams = (): AddStudentParams => ({
 })
 
 export const mockStudentModel = (): StudentModel => ({
-  id: 'any_id',
+  id: '6064b768ae8209001434d737',
   accountId: 'any_id',
   name: 'any_name',
   school: 'any_school',

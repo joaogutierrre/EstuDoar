@@ -1,15 +1,15 @@
+import { makeUpdateStudentByIdValidation } from './update-student-by-id-validation-factory';
 import { Validation } from './../../../../../presentation/protocols/validation';
 import { ValidationComposite } from './../../../../../validation/validators/validation-composite';
 import { RequiredFieldValidation } from './../../../../../validation/validators/required-field-validation';
-import { makeAddStudentValidation } from './add-student-validation-factory';
 
 jest.mock('../../../../../validation/validators/validation-composite')
 
-describe('AddStudentValidation factory', () => {
+describe('UpdateStudentByIdValidation factory', () => {
   test('should call ValidationComposite with all validations', () => {
-    makeAddStudentValidation()
+    makeUpdateStudentByIdValidation()
     const validations: Validation[] = []
-    for (const field of ['name', 'school', 'about']) {
+    for (const field of ['id', 'name', 'school', 'about', 'image', 'items']) {
       validations.push(new RequiredFieldValidation(field))
     }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
