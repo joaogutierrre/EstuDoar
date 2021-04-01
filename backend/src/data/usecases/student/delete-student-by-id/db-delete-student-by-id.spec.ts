@@ -29,4 +29,10 @@ describe('DbDeleteStudentById', () => {
     const promise = sut.delete('any_accountId', 'any_id')
     await expect(promise).rejects.toThrow()
   });
+
+  test('should return true on DeleteStudentByIdRepository success', async () => {
+    const { sut } = makeSut()
+    const wasDeleted = await sut.delete('any_accountId', 'any_id')
+    expect(wasDeleted).toBe(true)
+  });
 });

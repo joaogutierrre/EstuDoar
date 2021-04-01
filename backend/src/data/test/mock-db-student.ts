@@ -39,9 +39,9 @@ export class UpdateStudentByIdRepositorySpy implements UpdateStudentByIdReposito
 export class DeleteStudentByIdRepositorySpy implements DeleteStudentByIdRepository {
   accountId: string
   id: string
-  async deleteById (accountId: string, id: string): Promise<void> {
+  async deleteById (accountId: string, id: string): Promise<boolean> {
     this.accountId = accountId
     this.id = id
-    return null
+    return true
   }
 }
