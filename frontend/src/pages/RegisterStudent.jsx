@@ -21,6 +21,7 @@ class RegisterStudent extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.getSupplyCategories = this.getSupplyCategories.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+        this.isInvalidFields = this.isInvalidFields.bind(this);
     }
 
     setItem(index, event) {
@@ -34,10 +35,10 @@ class RegisterStudent extends Component {
         event.preventDefault();
         const newItem = {
             category: '',
-            quantity: '',
+            quantity: 1,
             donated: 0,
         };
-        this.setState(({items}) => ({items: [...items, newItem ]}))
+        this.setState(({items}) => ({items: [...items, newItem ]}));
     }
 
     removeItemFromList(index, event) {
@@ -58,7 +59,7 @@ class RegisterStudent extends Component {
         });
     }
 
-    getSupplyCategories(){
+    getSupplyCategories() {
         database.getSchoolSupplyCategories().then(({ categories }) => this.setState({ supplyCategories: categories }));
     }
 
@@ -73,9 +74,18 @@ class RegisterStudent extends Component {
             image: "any_image",
             items,
         };
-        console.log(student);
-        database.setStudent(student, accessToken);
-        this.setState({ isDone: true })
+        if(!this.isInvalidFields(student)){
+            database.setStudent(student, accessToken);
+            this.setState({ isDone: true })
+        }
+        
+    }
+
+    isInvalidFields(student) {
+        const { items } = student;
+        const checkTextInputs = Object.values(student).map((element) => element.length === 0 ? false : true ).includes(false);
+        const checkSelectInputs = items.map((item) => item.category === '' ? false : true).includes(false);
+        return (checkSelectInputs || checkTextInputs)
     }
 
     componentDidMount(){
