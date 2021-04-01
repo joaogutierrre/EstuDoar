@@ -34,5 +34,12 @@ describe('RoleController', () => {
         const httpRequest = mockRequest()
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse).toEqual(serverError(new ServerError(null)))
-    })
+    });
+
+    test('should call LoadRole with correct values', async () => {
+        const { sut, loadRolesSpy } = makeSut()
+        const httpRequest = mockRequest()
+        await sut.handle(httpRequest)
+        expect(loadRolesSpy.wasCalled).toBe(true)
+    });
 })
