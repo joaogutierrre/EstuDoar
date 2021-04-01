@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SelectSchoolSupply from '../components/SelectSchoolSupply';
 import './RegisterStudent.css';
 import * as database from '../services/databaseApi'
+import { Redirect } from 'react-router';
 
 class RegisterStudent extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ class RegisterStudent extends Component {
             about: '',
             items: [],
             supplyCategories: [],
+            isDone: false,
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);
@@ -73,6 +75,7 @@ class RegisterStudent extends Component {
         };
         console.log(student);
         database.setStudent(student, accessToken);
+        this.setState({ isDone: true })
     }
 
     componentDidMount(){
@@ -80,7 +83,7 @@ class RegisterStudent extends Component {
     }
 
     render () {
-        const { name, school, about, items, supplyCategories } = this.state;
+        const { name, school, about, items, supplyCategories, isDone } = this.state;
         return(
             <form className='student-register-form'>
                 <label>
@@ -111,7 +114,7 @@ class RegisterStudent extends Component {
                     />))}
                 </div>
                 <button onClick={this.addItemToList}>Novo Item</button>
-                <button onClick={this.handleRegister}>Finalizar Cadastro</button>
+                {isDone ? <Redirect to="/student-dashboard"/> :<button onClick={this.handleRegister}>Finalizar Cadastro</button>}
             </form>
         )
     }
