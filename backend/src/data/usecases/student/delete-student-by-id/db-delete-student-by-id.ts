@@ -6,8 +6,8 @@ export class DbDeleteStudentById implements DeleteStudentById {
     private readonly deleteStudentByIdRepository: DeleteStudentByIdRepository
   ) {}
 
-  async delete (accountId: string, id: string): Promise<void> {
-    await this.deleteStudentByIdRepository.deleteById(accountId, id)
-    return null
+  async delete (accountId: string, id: string): Promise<boolean> {
+    const wasDeleted = await this.deleteStudentByIdRepository.deleteById(accountId, id)
+    return wasDeleted
   }
 }

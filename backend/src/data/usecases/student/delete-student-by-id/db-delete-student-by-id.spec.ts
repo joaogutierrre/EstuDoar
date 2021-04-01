@@ -35,4 +35,11 @@ describe('DbDeleteStudentById', () => {
     const wasDeleted = await sut.delete('any_accountId', 'any_id')
     expect(wasDeleted).toBe(true)
   });
+
+  test('should return false on DeleteStudentByIdRepository fails', async () => {
+    const { sut, deleteStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(deleteStudentByIdRepositorySpy, 'deleteById').mockReturnValueOnce(Promise.resolve(false))
+    const wasDeleted = await sut.delete('any_accountId', 'any_id')
+    expect(wasDeleted).toBe(false)
+  });
 });
