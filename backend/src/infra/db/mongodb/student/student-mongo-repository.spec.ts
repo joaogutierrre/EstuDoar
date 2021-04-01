@@ -141,6 +141,12 @@ describe('StudentMongoRepository', () => {
       expect(students[1].id).toBeTruthy()
       expect(students[1].accountId).toBe('other_id')
     });
+
+    test('should return an empty list', async () => {
+      const { sut } = makeSut()
+      const students = await sut.loadAllStudents({})
+      expect(students.length).toBe(0)
+    });
   });
 
   describe('updateById()', () => {
