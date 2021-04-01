@@ -1,3 +1,5 @@
+import { DeleteStudentByIdRepository } from './../../../../data/protocols/db/student/delete-student-by-id-repository';
+import { UpdateStudentByIdRepository } from './../../../../data/protocols/db/student/update-student-by-id-repository';
 import { UpdateStudentParams } from './../../../../domain/usecases/student/update-student-by-id';
 import { LoadStudentsByAccountRepository } from './../../../../data/protocols/db/student/load-students-by-account-repository';
 import { MongoHelper } from './../helpers/mongo-helper';
@@ -6,7 +8,7 @@ import { StudentModel } from './../../../../domain/model/student';
 import { AddStudentRepository } from '../../../../data/protocols/db/student/add-student-repository';
 import { ObjectId } from 'bson';
 
-export class StudentMongoRepository implements AddStudentRepository, LoadStudentsByAccountRepository {
+export class StudentMongoRepository implements AddStudentRepository, LoadStudentsByAccountRepository, UpdateStudentByIdRepository, DeleteStudentByIdRepository {
   async add (data: AddStudentParams): Promise<StudentModel> {
     const studentCollection = await MongoHelper.getCollection('students')
     const result = await studentCollection.insertOne(data)
@@ -40,5 +42,14 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
       returnOriginal: false
     })
     return student.value ? MongoHelper.map(student.value) : null
+  }
+
+  async deleteById (accountId: string, id: string): Promise<void> {
+    const studentCollection = await MongoHelper.getCollection('students')
+    await studentCollection.deleteOne({
+      _id: new ObjectId(id),
+      accountId
+    })
+    return null
   }
 }
