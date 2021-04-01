@@ -1,3 +1,4 @@
+import { throwError } from "../../../domain/test/test-helper";
 import { LoadSubdistrictRepositorySpy } from "../../test/mock-load-subdistrict";
 import { ApiLoadSubdistrict } from "./api-load-subdistrict";
 
@@ -22,4 +23,11 @@ describe('ApiLoadSubdistrict', () => {
         await sut.load()
         expect(loadSubdistrictSpy).toHaveBeenCalled()
     })
+
+    test('should throw if LoadSubdistrictRepository throws', async () => {
+        const { sut, loadSubdistrictRepositorySpy } = makeSut()
+        jest.spyOn(loadSubdistrictRepositorySpy, 'loadSubdistrict').mockImplementation(throwError)
+        const promise = sut.load()
+        await expect(promise).rejects.toThrow()
+    });
 })
