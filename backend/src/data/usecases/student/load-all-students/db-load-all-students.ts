@@ -8,7 +8,7 @@ export class DbLoadAllStudents implements LoadAllStudents {
   ) {}
 
   async load (data: LoadAllStudentsParams): Promise<StudentModel[]> {
-    await this.loadAllStudentsRepository.loadAllStudents(data)
-    return null
+    const students = await this.loadAllStudentsRepository.loadAllStudents(data)
+    return students
   }
 }
