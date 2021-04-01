@@ -1,4 +1,5 @@
-import { badRequest, noContent } from './../../../helpers/http/http-helper';
+import { InvalidParamError } from './../../../errors/invalid-param-error';
+import { badRequest, forbidden, noContent } from './../../../helpers/http/http-helper';
 import { MissingParamError } from './../../../errors/missing-param-error';
 import { ValidationSpy } from '../../../test/mock-validation';
 import { HttpRequest } from '../../../protocols/http';
@@ -63,5 +64,12 @@ describe('DeleteStudentByIdController', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(noContent())
+  });
+
+  test('should return 403 on fails', async () => {
+    const { sut, deleteStudentByIdSpy } = makeSut()
+    jest.spyOn(deleteStudentByIdSpy, 'delete').mockReturnValueOnce(Promise.resolve(false))
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('id')))
   });
 });
