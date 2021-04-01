@@ -1,4 +1,4 @@
-import { badRequest } from './../../../helpers/http/http-helper';
+import { badRequest, noContent } from './../../../helpers/http/http-helper';
 import { MissingParamError } from './../../../errors/missing-param-error';
 import { ValidationSpy } from '../../../test/mock-validation';
 import { HttpRequest } from '../../../protocols/http';
@@ -57,5 +57,11 @@ describe('DeleteStudentByIdController', () => {
     jest.spyOn(validationSpy, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  });
+
+  test('should return 204 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(noContent())
   });
 });
