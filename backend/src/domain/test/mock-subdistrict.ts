@@ -1,6 +1,6 @@
 import { SubdistrictsModel } from "../model/subdistrict";
 
-export const mockRoleModel = (): SubdistrictsModel => ({
+export const mockSubdistrictModel = (): SubdistrictsModel => ({
     subdistricts: [{
         id: 'any_id',
         code: 'any_code',
