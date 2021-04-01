@@ -1,6 +1,7 @@
 import { throwError } from "../../../domain/test/test-helper";
 import { LoadSubdistrictRepositorySpy } from "../../test/mock-load-subdistrict";
 import { ApiLoadSubdistrict } from "./api-load-subdistrict";
+import { mockSubdistrictModel } from "../../../domain/test/mock-subdistrict"
 
 type SutTypes = {
     sut: ApiLoadSubdistrict
@@ -36,5 +37,11 @@ describe('ApiLoadSubdistrict', () => {
         jest.spyOn(loadSubdistrictRepositorySpy, 'loadSubdistrict').mockReturnValueOnce(null)
         const promise = await sut.load()
         await expect(promise).toBeNull()
+    });
+
+    test('should return a subdistrict on succes', async () => {
+        const { sut } = makeSut()
+        const promise = await sut.load()
+        expect(promise).toEqual(mockSubdistrictModel())
     });
 })
