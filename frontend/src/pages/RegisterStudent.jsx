@@ -84,6 +84,15 @@ class RegisterStudent extends Component {
             image: "",
             items,
         };
+        student.items.sort((a,b) => {
+            if(a.category < b.category) {
+                return -1;
+            }
+            if(a.category > b.category) {
+                return 1;
+            }
+            return 0;
+         });
         if(!this.isInvalidFields(student)){
             database.setStudent(student, accessToken);
             this.setState({ isDone: true })
