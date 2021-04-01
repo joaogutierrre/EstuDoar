@@ -1,3 +1,4 @@
+import { LoadAllStudentsParams } from './../usecases/student/load-all-students';
 import { StudentModel } from './../model/student';
 import { AddStudentParams } from './../usecases/student/add-student';
 
@@ -36,3 +37,10 @@ export const mockStudentModelList = (): StudentModel[] => ([
   mockStudentModel(), 
   mockStudentModel()
 ])
+
+export const mockLoadAllStudentsParams = (): LoadAllStudentsParams => ({
+  uf: 'any_uf',
+  city: 'any_city',
+  subDistrict: 'any_subDistrict',
+  school: 'any_school'
+})
