@@ -44,12 +44,12 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
     return student.value ? MongoHelper.map(student.value) : null
   }
 
-  async deleteById (accountId: string, id: string): Promise<void> {
+  async deleteById (accountId: string, id: string): Promise<boolean> {
     const studentCollection = await MongoHelper.getCollection('students')
-    await studentCollection.deleteOne({
+    const response = await studentCollection.deleteOne({
       _id: new ObjectId(id),
       accountId
     })
-    return null
+    return response.result.n === 1
   }
 }
