@@ -10,10 +10,7 @@ class RegisterStudent extends Component {
             name: '',
             school: '',
             about: '',
-            items: [{
-                category: '',
-                quantity: '',
-            }],
+            items: [],
             supplyCategories: [],
         }
         this.addItemToList = this.addItemToList.bind(this);
@@ -36,6 +33,7 @@ class RegisterStudent extends Component {
         const newItem = {
             category: '',
             quantity: '',
+            donated: 0,
         };
         this.setState(({items}) => ({items: [...items, newItem ]}))
     }
