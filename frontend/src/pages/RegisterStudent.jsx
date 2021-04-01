@@ -70,10 +70,11 @@ class RegisterStudent extends Component {
             name,
             school,
             about,
+            image: "any_image",
             items,
         };
         console.log(student);
-        // database.setStudent(student, accessToken);
+        database.setStudent(student, accessToken);
     }
 
     componentDidMount(){
