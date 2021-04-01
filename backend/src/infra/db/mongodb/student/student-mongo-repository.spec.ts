@@ -100,6 +100,49 @@ describe('StudentMongoRepository', () => {
     });
   });
 
+  describe('loadAllStudents()', () => {
+    test('should return all students', async () => {
+      await studentCollection.insertMany([{
+        accountId: 'any_id',
+        name: 'any_name',
+        school: 'any_school',
+        about: 'any_about',
+        image: 'any_image',
+        items: [{
+          category: 'any_category',
+          quantity: 1,
+          donated: 0
+        }, {
+          category: 'any_category',
+          quantity: 2,
+          donated: 0
+        }]
+      }, {
+        accountId: 'other_id',
+        name: 'other_name',
+        school: 'other_school',
+        about: 'other_about',
+        image: 'other_image',
+        items: [{
+          category: 'other_category',
+          quantity: 1,
+          donated: 0
+        }, {
+          category: 'other_category',
+          quantity: 2,
+          donated: 0
+        }]
+      }])
+      const { sut } = makeSut()
+      const students = await sut.loadAllStudents({})
+      expect(students.length).toBe(2)
+      expect(students[0].id).toBeTruthy()
+      expect(students[0].accountId).toBe('any_id')
+      expect(students[1].id).toBeTruthy()
+      expect(students[1].accountId).toBe('other_id')
+    });
+  });
+
   describe('updateById()', () => {
     test('should return an student on updateById success', async () => {
       const { sut } = makeSut()
