@@ -34,4 +34,10 @@ describe('LoadAllStudents Controller', () => {
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   });
+
+  test('should call LoadAllStudents with correct values', async () => {
+    const { sut, loadAllStudentsSpy } = makeSut()
+    await sut.handle(mockRequest())
+    expect(loadAllStudentsSpy.data).toEqual(mockRequest().body)
+  });
 });
