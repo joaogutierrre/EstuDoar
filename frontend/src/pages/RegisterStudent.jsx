@@ -71,7 +71,7 @@ class RegisterStudent extends Component {
             name,
             school,
             about,
-            image: "any_image",
+            image: "",
             items,
         };
         if(!this.isInvalidFields(student)){
@@ -83,7 +83,7 @@ class RegisterStudent extends Component {
 
     isInvalidFields(student) {
         const { items } = student;
-        const checkTextInputs = Object.values(student).map((element) => element.length === 0 ? false : true ).includes(false);
+        const checkTextInputs = Object.values(student).splice(4, 1).map((element) => element.length === 0 ? false : true ).includes(false);
         const checkSelectInputs = items.map((item) => item.category === '' ? false : true).includes(false);
         return (checkSelectInputs || checkTextInputs)
     }
