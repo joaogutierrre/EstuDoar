@@ -1,7 +1,7 @@
 import { mockAddStudentParams, mockStudentModel } from './../../../../domain/test/mock-student';
 import { StudentMongoRepository } from './student-mongo-repository';
 import { MongoHelper } from './../helpers/mongo-helper';
-import { Collection } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
 
 type SutTypes = {
   sut: StudentMongoRepository
@@ -114,6 +114,16 @@ describe('StudentMongoRepository', () => {
       const { sut } = makeSut()
       const updatedStudent = await sut.updateById(mockStudentModel())
       expect(updatedStudent).toBe(null)
+    });
+  });
+
+  describe('deleteById()', () => {
+    test('should not return an student on deleteById success', async () => {
+      const { sut } = makeSut()
+      const student = await sut.add(mockAddStudentParams())
+      await sut.deleteById(student.accountId, student.id)
+      const deletedStudent = await studentCollection.findOne({ _id: new ObjectId(student.id) })
+      expect(deletedStudent).toBe(null)
     });
   });
 });
