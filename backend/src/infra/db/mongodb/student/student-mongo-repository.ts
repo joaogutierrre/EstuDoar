@@ -1,3 +1,5 @@
+import { LoadAllStudentsParams } from './../../../../domain/usecases/student/load-all-students';
+import { LoadAllStudentsRepository } from './../../../../data/protocols/db/student/load-all-students-repository';
 import { DeleteStudentByIdRepository } from './../../../../data/protocols/db/student/delete-student-by-id-repository';
 import { UpdateStudentByIdRepository } from './../../../../data/protocols/db/student/update-student-by-id-repository';
 import { UpdateStudentParams } from './../../../../domain/usecases/student/update-student-by-id';
@@ -8,7 +10,7 @@ import { StudentModel } from './../../../../domain/model/student';
 import { AddStudentRepository } from '../../../../data/protocols/db/student/add-student-repository';
 import { ObjectId } from 'bson';
 
-export class StudentMongoRepository implements AddStudentRepository, LoadStudentsByAccountRepository, UpdateStudentByIdRepository, DeleteStudentByIdRepository {
+export class StudentMongoRepository implements AddStudentRepository, LoadStudentsByAccountRepository, UpdateStudentByIdRepository, DeleteStudentByIdRepository, LoadAllStudentsRepository {
   async add (data: AddStudentParams): Promise<StudentModel> {
     const studentCollection = await MongoHelper.getCollection('students')
     const result = await studentCollection.insertOne(data)
@@ -22,6 +24,13 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
       accountId: accountId
     })
     .toArray()
+    return MongoHelper.mapCollection(students)
+  }
+
+  async loadAllStudents (data: LoadAllStudentsParams): Promise<StudentModel[]> {
+    const studentCollection = await MongoHelper.getCollection('students')
+    const students = await studentCollection.find({}).toArray()
+    //console.log(students.forEach((student) => (student.accountId)))
     return MongoHelper.mapCollection(students)
   }
 
