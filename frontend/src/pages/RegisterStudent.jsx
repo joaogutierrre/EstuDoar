@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SelectSchoolSupply from '../components/SelectSchoolSupply';
 import './RegisterStudent.css';
 import * as database from '../services/databaseApi'
+import { Redirect } from 'react-router';
 
 class RegisterStudent extends Component {
     constructor(props){
@@ -10,11 +11,9 @@ class RegisterStudent extends Component {
             name: '',
             school: '',
             about: '',
-            items: [{
-                category: '',
-                quantity: '',
-            }],
+            items: [],
             supplyCategories: [],
+            isDone: false,
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);
@@ -22,6 +21,7 @@ class RegisterStudent extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.getSupplyCategories = this.getSupplyCategories.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+        this.isInvalidFields = this.isInvalidFields.bind(this);
     }
 
     setItem(index, event) {
@@ -35,9 +35,10 @@ class RegisterStudent extends Component {
         event.preventDefault();
         const newItem = {
             category: '',
-            quantity: '',
+            quantity: 1,
+            donated: 0,
         };
-        this.setState(({items}) => ({items: [...items, newItem ]}))
+        this.setState(({items}) => ({items: [...items, newItem ]}));
     }
 
     removeItemFromList(index, event) {
@@ -58,8 +59,18 @@ class RegisterStudent extends Component {
         });
     }
 
-    getSupplyCategories(){
-        database.getSchoolSupplyCategories().then(({ categories }) => this.setState({ supplyCategories: categories }));
+    getSupplyCategories() {
+        database.getSchoolSupplyCategories().then(({ categories }) => {
+            categories.sort((a,b) => {
+                if(a.name < b.name) {
+                    return -1;
+                }
+                if(a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+             });
+            this.setState({ supplyCategories: categories })});
     }
 
     handleRegister(event) {
@@ -70,11 +81,30 @@ class RegisterStudent extends Component {
             name,
             school,
             about,
-            image: "any_image",
+            image: "",
             items,
         };
-        console.log(student);
-        database.setStudent(student, accessToken);
+        student.items.sort((a,b) => {
+            if(a.category < b.category) {
+                return -1;
+            }
+            if(a.category > b.category) {
+                return 1;
+            }
+            return 0;
+         });
+        if(!this.isInvalidFields(student)){
+            database.setStudent(student, accessToken);
+            this.setState({ isDone: true })
+        }
+        
+    }
+
+    isInvalidFields(student) {
+        const { items } = student;
+        const checkTextInputs = Object.values(student).splice(4, 1).map((element) => element.length === 0 ? false : true ).includes(false);
+        const checkSelectInputs = items.map((item) => item.category === '' ? false : true).includes(false);
+        return (checkSelectInputs || checkTextInputs)
     }
 
     componentDidMount(){
@@ -82,7 +112,7 @@ class RegisterStudent extends Component {
     }
 
     render () {
-        const { name, school, about, items, supplyCategories } = this.state;
+        const { name, school, about, items, supplyCategories, isDone } = this.state;
         return(
             <form className='student-register-form'>
                 <label>
@@ -113,7 +143,7 @@ class RegisterStudent extends Component {
                     />))}
                 </div>
                 <button onClick={this.addItemToList}>Novo Item</button>
-                <button onClick={this.handleRegister}>Finalizar Cadastro</button>
+                {isDone ? <Redirect to="/student-dashboard"/> :<button onClick={this.handleRegister}>Finalizar Cadastro</button>}
             </form>
         )
     }

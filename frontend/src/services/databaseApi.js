@@ -4,7 +4,7 @@ export async function getBrazilUFs() {
         const ufs = await response.json();
         return ufs;
     }catch (error) {
-        throw new Error('Failed to fetch API and get UFs');
+        console.log('error to fetch API and get UFs', error)
     }
 }
 
@@ -14,7 +14,7 @@ export async function getBrazilCitiesByUF(ufId) {
         const cities = await response.json();
         return cities;
     } catch (error) {
-        throw new Error('Failed to fetch API and get cities');
+        console.log('error to fetch API and get cities', error)
     }
 }
 
@@ -24,7 +24,7 @@ export async function getSchoolSupplyCategories() {
         const categories = await response.json();
         return categories;
     } catch(error) {
-        throw new Error('Failed to fetch API and get School Supply Categories');
+        console.log('error to fetch API and get School Supply Categories', error)
     }
 }
 
@@ -41,10 +41,14 @@ export async function getStudents(accessToken) {
 
     try{
         const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/students", requestOptions);
-        const students = await response.json();
-        return students;
+        if(response.status !== 204)
+        {
+            const students = await response.json();
+            return students;
+        }
+        
     } catch(error) {
-        throw new Error('Failed to fetch API and get GET students');
+        console.log('error to fetch API and GET students', error)
     }
 }
 
@@ -67,7 +71,7 @@ export async function setStudent(student, accessToken) {
         const result = await response.json();
         return result;
     }catch(error){
-        throw new Error('Add Students Failed');
+        console.log('error add students', error)
     }
 }
 
@@ -90,7 +94,7 @@ export async function handleLogin(email, password) {
         const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/login", requestOptions)
         const accessToken = await response.json();
         return accessToken;
-    } catch (Error) {
-        throw new Error('Login Failed');
+    } catch (error) {
+        console.log('error, Login', error)
     }
 }
