@@ -1,5 +1,6 @@
+import { mockRoleModel } from "../../../domain/test/mock-role";
 import { ServerError } from "../../errors/server-error";
-import { serverError } from "../../helpers/http/http-helper";
+import { ok, serverError } from "../../helpers/http/http-helper";
 import { HttpRequest } from "../../protocols/http";
 import { LoadRolesSpy } from "../../test/role/mock-role";
 import { RoleController } from "./role-controller";
@@ -41,5 +42,12 @@ describe('RoleController', () => {
         const httpRequest = mockRequest()
         await sut.handle(httpRequest)
         expect(loadRolesSpy.wasCalled).toBe(true)
+    });
+
+    test('should return 200 if valid data is provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = mockRequest()
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse).toEqual(ok(mockRoleModel()))
     });
 })
