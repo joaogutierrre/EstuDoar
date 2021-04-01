@@ -1,3 +1,4 @@
+import { throwError } from './../../../../domain/test/test-helper';
 import { DeleteStudentByIdRepositorySpy } from './../../../test/mock-db-student';
 import { DbDeleteStudentById } from './db-delete-student-by-id';
 type SutTypes = {
@@ -20,5 +21,12 @@ describe('DbDeleteStudentById', () => {
     await sut.delete('any_accountId', 'any_id')
     expect(deleteStudentByIdRepositorySpy.accountId).toBe('any_accountId')
     expect(deleteStudentByIdRepositorySpy.id).toBe('any_id')
+  });
+
+  test('should throw if DeleteStudentByIdRepository throws', async () => {
+    const { sut, deleteStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(deleteStudentByIdRepositorySpy, 'deleteById').mockImplementationOnce(throwError)
+    const promise = sut.delete('any_accountId', 'any_id')
+    await expect(promise).rejects.toThrow()
   });
 });
