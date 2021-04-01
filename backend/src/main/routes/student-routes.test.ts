@@ -176,4 +176,17 @@ describe('Student Routes', () => {
         .expect(403)
     })
   });
+
+  describe('DELETE /students', () => {
+    test('should return 403 on delete student by id fails', async () => {
+      const accessToken = await makeAccessToken('parent')
+      await request(app)
+        .delete('/api/students')
+        .set('x-access-token', accessToken)
+        .send({
+          id: '6064c68d8cc5460089bc4a1b'
+        })
+        .expect(403)
+    });
+  });
 });

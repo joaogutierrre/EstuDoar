@@ -1,3 +1,4 @@
+import { DeleteStudentByIdRepository } from './../protocols/db/student/delete-student-by-id-repository';
 import { UpdateStudentParams } from './../../domain/usecases/student/update-student-by-id';
 import { UpdateStudentByIdRepository } from './../protocols/db/student/update-student-by-id-repository';
 import { LoadStudentsByAccountRepository } from './../protocols/db/student/load-students-by-account-repository';
@@ -32,5 +33,15 @@ export class UpdateStudentByIdRepositorySpy implements UpdateStudentByIdReposito
     this.data = data
     this.result = mockStudentModel()
     return mockStudentModel()
+  }
+}
+
+export class DeleteStudentByIdRepositorySpy implements DeleteStudentByIdRepository {
+  accountId: string
+  id: string
+  async deleteById (accountId: string, id: string): Promise<boolean> {
+    this.accountId = accountId
+    this.id = id
+    return true
   }
 }
