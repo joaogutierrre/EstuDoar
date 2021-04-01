@@ -18,13 +18,56 @@ export async function getBrazilCitiesByUF(ufId) {
     }
 }
 
-export async function getSchoolSupplyCategories(){
+export async function getSchoolSupplyCategories() {
     try{
         const response = await fetch('https://estudoar-ts-api.herokuapp.com/api/category');
         const categories = await response.json();
         return categories;
     } catch(error) {
         throw new Error('Failed to fetch API and get School Supply Categories');
+    }
+}
+
+export async function getStudents(accessToken) {
+    var myHeaders = new Headers();
+
+    myHeaders.append("x-access-token", accessToken);
+
+    var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+    };
+
+    try{
+        const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/students", requestOptions);
+        const students = await response.json();
+        return students;
+    } catch(error) {
+        throw new Error('Failed to fetch API and get GET students');
+    }
+}
+
+export async function setStudent(student, accessToken) {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", accessToken);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(student);
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    try{
+        const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/students", requestOptions);
+        const result = await response.json();
+        return result;
+    }catch(error){
+        throw new Error('Add Students Failed');
     }
 }
 
