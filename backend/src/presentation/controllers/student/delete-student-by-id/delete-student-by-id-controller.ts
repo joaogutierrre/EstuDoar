@@ -1,4 +1,4 @@
-import { badRequest } from './../../../helpers/http/http-helper';
+import { badRequest, noContent } from './../../../helpers/http/http-helper';
 import { Validation } from '../../../protocols/validation';
 import { serverError } from '../../../helpers/http/http-helper';
 import { DeleteStudentById } from '../../../../domain/usecases/student/delete-student-by-id';
@@ -20,7 +20,7 @@ export class DeleteStudentByIdController implements Controller {
       const { accountId } = httpRequest
       const { id } = httpRequest.body
       await this.deleteStudentById.delete(accountId, id)
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
