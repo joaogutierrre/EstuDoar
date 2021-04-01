@@ -1,3 +1,4 @@
+import { badRequest } from './../../../helpers/http/http-helper';
 import { Validation } from '../../../protocols/validation';
 import { serverError } from '../../../helpers/http/http-helper';
 import { DeleteStudentById } from '../../../../domain/usecases/student/delete-student-by-id';
@@ -12,7 +13,10 @@ export class DeleteStudentByIdController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      await this.validation.validate(httpRequest.body)
+      const error = await this.validation.validate(httpRequest.body)
+      if (error) {
+        return badRequest(error)
+      }
       const { accountId } = httpRequest
       const { id } = httpRequest.body
       await this.deleteStudentById.delete(accountId, id)
