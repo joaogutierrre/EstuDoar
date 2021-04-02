@@ -1,0 +1,36 @@
+import { ServerError } from "../../../errors/server-error"
+import { serverError } from "../../../helpers/http/http-helper"
+import { HttpRequest } from "../../../protocols/http"
+import { LoadSubdistrictsSpy } from "../../../test/mock-locality"
+import { LoadSubdistrictsController } from "./load-subdistricts-controller"
+
+const mockRequest = (): HttpRequest => ({
+    params: {
+        city: 'any_uf'
+    }
+})
+
+type SutTypes = {
+    sut: LoadSubdistrictsController
+    loadSubdistrictsSpy: LoadSubdistrictsSpy
+}
+
+const makeSut = (): SutTypes => {
+    const loadSubdistrictsSpy = new LoadSubdistrictsSpy()
+    const sut = new LoadSubdistrictsController(loadSubdistrictsSpy)
+    return {
+        sut,
+        loadSubdistrictsSpy
+    }
+}
+
+describe('LoadSubdistricts Controller', () => {
+    test('should return 500 if LoadSubdistricts throws', async () => {
+        const { sut, loadSubdistrictsSpy } = makeSut()
+        jest.spyOn(loadSubdistrictsSpy, 'load').mockImplementationOnce(() => {
+            return Promise.reject(new Error())
+          })
+          const httpResponse = await sut.handle(mockRequest())
+          expect(httpResponse).toEqual(serverError(new ServerError(null)))
+        });
+})
