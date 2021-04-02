@@ -1,3 +1,4 @@
+import { throwError } from './../../../domain/test/test-helper';
 import { LoadStudentByIdRepositorySpy } from './../../test/mock-db-student';
 import { mockDonateParams } from './../../../domain/test/mock-donation';
 import { DonateRepositorySpy } from './../../test/mock-db-donation';
@@ -29,5 +30,12 @@ describe('DbDonate', () => {
     const { sut, loadStudentByIdRepositorySpy } = makeSut()
     await sut.donate(mockDonateParams())
     expect(loadStudentByIdRepositorySpy.data).toEqual('any_studentId')
+  });
+
+  test('should throw if LoadStudentByIdRepository throws', async () => {
+    const { sut, loadStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadStudentByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
+    const promise = sut.donate(mockDonateParams())
+    await expect(promise).rejects.toThrow()
   });
 });
