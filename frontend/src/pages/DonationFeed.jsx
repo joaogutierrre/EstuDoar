@@ -13,11 +13,30 @@ class DonationFeed extends Component {
     }
 
     this.getStudents = this.getStudents.bind(this);
+    this.getFilters = this.getFilters.bind(this);
   }
 
   getStudents() {
-    const { filters } = this.state
-    database.getFeed(filters).then((students) => this.setState({ students })); 
+    const { filters } = this.state;
+    database.getFeed(filters).then((students) => {
+      if(students){
+        this.setState({ students })
+      }
+      else{
+        this.setState({students: []})
+      }
+    }); 
+  }
+
+  getFilters(uf, city, school) {
+    console.log(uf, city, school);
+    const { filters } = this.state;
+    filters[0] = uf;
+    filters[1] = city;
+    filters[2] = school; 
+
+  console.log(filters);
+    this.setState({ filters }, this.getStudents());
   }
 
   componentDidMount(){
@@ -35,7 +54,9 @@ class DonationFeed extends Component {
     return (
       <div className="feed">
         <section className="filter">
-          <FeedFilter />
+          <FeedFilter 
+            handleFilters={this.getFilters} 
+          />
         </section>
         <section className="card-list">
           {cardsList}

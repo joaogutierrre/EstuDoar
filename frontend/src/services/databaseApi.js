@@ -101,9 +101,14 @@ export async function handleLogin(email, password) {
 
 export async function getFeed(filters) {
     let endpoint = "https://estudoar-ts-api.herokuapp.com/api/feed/students";
+    filters = filters.filter(function(str) {
+        return /\S/.test(str);
+    });
+    console.log(filters);
     if(filters.length !== 0) {
         endpoint = filters.reduce((acc, currentFilter) => acc = `${acc}/${currentFilter}`, endpoint);
     }
+    console.log(endpoint);
         try{
             const requestOptions = {
                 method: 'GET',
