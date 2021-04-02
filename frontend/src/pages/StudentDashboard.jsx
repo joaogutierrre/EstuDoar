@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DashboardStudentCard from '../components/DashboardStudentCard';
 import './StudentDashboard.css'
-import studets from '../fakeStudents'
+import * as database from '../services/databaseApi'
 
 class StudentDashboard extends Component {
     constructor(props) {
@@ -10,9 +10,24 @@ class StudentDashboard extends Component {
         this.state = {
             students: [],
         }
+        this.getStudents = this.getStudents.bind(this);
+    }
+
+    getStudents(){
+        const accessToken = localStorage.getItem("estudoar");
+        database.getStudents(accessToken).then((students) => {
+            if(students){
+                this.setState({students});
+            } 
+        });
+    }
+
+    componentDidMount() {
+        this.getStudents();
     }
     render(){
-        const studentList = studets.map((student, index) => (
+        const { students } = this.state; 
+        const studentList = students.map((student, index) => (
             <DashboardStudentCard 
                 name={student.name}
                 school={student.school}

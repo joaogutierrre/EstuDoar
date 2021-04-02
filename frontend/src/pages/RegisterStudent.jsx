@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SelectSchoolSupply from '../components/SelectSchoolSupply';
 import './RegisterStudent.css';
 import * as database from '../services/databaseApi'
+import { Redirect } from 'react-router';
 
 class RegisterStudent extends Component {
     constructor(props){
@@ -10,43 +11,42 @@ class RegisterStudent extends Component {
             name: '',
             school: '',
             about: '',
-            supplyList: [{
-                id: '',
-                name: '',
-                quantity: '',
-            }],
+            items: [],
             supplyCategories: [],
+            isDone: false,
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);
         this.setItem = this.setItem.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.getSupplyCategories = this.getSupplyCategories.bind(this);
+        this.handleRegister = this.handleRegister.bind(this);
+        this.isInvalidFields = this.isInvalidFields.bind(this);
     }
 
     setItem(index, event) {
-        const { supplyList } = this.state;
-        const newSupply = [...supplyList];
+        const { items } = this.state;
+        const newSupply = [...items];
         newSupply[index][event.target.name] = event.target.value;
-        this.setState({supplyList: newSupply})
+        this.setState({items: newSupply})
     }
 
     addItemToList(event) {
         event.preventDefault();
         const newItem = {
-            id: '',
-            name: '',
-            quantity: '',
+            category: '',
+            quantity: 1,
+            donated: 0,
         };
-        this.setState(({supplyList}) => ({supplyList: [...supplyList, newItem ]}))
+        this.setState(({items}) => ({items: [...items, newItem ]}));
     }
 
     removeItemFromList(index, event) {
         event.preventDefault();
-        const { supplyList } = this.state;
-        const newSupply = [...supplyList];
+        const { items } = this.state;
+        const newSupply = [...items];
         newSupply.splice(index, 1)
-        this.setState({supplyList: newSupply});
+        this.setState({items: newSupply});
     }
 
     handleInputChange(event) {
@@ -59,8 +59,52 @@ class RegisterStudent extends Component {
         });
     }
 
-    getSupplyCategories(){
-        database.getSchoolSupplyCategories().then(({ categories }) => this.setState({ supplyCategories: categories }));
+    getSupplyCategories() {
+        database.getSchoolSupplyCategories().then(({ categories }) => {
+            categories.sort((a,b) => {
+                if(a.name < b.name) {
+                    return -1;
+                }
+                if(a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+             });
+            this.setState({ supplyCategories: categories })});
+    }
+
+    handleRegister(event) {
+        event.preventDefault();
+        const {name, school, about, items} = this.state;
+        const accessToken = localStorage.getItem("estudoar");
+        const student = {
+            name,
+            school,
+            about,
+            image: "",
+            items,
+        };
+        student.items.sort((a,b) => {
+            if(a.category < b.category) {
+                return -1;
+            }
+            if(a.category > b.category) {
+                return 1;
+            }
+            return 0;
+         });
+        if(!this.isInvalidFields(student)){
+            database.setStudent(student, accessToken);
+            this.setState({ isDone: true })
+        }
+        
+    }
+
+    isInvalidFields(student) {
+        const { items } = student;
+        const checkTextInputs = Object.values(student).splice(4, 1).map((element) => element.length === 0 ? false : true ).includes(false);
+        const checkSelectInputs = items.map((item) => item.category === '' ? false : true).includes(false);
+        return (checkSelectInputs || checkTextInputs)
     }
 
     componentDidMount(){
@@ -68,9 +112,9 @@ class RegisterStudent extends Component {
     }
 
     render () {
-        const { name, school, about, supplyList, supplyCategories } = this.state;
+        const { name, school, about, items, supplyCategories, isDone } = this.state;
         return(
-            <form action="" className='student-register-form'>
+            <form className='student-register-form'>
                 <label>
                     Nome:
                     <input type="text" name="name" value={name} onChange={this.handleInputChange} />
@@ -89,7 +133,7 @@ class RegisterStudent extends Component {
                     />
                 </label>
                 <div className="list-container">
-                    {supplyList.map((item , index) => (
+                    {items.map((item , index) => (
                     <SelectSchoolSupply 
                         setItem={event => this.setItem(index, event)}
                         removeItem={event => this.removeItemFromList(index, event)}
@@ -99,7 +143,7 @@ class RegisterStudent extends Component {
                     />))}
                 </div>
                 <button onClick={this.addItemToList}>Novo Item</button>
-                <button>Finalizar Cadastro</button>
+                {isDone ? <Redirect to="/student-dashboard"/> :<button onClick={this.handleRegister}>Finalizar Cadastro</button>}
             </form>
         )
     }

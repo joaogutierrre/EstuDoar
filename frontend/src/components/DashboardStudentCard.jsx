@@ -39,7 +39,7 @@ class DashboardStudentCard extends Component {
                     </div>
                     <div className="list-progress-bar">
                         <p>{percent}% Concluído</p>
-                        <progress id="file" value="32" max="100" />
+                        <progress id="file" value={percent} max="100" />
                     </div>
                     <div className="donate-button">
                       <Link
