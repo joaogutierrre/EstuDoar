@@ -73,6 +73,8 @@ describe('Student Routes', () => {
         .set('x-access-token', accessToken)
         .send({
           name: 'any_name',
+          uf: 'any_uf',
+          city: 'any_city',
           school: 'any_school',
           about: 'any_about',
           image: 'any_image',

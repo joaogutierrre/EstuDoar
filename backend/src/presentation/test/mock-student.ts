@@ -1,3 +1,4 @@
+import { LoadAllStudents, LoadAllStudentsParams } from './../../domain/usecases/student/load-all-students';
 import { DeleteStudentById } from './../../domain/usecases/student/delete-student-by-id';
 import { UpdateStudentById, UpdateStudentParams } from './../../domain/usecases/student/update-student-by-id';
 import { LoadStudentsByAccount } from './../../domain/usecases/student/load-students-by-account';
@@ -42,5 +43,13 @@ export class DeleteStudentByIdSpy implements DeleteStudentById {
     this.accountId = accountId
     this.id = id
     return true
+  }
+}
+
+export class LoadAllStudentsSpy implements LoadAllStudents {
+  data: object
+  async load (data: LoadAllStudentsParams): Promise<StudentModel[]> {
+    this.data = data
+    return mockStudentModelList()
   }
 }

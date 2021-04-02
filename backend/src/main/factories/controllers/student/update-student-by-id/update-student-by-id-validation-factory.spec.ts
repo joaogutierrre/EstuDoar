@@ -9,7 +9,7 @@ describe('UpdateStudentByIdValidation factory', () => {
   test('should call ValidationComposite with all validations', () => {
     makeUpdateStudentByIdValidation()
     const validations: Validation[] = []
-    for (const field of ['id', 'name', 'school', 'about', 'image', 'items']) {
+    for (const field of ['id', 'name', 'uf', 'city', 'school', 'about']) {
       validations.push(new RequiredFieldValidation(field))
     }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)

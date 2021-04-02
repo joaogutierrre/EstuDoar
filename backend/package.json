@@ -12,7 +12,7 @@
     "test": "jest",
     "test:staged": "jest",
     "test:verbose": "npm test -- --passWithNoTests --runInBand",
-    "test:unit": "npm test -- --watch",
+    "test:unit": "npm test -- --watch --runInBand",
     "test:ci": "npm test -- --coverage",
     "test:integration": "npm test -- --watch -c"
   },

@@ -9,7 +9,7 @@ describe('AddStudentValidation factory', () => {
   test('should call ValidationComposite with all validations', () => {
     makeAddStudentValidation()
     const validations: Validation[] = []
-    for (const field of ['name', 'school', 'about']) {
+    for (const field of ['name', 'uf', 'city', 'school', 'about']) {
       validations.push(new RequiredFieldValidation(field))
     }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
