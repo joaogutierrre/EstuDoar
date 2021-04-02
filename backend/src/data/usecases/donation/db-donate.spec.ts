@@ -1,3 +1,4 @@
+import { mockStudentModel } from './../../../domain/test/mock-student';
 import { throwError } from './../../../domain/test/test-helper';
 import { LoadStudentByIdRepositorySpy } from './../../test/mock-db-student';
 import { mockDonateParams } from './../../../domain/test/mock-donation';
@@ -37,5 +38,15 @@ describe('DbDonate', () => {
     jest.spyOn(loadStudentByIdRepositorySpy, 'loadById').mockImplementationOnce(throwError)
     const promise = sut.donate(mockDonateParams())
     await expect(promise).rejects.toThrow()
+  });
+
+  test('should call UpdateStudentById with correct values', async () => {
+    const { sut, updateStudentByIdRepositorySpy } = makeSut()
+    const donated = mockDonateParams()
+    await sut.donate(donated)
+    const student = mockStudentModel()
+    student.items[0].donated = donated.items[0].donated
+    student.items[1].donated = donated.items[1].donated
+    expect(updateStudentByIdRepositorySpy.data).toEqual(student)
   });
 });
