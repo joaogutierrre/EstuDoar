@@ -34,4 +34,11 @@ describe('DbLoadStudentById', () => {
     const student = await sut.load('any_id')
     expect(student).toBeTruthy()
   });
+
+  test('should return an student on success', async () => {
+    const { sut, loadStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(loadStudentByIdRepositorySpy, 'loadById').mockReturnValueOnce(null)
+    const student = await sut.load('any_id')
+    expect(student).toBeNull()
+  });
 });
