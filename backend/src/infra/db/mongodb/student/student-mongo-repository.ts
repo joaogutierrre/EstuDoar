@@ -30,7 +30,6 @@ export class StudentMongoRepository implements AddStudentRepository, LoadStudent
   async loadAllStudents (data: LoadAllStudentsParams): Promise<StudentModel[]> {
     const studentCollection = await MongoHelper.getCollection('students')
     const students = await studentCollection.find({}).toArray()
-    //console.log(students.forEach((student) => (student.accountId)))
     return MongoHelper.mapCollection(students)
   }
 

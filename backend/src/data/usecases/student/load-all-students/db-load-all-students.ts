@@ -9,6 +9,20 @@ export class DbLoadAllStudents implements LoadAllStudents {
 
   async load (data: LoadAllStudentsParams): Promise<StudentModel[]> {
     const students = await this.loadAllStudentsRepository.loadAllStudents(data)
-    return students
+    let filteredStudents = students ? students : [];
+    if (data.uf) {
+      filteredStudents = filteredStudents.filter((student) => student.uf === data.uf)
+      if (data.city) {
+        filteredStudents = filteredStudents.filter((student) => student.city === data.city)
+        if (data.subDistrict && data.subDistrict != 'null') {
+          filteredStudents = filteredStudents.filter((student) => student.subDistrict === data.subDistrict)
+        }
+        if (data.school) {
+          filteredStudents = filteredStudents.filter((student) => student.school === data.school)
+        }
+      }
+    }
+    //console.log('FILTER => ' + JSON.stringify(filteredStudents))
+    return filteredStudents
   }
 }
