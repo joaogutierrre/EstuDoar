@@ -175,4 +175,29 @@ describe('StudentMongoRepository', () => {
       expect(deletedStudent).toBe(null)
     });
   });
+
+  describe('loadById()', () => {
+    test('should return an student if valid id is provided', async () => {
+      const res = await studentCollection.insertOne({
+        accountId: 'any_id',
+        name: 'any_name',
+        school: 'any_school',
+        about: 'any_about',
+        image: 'any_image',
+        items: [{
+          category: 'any_category',
+          quantity: 1,
+          donated: 0
+        }, {
+          category: 'any_category',
+          quantity: 2,
+          donated: 0
+        }]
+      })
+      const { sut } = makeSut()
+      const id = res.ops[0]._id
+      const student = await sut.loadById(id)
+      expect(student).toBeTruthy()
+    });
+  });
 });
