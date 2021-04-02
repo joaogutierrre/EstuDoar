@@ -9,7 +9,6 @@ const mockRequest = (): HttpRequest => ({
   params: {
     uf: 'any_uf',
     city: 'any_city',
-    subDistrict: 'any_subDistrict',
     school: 'any_school'
   }
 })

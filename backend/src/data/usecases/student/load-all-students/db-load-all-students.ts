@@ -14,9 +14,6 @@ export class DbLoadAllStudents implements LoadAllStudents {
       filteredStudents = filteredStudents.filter((student) => student.uf === data.uf)
       if (data.city) {
         filteredStudents = filteredStudents.filter((student) => student.city === data.city)
-        if (data.subDistrict && data.subDistrict != 'null') {
-          filteredStudents = filteredStudents.filter((student) => student.subDistrict === data.subDistrict)
-        }
         if (data.school) {
           filteredStudents = filteredStudents.filter((student) => student.school === data.school)
         }
