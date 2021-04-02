@@ -57,7 +57,7 @@ describe('LocalityService', () => {
 
   describe('loadSubdistrict', () => {
     test('should return a list of subdistricts if axios returns status code 200', async () => {
-      const { sut } = makeSut() 
+      const { sut } = makeSut()
       jest.spyOn(axios, 'get').mockReturnValueOnce(Promise.resolve({
         data: {
           statusCode: 200
@@ -65,6 +65,12 @@ describe('LocalityService', () => {
       }))
       const subdistricts = await sut.loadSubdistrict('city')
       expect(subdistricts).toBeTruthy()
-    })
+    });
+
+    test('should return a list of subdistricts on success', async () => {
+      const { sut } = makeSut()
+      const subdistricts = await sut.loadSubdistrict('3304557')
+      expect(subdistricts).toBeTruthy()
+    });
   });
 });
