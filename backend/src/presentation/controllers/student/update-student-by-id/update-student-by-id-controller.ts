@@ -18,11 +18,14 @@ export class UpdateStudentByIdController implements Controller {
         return badRequest(error)
       }
       const { accountId } = httpRequest
-      const { id, name, school, about, image, items } = httpRequest.body
+      const { id, name, uf, city, subDistrict, school, about, image, items } = httpRequest.body
       const student = await this.updateStudentById.update({
         accountId,
         id,
         name,
+        uf,
+        city,
+        subDistrict,
         school,
         about,
         image,
