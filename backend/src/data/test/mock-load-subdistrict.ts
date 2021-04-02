@@ -1,5 +1,5 @@
 import { SubdistrictModel } from "../../domain/model/subdistrict";
-import { LoadSubdistrictRepository } from "../protocols/db/subdistrict/load-subdistrict-repository";
+import { LoadSubdistrictRepository } from "../protocols/service/load-subdistrict-repository";
 
 export class LoadSubdistrictRepositorySpy implements LoadSubdistrictRepository{
     data: string

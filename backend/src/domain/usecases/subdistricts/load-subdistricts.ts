@@ -1,5 +1,5 @@
 import { SubdistrictsModel } from './../../model/subdistrict';
 
 export interface LoadSubdistricts {
-    load: () => Promise<SubdistrictsModel>
+    load: (city: string) => Promise<SubdistrictsModel>
 }
