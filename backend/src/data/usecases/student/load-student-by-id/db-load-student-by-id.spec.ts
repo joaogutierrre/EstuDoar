@@ -28,4 +28,10 @@ describe('DbLoadStudentById', () => {
     const promise = sut.load('any_id')
     await expect(promise).rejects.toThrow()
   });
+
+  test('should return an student on success', async () => {
+    const { sut, loadStudentByIdRepositorySpy } = makeSut()
+    const student = await sut.load('any_id')
+    expect(student).toBeTruthy()
+  });
 });
