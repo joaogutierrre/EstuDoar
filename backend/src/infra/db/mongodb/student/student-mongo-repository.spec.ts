@@ -200,4 +200,10 @@ describe('StudentMongoRepository', () => {
       expect(student).toBeTruthy()
     });
   });
+
+  test('should return null if invalid id is provided', async () => {
+    const { sut } = makeSut()
+    const student = await sut.loadById('606606fd3944b900153c8e47')
+    expect(student).toBeNull()
+  });
 });
