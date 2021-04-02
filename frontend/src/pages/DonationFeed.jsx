@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import FeedFilter from '../components/FeedFilter';
 import DonateStudentCard from '../components/DonateStudentCard';
 import './DonationFeed.css'
-import students from '../fakeStudents'
+import * as database from '../services/databaseApi'
 
 class DonationFeed extends Component {
   constructor(props) {
     super(props);
     this.state = {
       students: [],
+      filters: [],
     }
+
+    this.getStudents = this.getStudents.bind(this);
   }
 
   getStudents() {
-    this.setState({ students })
+    const { filters } = this.state
+    database.getFeed(filters).then((students) => this.setState({ students })); 
   }
 
   componentDidMount(){
@@ -21,6 +25,7 @@ class DonationFeed extends Component {
   }
 
   render() {
+    const { students } = this.state
     const cardsList = students.map((student, index) => (
       <DonateStudentCard 
         student={student}
