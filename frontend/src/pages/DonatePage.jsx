@@ -15,9 +15,7 @@ class DonatePage extends Component {
 
   setItemDonated(index, event) {
     const { answer } = this.state;
-    console.log(index, event.target.value);
-    answer.items[index].donated += parseInt(event.target.value); 
-    console.log("Answer", answer);
+    answer.items[index].isDonating = Number(event.target.value); 
     this.setState({answer})
 }
 

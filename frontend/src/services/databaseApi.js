@@ -104,11 +104,10 @@ export async function getFeed(filters) {
     filters = filters.filter(function(str) {
         return /\S/.test(str);
     });
-    console.log(filters);
+    
     if(filters.length !== 0) {
         endpoint = filters.reduce((acc, currentFilter) => acc = `${acc}/${currentFilter}`, endpoint);
     }
-    console.log(endpoint);
         try{
             const requestOptions = {
                 method: 'GET',

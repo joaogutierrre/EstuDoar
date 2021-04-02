@@ -29,13 +29,11 @@ class DonationFeed extends Component {
   }
 
   getFilters(uf, city, school) {
-    console.log(uf, city, school);
     const { filters } = this.state;
     filters[0] = uf;
     filters[1] = city;
     filters[2] = school; 
 
-  console.log(filters);
     this.setState({ filters }, this.getStudents());
   }
 
