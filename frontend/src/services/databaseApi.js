@@ -29,11 +29,11 @@ export async function getSchoolSupplyCategories() {
 }
 
 export async function getStudents(accessToken) {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
 
     myHeaders.append("x-access-token", accessToken);
 
-    var requestOptions = {
+    const requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
@@ -53,13 +53,13 @@ export async function getStudents(accessToken) {
 }
 
 export async function setStudent(student, accessToken) {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("x-access-token", accessToken);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify(student);
+    const raw = JSON.stringify(student);
 
-    var requestOptions = {
+    const requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
@@ -70,21 +70,21 @@ export async function setStudent(student, accessToken) {
         const response = await fetch("https://estudoar-ts-api.herokuapp.com/api/students", requestOptions);
         const result = await response.json();
         return result;
-    }catch(error){
+    } catch(error){
         console.log('error add students', error)
     }
 }
 
 export async function handleLogin(email, password) {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    const raw = JSON.stringify({
         email,
         password
     });
 
-    var requestOptions = {
+    const requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
@@ -97,4 +97,23 @@ export async function handleLogin(email, password) {
     } catch (error) {
         console.log('error, Login', error)
     }
+}
+
+export async function getFeed(filters) {
+    let endpoint = "https://estudoar-ts-api.herokuapp.com/api/feed/students";
+    if(filters.length !== 0) {
+        endpoint = filters.reduce((acc, currentFilter) => acc = `${acc}/${currentFilter}`, endpoint);
+    }
+        try{
+            const requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+              };
+              
+              const response = await fetch(endpoint, requestOptions);
+              const students = await response.json();
+              return students; 
+        } catch (error) {
+            console.log("error get feed", error);
+        } 
 }
