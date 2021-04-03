@@ -9,10 +9,10 @@ class FeedFilter extends Component {
         ufs: [],
         cities: [],
         schools: [],
-        selectUFId: '',
+        currentUFValues: '',
         newData: false,
-        selectCitie: '',
-        selectSchool: '',
+        currentCity: '',
+        currentSchool: '',
       }
       this.getUFsList = this.getUFsList.bind(this);
       this.getCitiesList = this.getCitiesList.bind(this);
@@ -24,8 +24,9 @@ class FeedFilter extends Component {
     }
 
     getCitiesList(){
-      const { selectUFId } = this.state;
-      database.getBrazilCitiesByUF(selectUFId).then((cities) => this.setState({ cities }));
+      const { currentUFValues } = this.state;
+      const id = currentUFValues.split(",", 1);
+      database.getBrazilCitiesByUF(id).then((cities) => this.setState({ cities }));
       this.setState({newData: false})
     }
 
@@ -44,25 +45,28 @@ class FeedFilter extends Component {
     }
     
   render() {
-    const { ufs, cities, selectUFId, selectCitie, newData } = this.state;
-    if (selectUFId && newData) {
+    const { ufs, cities, currentUFValues, currentCity, currentSchool, newData } = this.state;
+    const { handleFilters } = this.props;
+    const currentUF = currentUFValues.split(",").slice(-1)[0];
+    if (currentUFValues.length && newData) {
       this.getCitiesList();
     }
     return (
       <div>
         <form className="filter-form">
-            <select id="states" name="selectUFId" onChange={this.handleInputChange}>
+            <select id="states" name="currentUFValues" onChange={this.handleInputChange}>
               <option value='35'>Selecione o Estado</option>
-              {ufs.map((uf) => (<option key={ uf.id } value={ uf.id }>{ uf.nome }</option>))}
+              {ufs.map((uf) => (<option key={ uf.id } value={ [uf.id, uf.sigla] }>{ uf.nome }</option>))}
             </select>
-            <select id="cities">
+            <select id="cities" name="currentCity" onChange={this.handleInputChange}>
               <option value="all">Todas as Cidades</option>
-              {cities.map((city) => (<option key={ city.id } value={ city.id }>{ city.nome }</option>))}
+              {cities.map((city) => (<option key={ city.id } value={ city.nome }>{ city.nome }</option>))}
             </select>
-            <select id="schools">
+            <select id="schools" name="currentSchool" onChange={this.handleInputChange}>
               <option value="all">Todas as Escolas</option>
             </select>
         </form>
+        <button type="button" onClick={() => handleFilters(currentUF, currentCity, currentSchool)}>Filtrar</button>
       </div>
     );
   }

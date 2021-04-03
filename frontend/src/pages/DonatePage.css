@@ -1,0 +1,48 @@
+.donate-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.supply-item {
+    margin-top: 15px;
+}
+
+.item-container {
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    background-color: #ecf0f1;
+    border: 2px solid #7f8c8d;
+}
+
+.supply-donate{
+    margin: 20px;
+}
+
+.image-container img {
+    width: 60vh;
+}
+
+.about-student {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 960px) {
+    .item-container {
+        font-size: 3vh;
+    }
+}
+
