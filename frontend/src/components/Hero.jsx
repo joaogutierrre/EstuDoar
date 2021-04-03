@@ -8,7 +8,7 @@ class Hero extends Component {
       <section className="hero-container f-column">
         <div className="hero-text-container f-column">
           <h1>
-          A melhor forma de <br /> <span className="bg-marger">doar conhecimento</span> 
+          A melhor forma de <br /> <span className="bg-marker">doar conhecimento</span> 
           </h1>
         </div>
 
