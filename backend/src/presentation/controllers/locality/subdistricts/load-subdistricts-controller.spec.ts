@@ -1,6 +1,7 @@
+import { mockSubdistrictsModel } from "../../../../domain/test/mock-locality"
 import { ServerError } from "../../../errors/server-error"
 import { ServiceUnavaibleError } from "../../../errors/service-unavaible-error"
-import { serverError, serviceUnavaible } from "../../../helpers/http/http-helper"
+import { ok, serverError, serviceUnavaible } from "../../../helpers/http/http-helper"
 import { HttpRequest } from "../../../protocols/http"
 import { LoadSubdistrictsSpy } from "../../../test/mock-locality"
 import { LoadSubdistrictsController } from "./load-subdistricts-controller"
@@ -48,5 +49,9 @@ describe('LoadSubdistricts Controller', () => {
         expect(httpResponse).toEqual(serviceUnavaible(new ServiceUnavaibleError()))
     });
 
-
+    test('should return 200 on success', async () => {
+        const { sut } = makeSut()
+        const httpResponse = await sut.handle(mockRequest())
+        expect(httpResponse).toEqual(ok(mockSubdistrictsModel()))
+    });
 })
