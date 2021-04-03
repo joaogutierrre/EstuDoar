@@ -52,6 +52,7 @@ describe('Donation Routes', () => {
       const accessToken = await makeAccessToken()
       const result = await studentCollection.insertOne({
         name: 'any_name',
+        age: 'any_age',
         uf: 'any_uf',
         city: 'any_city',
         school: 'any_school',

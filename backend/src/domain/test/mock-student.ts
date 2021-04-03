@@ -5,7 +5,7 @@ import { AddStudentParams } from './../usecases/student/add-student';
 export const mockAddStudentParams = (): AddStudentParams => ({
   accountId: 'any_id',
   name: 'any_name',
-  age: 1,
+  age: "any_age",
   uf: 'any_uf',
   city: 'any_city',
   school: 'any_school',
@@ -18,7 +18,7 @@ export const mockStudentModel = (): StudentModel => ({
   id: '6064b768ae8209001434d737',
   accountId: 'any_id',
   name: 'any_name',
-  age: 1,
+  age: "any_age",
   uf: 'any_uf',
   city: 'any_city',
   school: 'any_school',

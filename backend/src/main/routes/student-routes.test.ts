@@ -76,7 +76,7 @@ describe('Student Routes', () => {
         .set('x-access-token', accessToken)
         .send({
           name: 'any_name',
-          age: 1,
+          age: 'any_age',
           uf: 'any_uf',
           city: 'any_city',
           school: 'any_school',
@@ -119,7 +119,7 @@ describe('Student Routes', () => {
         .send({
           id: 'any_id',
           name: 'any_name',
-          age: 1,
+          age: 'any_age',
           city: 'any_city',
           uf: 'any_uf',
           school: 'any_school',
