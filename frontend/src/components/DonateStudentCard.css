@@ -1,9 +1,10 @@
 .card-container {
-    width: 200px;
+    width: 380px;
     overflow: hidden;
     box-shadow: 0px 0px 15px -5px;
     transition: 0.5s;
     animation: ease-in-out;
+    padding-bottom: 10px;
 }
 
 .card-container:hover {
@@ -13,38 +14,42 @@
 
 .image-container img{
     overflow: hidden;
+    margin: 20px;
     max-width: 100%;
-    height: auto;
+    height: 10vh;
 }
 
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.student-data {
+    margin: 20px;
+    line-height: 3vh
+}
+
+.student-about {
+    margin: 5px 20px 30px;
+    text-align: justify;
 }
 
 .list-progress-bar {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .donate-button button{
-    background-color: white; 
-    border-radius: 5px;
-    border: 2px solid #4CAF50;
-    color: #4CAF50;
-    padding: 16px 32px;
+    background-color: rgb(91,44,150); 
+    border: none;
+    border-radius: 10px;
+    color: rgb(254, 254, 254);
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 10px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
+    margin-left: 80px;
 }
 
-.donate-button button:hover {
-    background-color: #4CAF50;
-    color: white;
+.grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
 }
