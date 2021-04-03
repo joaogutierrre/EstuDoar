@@ -6,7 +6,7 @@ import { LoadSubdistrictsController } from "./load-subdistricts-controller"
 
 const mockRequest = (): HttpRequest => ({
     params: {
-        city: 'any_uf'
+        city: 'any_city'
     }
 })
 
@@ -29,8 +29,16 @@ describe('LoadSubdistricts Controller', () => {
         const { sut, loadSubdistrictsSpy } = makeSut()
         jest.spyOn(loadSubdistrictsSpy, 'load').mockImplementationOnce(() => {
             return Promise.reject(new Error())
-          })
-          const httpResponse = await sut.handle(mockRequest())
-          expect(httpResponse).toEqual(serverError(new ServerError(null)))
-        });
+        })
+        const httpResponse = await sut.handle(mockRequest())
+        expect(httpResponse).toEqual(serverError(new ServerError(null)))
+    });
+
+    test('should call LoadSubdistricts with correct value', async () => {
+        const { sut, loadSubdistrictsSpy } = makeSut()
+        await sut.handle(mockRequest())
+        expect(loadSubdistrictsSpy.data).toBe('any_city')
+      });
+
+
 })
