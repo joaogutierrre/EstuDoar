@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai";
-import { IoBookSharp } from "react-icons/io5";
 import './Navbar.css'
+import logo from '../assets/logo.svg'
 class Navbar extends Component {
     constructor(props) {
         super(props);
@@ -27,17 +27,16 @@ class Navbar extends Component {
         const { click } = this.state;
 
         return (
-            <nav className="navbar">
-                <div className="navbar-container">
-                    <Link to="/" className="navbar-logo">
+            <nav className="navbar bg-white txt-purple-dark">
+                <Link to="/" className="navbar-container">
+
+                        <img src={logo}></img>
                         <span>EstuDoar</span> 
-                        <IoBookSharp />
-                    </Link>
-                </div>
+                </Link>
                 <div className='menu-icon' onClick={this.handleClick}>
-                    <AiOutlineMenu className={click ? 'fas fa-times' : 'fas fa-bars'} />
+                    <AiOutlineMenu className={click ? 'fas fa-times' : 'fas'} />
                 </div>
-                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                <ul className={click ? 'nav-menu active bg-white' : 'nav-menu'}>
                     <li className='nav-item'>
                         <Link to='/donation-feed' className='nav-links' onClick={this.closeMobileMenu}>
                             Quero Doar

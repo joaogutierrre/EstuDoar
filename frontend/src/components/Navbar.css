@@ -3,27 +3,28 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
 */
 
 .navbar {
-    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    align-items: center;
     height: 80px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 1.2rem;
+    font-weight: 600;
+    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 999;
   }
   
   .navbar-container {
+    font-size: 1.5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    align-self: flex-start;
     height: 80px;
     max-width: 1500px;
+    text-decoration: none;
   }
   
   .navbar-logo {
-    color: #fff;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -58,7 +59,6 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
   }
   
   .nav-links {
-    color: #fff;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -67,12 +67,10 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
   }
   
   .nav-links:hover {
-    border-bottom: 4px solid #fff;
-    transition: all 0.2s ease-out;
-  }
-  
-  .fa-bars {
-    color: #fff;
+    background-image: url("../assets/bg-marker.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
   }
   
   .nav-links-mobile {
@@ -89,6 +87,7 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
     }
   
     .nav-menu {
+      align-self: flex-end;
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -101,7 +100,6 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
     }
   
     .nav-menu.active {
-      background: #242222;
       left: 0;
       opacity: 1;
       transition: all 0.5s ease;
@@ -139,7 +137,6 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
     }
   
     .fa-times {
-      color: #fff;
       font-size: 2rem;
     }
   
