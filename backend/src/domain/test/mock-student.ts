@@ -5,9 +5,9 @@ import { AddStudentParams } from './../usecases/student/add-student';
 export const mockAddStudentParams = (): AddStudentParams => ({
   accountId: 'any_id',
   name: 'any_name',
+  age: "any_age",
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school',
   about: 'any_about',
   image: 'any_image',
@@ -18,9 +18,9 @@ export const mockStudentModel = (): StudentModel => ({
   id: '6064b768ae8209001434d737',
   accountId: 'any_id',
   name: 'any_name',
+  age: "any_age",
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school',
   about: 'any_about',
   image: 'any_image',
@@ -47,6 +47,5 @@ export const mockStudentModelList = (): StudentModel[] => ([
 export const mockLoadAllStudentsParams = (): LoadAllStudentsParams => ({
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school'
 })

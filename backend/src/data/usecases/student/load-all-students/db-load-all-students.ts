@@ -19,7 +19,6 @@ export class DbLoadAllStudents implements LoadAllStudents {
         }
       }
     }
-    //console.log('FILTER => ' + JSON.stringify(filteredStudents))
     return filteredStudents
   }
 }

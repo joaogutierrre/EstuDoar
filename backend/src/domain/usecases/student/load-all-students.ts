@@ -3,7 +3,6 @@ import { StudentModel } from './../../model/student';
 export type LoadAllStudentsParams = {
   uf?: string
   city?: string
-  subDistrict?: string
   school?: string
 }
 
