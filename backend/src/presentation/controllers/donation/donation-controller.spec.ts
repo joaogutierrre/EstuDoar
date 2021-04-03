@@ -1,3 +1,6 @@
+import { ServerError } from './../../errors/server-error';
+import { serverError } from './../../helpers/http/http-helper';
+import { throwError } from './../../../domain/test/test-helper';
 import { HttpRequest } from './../../protocols/http';
 import { DonateSpy } from './../../test/donation/mock-donation';
 import { DonationController } from './donation-controller';
@@ -48,4 +51,12 @@ describe('Donation Controller', () => {
       }]
     })
   });
+
+  test('should return 500 if Donate throws', async () => {
+    const { sut, donateSpy } = makeSut()
+    jest.spyOn(donateSpy, 'donate').mockImplementationOnce(throwError)
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new ServerError(null)))
+})
 });
