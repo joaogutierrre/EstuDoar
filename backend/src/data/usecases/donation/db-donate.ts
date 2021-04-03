@@ -12,7 +12,17 @@ export class DbDonate implements Donate {
   ) {}
 
   async donate (data: DonateParams): Promise<DonationModel> {
-    await this.loadStudentByIdRepository.loadById(data.studentId)
+    const student = await this.loadStudentByIdRepository.loadById(data.studentId)
+    for (const item of student.items) {
+      for (const donatedItem of data.items) {
+        if (item.category === donatedItem.category) {
+          if (item.donated + donatedItem.donated <= item.quantity) {
+            item.donated += donatedItem.donated
+          }
+        }
+      }
+    }
+    await this.updateStudentByIdRepository.updateById(student)
     return null
   }
 }
