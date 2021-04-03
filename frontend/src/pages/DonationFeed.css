@@ -34,13 +34,13 @@
   justify-content: space-between;
 }
 
-@media only screen and (min-width: 560px) {
+@media only screen and (min-width: 860px) {
     .card-list {
       grid-template-columns: 1fr 1fr;
     }  
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 1000px) {
     .card-list {
       grid-template-columns: repeat(3, 1fr);
     }
