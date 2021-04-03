@@ -4,7 +4,7 @@ import { DonateParams } from './../usecases/donation/donate';
 export const mockDonationModel = (): DonationModel => ({
   id: 'any_id',
   type: 'any_type',
-  donatorId: 'any_donatorId',
+  accountId: 'any_accountId',
   studentId: 'any_studentId',
   items: [{
     category: 'any_category',
@@ -17,7 +17,7 @@ export const mockDonationModel = (): DonationModel => ({
 
 export const mockDonateParams = (): DonateParams => ({
   type: 'any_type',
-  donatorId: 'any_donatorId',
+  accountId: 'any_accountId',
   studentId: 'any_studentId',
   items: [{
     category: 'any_category',

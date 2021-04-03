@@ -34,7 +34,7 @@ describe('DonationMongoRepository', () => {
             const { sut } = makeSut()
             const category = await sut.donate({
                 type: 'any_type',
-                donatorId: 'any_donatorId',
+                accountId: 'any_accountId',
                 studentId: 'any_studentId',
                 items: [{
                   category: 'any_category',
@@ -47,7 +47,7 @@ describe('DonationMongoRepository', () => {
             expect(category).toBeTruthy()
             expect(category.id).toBeTruthy()
             expect(category.type).toBe('any_type')
-            expect(category.donatorId).toBe('any_donatorId')
+            expect(category.accountId).toBe('any_accountId')
             expect(category.studentId).toBe('any_studentId')
             expect(category.items.length).toBe(2)
         })
