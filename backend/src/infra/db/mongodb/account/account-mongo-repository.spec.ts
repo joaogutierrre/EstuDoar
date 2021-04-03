@@ -148,7 +148,6 @@ describe('AccountMongoRepository', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         cpf: 'any_cpf',
-        role: 'parent',
         password: 'any_password',
         accessToken: 'any_token'
       })

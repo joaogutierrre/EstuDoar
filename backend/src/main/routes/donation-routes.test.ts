@@ -5,13 +5,13 @@ import app from '../config/app';
 import { MongoHelper } from './../../infra/db/mongodb/helpers/mongo-helper';
 import env from '../config/env';
 
-const makeAccessToken = async (role: string): Promise<string> => {
+const makeAccessToken = async (role?: string): Promise<string> => {
   const res = await accountCollection.insertOne({
     name: 'any_name',
     email: 'any_email@email.com',
     cpf: '11111111111',
     password: '123',
-    role: role
+    role
   })
   const id = res.ops[0]._id
   const accessToken = sign({ id }, env.jwtSecret)
@@ -49,7 +49,7 @@ describe('Donation Routes', () => {
 
   describe('POST /donate', () => {
     test('should return an donation on success', async () => {
-      const accessToken = await makeAccessToken('donator')
+      const accessToken = await makeAccessToken()
       const result = await studentCollection.insertOne({
         name: 'any_name',
         uf: 'any_uf',
