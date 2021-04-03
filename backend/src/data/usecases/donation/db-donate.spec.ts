@@ -49,4 +49,11 @@ describe('DbDonate', () => {
     student.items[1].donated = donated.items[1].donated
     expect(updateStudentByIdRepositorySpy.data).toEqual(student)
   });
+
+  test('should throw if UpdateStudentById throws', async () => {
+    const { sut, updateStudentByIdRepositorySpy } = makeSut()
+    jest.spyOn(updateStudentByIdRepositorySpy, 'updateById').mockImplementationOnce(throwError)
+    const promise = sut.donate(mockDonateParams())
+    await expect(promise).rejects.toThrow()
+  });
 });
