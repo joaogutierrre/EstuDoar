@@ -18,11 +18,14 @@ export class DbDonate implements Donate {
         if (item.category === donatedItem.category) {
           if (item.donated + donatedItem.donated <= item.quantity) {
             item.donated += donatedItem.donated
+          } else {
+            return null
           }
         }
       }
     }
     await this.updateStudentByIdRepository.updateById(student)
+    await this.donateRepository.donate(data)
     return null
   }
 }
