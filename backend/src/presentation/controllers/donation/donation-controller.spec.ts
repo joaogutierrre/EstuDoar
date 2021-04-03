@@ -1,6 +1,7 @@
+import { mockDonationModel } from './../../../domain/test/mock-donation';
 import { InvalidParamError } from './../../errors/invalid-param-error';
 import { ServerError } from './../../errors/server-error';
-import { serverError, forbidden } from './../../helpers/http/http-helper';
+import { serverError, forbidden, ok } from './../../helpers/http/http-helper';
 import { throwError } from './../../../domain/test/test-helper';
 import { HttpRequest } from './../../protocols/http';
 import { DonateSpy } from './../../test/donation/mock-donation';
@@ -67,5 +68,12 @@ describe('Donation Controller', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('donated')))
+  });
+
+  test('should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok(mockDonationModel()))
   });
 });
