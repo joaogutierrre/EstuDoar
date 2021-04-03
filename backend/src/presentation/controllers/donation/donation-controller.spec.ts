@@ -1,5 +1,6 @@
+import { InvalidParamError } from './../../errors/invalid-param-error';
 import { ServerError } from './../../errors/server-error';
-import { serverError } from './../../helpers/http/http-helper';
+import { serverError, forbidden } from './../../helpers/http/http-helper';
 import { throwError } from './../../../domain/test/test-helper';
 import { HttpRequest } from './../../protocols/http';
 import { DonateSpy } from './../../test/donation/mock-donation';
@@ -58,5 +59,13 @@ describe('Donation Controller', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
-})
+  })
+
+  test('should returns 403 if Donate returns null', async () => {
+    const { sut, donateSpy } = makeSut()
+    jest.spyOn(donateSpy, 'donate').mockReturnValueOnce(null)
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('donated')))
+  });
 });
