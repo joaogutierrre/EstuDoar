@@ -1,3 +1,4 @@
+import { ValidationSpy } from './../../test/mock-validation';
 import { mockDonationModel } from './../../../domain/test/mock-donation';
 import { InvalidParamError } from './../../errors/invalid-param-error';
 import { ServerError } from './../../errors/server-error';
@@ -25,14 +26,17 @@ const mockRequest = (): HttpRequest => ({
 type SutTypes = {
   sut: DonationController
   donateSpy: DonateSpy
+  validationSpy: ValidationSpy
 }
 
 const makeSut = (): SutTypes => {
   const donateSpy = new DonateSpy()
-  const sut = new DonationController(donateSpy)
+  const validationSpy = new ValidationSpy()
+  const sut = new DonationController(donateSpy, validationSpy)
   return {
     sut,
-    donateSpy
+    donateSpy,
+    validationSpy
   }
 }
 
@@ -75,5 +79,12 @@ describe('Donation Controller', () => {
     const httpRequest = mockRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok(mockDonationModel()))
+  });
+
+  test('should call Validation with correct values', async () => {
+    const { sut, validationSpy } = makeSut()
+    const httpRequest = mockRequest()
+    await sut.handle(httpRequest)
+    expect(validationSpy.data).toEqual(httpRequest.body)
   });
 });
