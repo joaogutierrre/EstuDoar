@@ -17,7 +17,10 @@
   background-image: url("./assets/bg-marker.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 100%;    
+  padding: 80px 0;
+  padding: 30px;
+  margin: -30px;
 }
 
 .button-round {

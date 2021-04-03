@@ -20,8 +20,17 @@
     overflow: hidden;
 }
 
-@media only screen and (min-width: 700px) {
-    .history-container {
-      grid-template-columns: 1fr 1fr;
-    }  
+.txt-circle {
+    background-image: url("../assets/txt-circle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 6vh;
+    padding: 80px 0;
+    padding-left: 50px;
+    margin-left: -30px;
+}
+
+.home-title {
+    margin: 20px 0;
+    justify-self: flex-start;
 }
