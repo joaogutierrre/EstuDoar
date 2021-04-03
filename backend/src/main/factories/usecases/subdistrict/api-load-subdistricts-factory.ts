@@ -5,4 +5,4 @@ import { LocalityService } from "../../../../infra/service/locality/locality-ser
 export const makeApiLoadSubdistricts = (): LoadSubdistricts =>{
     const loadSubdistrictsService = new LocalityService()
     return new ApiLoadSubdistrict(loadSubdistrictsService)
-}
+} 
