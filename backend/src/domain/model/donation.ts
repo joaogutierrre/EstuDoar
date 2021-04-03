@@ -4,7 +4,6 @@ export type DonationModel = {
   id: string
   type: string
   donatorId: string
-  accountId: string
   studentId: string
   items: DonationItemModel[]
 }
