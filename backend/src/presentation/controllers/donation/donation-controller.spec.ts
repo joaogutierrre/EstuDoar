@@ -1,8 +1,9 @@
+import { MissingParamError } from './../../errors/missing-param-error';
 import { ValidationSpy } from './../../test/mock-validation';
 import { mockDonationModel } from './../../../domain/test/mock-donation';
 import { InvalidParamError } from './../../errors/invalid-param-error';
 import { ServerError } from './../../errors/server-error';
-import { serverError, forbidden, ok } from './../../helpers/http/http-helper';
+import { serverError, forbidden, ok, badRequest } from './../../helpers/http/http-helper';
 import { throwError } from './../../../domain/test/test-helper';
 import { HttpRequest } from './../../protocols/http';
 import { DonateSpy } from './../../test/donation/mock-donation';
@@ -86,5 +87,13 @@ describe('Donation Controller', () => {
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(validationSpy.data).toEqual(httpRequest.body)
+  });
+
+  test('should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    jest.spyOn(validationSpy, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpRequest = mockRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   });
 });
