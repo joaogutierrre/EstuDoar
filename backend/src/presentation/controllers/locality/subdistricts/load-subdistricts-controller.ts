@@ -6,20 +6,19 @@ import { Controller } from "../../../protocols/controller"
 import { HttpRequest, HttpResponse } from "../../../protocols/http"
 
 export class LoadSubdistrictsController implements Controller {
-    constructor (
-      private readonly loadSubdistricts: LoadSubdistricts
-    ) {}
-  
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      try {
-        const { city } = httpRequest.params
-        const subdistricts = await this.loadSubdistricts.load(city)
-        if (!subdistricts) {
-          return serviceUnavaible(new ServiceUnavaibleError())
+    constructor(
+        private readonly loadSubdistricts: LoadSubdistricts
+    ) { }
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+        try {
+            const { city } = httpRequest.params
+            const subdistricts = await this.loadSubdistricts.load(city)
+            if (!subdistricts) {
+                return serviceUnavaible(new ServiceUnavaibleError())
+            }
+            return ok(subdistricts)
+        } catch (error) {
+            return serverError(new ServerError(error))
         }
-        return ok(subdistricts)
-      } catch (error) {
-        return serverError(new ServerError(error))
-      }
     }
-  }
+}
