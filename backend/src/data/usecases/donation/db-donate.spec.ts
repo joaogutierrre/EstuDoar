@@ -69,4 +69,10 @@ describe('DbDonate', () => {
     const promise = sut.donate(mockDonateParams())
     await expect(promise).rejects.toThrow()
   });
+
+  test('should return an donation model on success', async () => {
+    const { sut } = makeSut()
+    const donation = await sut.donate(mockDonateParams())
+    expect(donation).toBeTruthy()
+  });
 });
