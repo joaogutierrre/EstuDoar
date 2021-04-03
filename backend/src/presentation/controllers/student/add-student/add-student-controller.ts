@@ -17,10 +17,11 @@ export class AddStudentController implements Controller {
         return badRequest(error)
       }
       const { accountId } = httpRequest
-      const { name, uf, city, school, about, image, items } = httpRequest.body
+      const { name, age, uf, city, school, about, image, items } = httpRequest.body
       const student = await this.addStudent.add({
         accountId,
         name,
+        age,
         uf,
         city,
         school,

@@ -2,6 +2,7 @@ export type StudentModel = {
   id: string
   accountId: string
   name: string
+  age: number
   uf: string
   city: string
   school: string
