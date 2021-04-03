@@ -1,3 +1,5 @@
+import { InvalidParamError } from './../../errors/invalid-param-error';
+import { serverError, forbidden } from './../../helpers/http/http-helper';
 import { Donate } from './../../../domain/usecases/donation/donate';
 import { HttpRequest, HttpResponse } from './../../protocols/http';
 import { Controller } from './../../protocols/controller';
@@ -8,14 +10,21 @@ export class DonationController implements Controller {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { accountId } = httpRequest
-    const { type, studentId, items } = httpRequest.body
-    await this.donate.donate({
-      accountId,
-      type,
-      studentId,
-      items
-    })
-    return null
+    try {
+      const { accountId } = httpRequest
+      const { type, studentId, items } = httpRequest.body
+      const donation = await this.donate.donate({
+        accountId,
+        type,
+        studentId,
+        items
+      })
+      if (!donation) {
+        return forbidden(new InvalidParamError('donated'))
+      }
+      return null
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
