@@ -25,7 +25,7 @@ export class DbDonate implements Donate {
       }
     }
     await this.updateStudentByIdRepository.updateById(student)
-    await this.donateRepository.donate(data)
-    return null
+    const donation = await this.donateRepository.donate(data)
+    return donation
   }
 }
