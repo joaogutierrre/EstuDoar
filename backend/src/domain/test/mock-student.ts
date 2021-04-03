@@ -7,7 +7,6 @@ export const mockAddStudentParams = (): AddStudentParams => ({
   name: 'any_name',
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school',
   about: 'any_about',
   image: 'any_image',
@@ -20,7 +19,6 @@ export const mockStudentModel = (): StudentModel => ({
   name: 'any_name',
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school',
   about: 'any_about',
   image: 'any_image',
@@ -47,6 +45,5 @@ export const mockStudentModelList = (): StudentModel[] => ([
 export const mockLoadAllStudentsParams = (): LoadAllStudentsParams => ({
   uf: 'any_uf',
   city: 'any_city',
-  subDistrict: 'any_subDistrict',
   school: 'any_school'
 })

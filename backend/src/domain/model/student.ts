@@ -4,7 +4,6 @@ export type StudentModel = {
   name: string
   uf: string
   city: string
-  subDistrict?: string
   school: string
   about: string
   image: string
