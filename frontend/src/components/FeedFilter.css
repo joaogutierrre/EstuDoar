@@ -10,3 +10,10 @@
     width: 40vh;
     max-width: 400px;
 }
+
+.select-input {
+    background-color: rgba(196, 196, 196, 0.171);
+    mix-blend-mode: normal;
+    border-radius: 10px;
+    padding: 10px;
+}
