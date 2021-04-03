@@ -1,5 +1,5 @@
 import { InvalidParamError } from './../../errors/invalid-param-error';
-import { serverError, forbidden } from './../../helpers/http/http-helper';
+import { serverError, forbidden, ok } from './../../helpers/http/http-helper';
 import { Donate } from './../../../domain/usecases/donation/donate';
 import { HttpRequest, HttpResponse } from './../../protocols/http';
 import { Controller } from './../../protocols/controller';
@@ -22,7 +22,7 @@ export class DonationController implements Controller {
       if (!donation) {
         return forbidden(new InvalidParamError('donated'))
       }
-      return null
+      return ok(donation)
     } catch (error) {
       return serverError(error)
     }
