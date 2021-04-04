@@ -1,3 +1,6 @@
+import { categoriesSchema } from './schemas/categories-schema';
+import { categorySchema } from './schemas/category-schema';
+import { categoryPath } from './paths/category-path';
 import { serviceUnavaible } from './components/service-unavaible';
 import { citiesSchema } from './schemas/cities-schema';
 import { citySchema } from './schemas/city-schema';
@@ -51,6 +54,8 @@ export default {
   }, {
     name: 'Doação'
   }, {
+    name: 'Material escolar'
+  }, {
     name: 'Localidade'
   }, {
     name: 'Função'
@@ -66,7 +71,8 @@ export default {
     '/role': rolePath,
     '/donate': donationPath,
     '/ufs': ufPath,
-    '/cities/{uf}': cityPath
+    '/cities/{uf}': cityPath,
+    '/category': categoryPath
   },
   schemas: {
     account: accountSchema,
@@ -87,7 +93,9 @@ export default {
     uf: ufSchema,
     ufs: ufsSchema,
     city: citySchema,
-    cities: citiesSchema
+    cities: citiesSchema,
+    category: categorySchema,
+    categories: categoriesSchema
   },
   components: {
     securitySchemes: {
