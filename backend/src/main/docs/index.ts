@@ -1,3 +1,4 @@
+import { addStudentParamsSchema } from './schemas/add-student-params-schema';
 import { signUpParamsSchema } from './schemas/signup-params-schema';
 import { signUpPath } from './paths/signup-path';
 import { apiKeyAuthSchema } from './schemas/api-key-auth-schema';
@@ -43,7 +44,8 @@ export default {
     error: errorSchema,
     student: studentSchema,
     students: studentsSchema,
-    studentItem: studentItemSchema
+    studentItem: studentItemSchema,
+    addStudentParams: addStudentParamsSchema
   },
   components: {
     securitySchemes: {
