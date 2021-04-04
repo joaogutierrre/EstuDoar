@@ -1,3 +1,10 @@
+import { donateParamsSchema } from './schemas/donate-params-schema';
+import { donationSchema } from './schemas/donation-schema';
+import { donationItemSchema } from './schemas/donation-item-schema';
+import { donationPath } from './paths/donation-path';
+import { rolesSchema } from './schemas/roles-schema';
+import { roleSchema } from './schemas/role-schema';
+import { rolePath } from './paths/role-path';
 import { updateStudentParamsSchema } from './schemas/update-student-params-schema';
 import { feedStudentPath } from './paths/feed-student-path';
 import { addStudentParamsSchema } from './schemas/add-student-params-schema';
@@ -18,6 +25,7 @@ import { loginParamsSchema } from './schemas/login-params-schema';
 import { accountSchema } from './schemas/account-schema';
 import { loginPath } from './paths/login-path'
 import { studentPath } from './paths/student-path';
+import { deleteStudentParamsSchema } from './schemas/delete-student-params-schema';
 
 export default {
   openapi: '3.0.0',
@@ -33,12 +41,18 @@ export default {
     name: 'Login'
   }, {
     name: 'Estudante'
+  }, {
+    name: 'Doação'
+  }, {
+    name: 'Função'
   }],
   paths: {
     '/login': loginPath,
     '/signup': signUpPath,
     '/students': studentPath,
-    '/feed/students': feedStudentPath
+    '/feed/students': feedStudentPath,
+    '/role': rolePath,
+    '/donate': donationPath
   },
   schemas: {
     account: accountSchema,
@@ -49,7 +63,13 @@ export default {
     students: studentsSchema,
     studentItem: studentItemSchema,
     addStudentParams: addStudentParamsSchema,
-    updateStudentParams: updateStudentParamsSchema
+    updateStudentParams: updateStudentParamsSchema,
+    deleteStudentParams: deleteStudentParamsSchema,
+    role: roleSchema,
+    roles: rolesSchema,
+    donation: donationSchema,
+    donationItem: donationItemSchema,
+    donateParams: donateParamsSchema
   },
   components: {
     securitySchemes: {
