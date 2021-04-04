@@ -1,7 +1,10 @@
 export const studentPath = {
   get: {
     tags: ['Estudante'],
-    summary: 'API para listar todos os estudantes',
+    summary: 'API para listar os estudantes do usuário',
+    security: [{
+      apiKeyAuth: []
+    }],
     responses: {
       200: {
         description: 'Sucesso',
@@ -15,6 +18,9 @@ export const studentPath = {
       },
       204: {
         $ref: '#/components/noContent'
+      },
+      403: {
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/notFound'

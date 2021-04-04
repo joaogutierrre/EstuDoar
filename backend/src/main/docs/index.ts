@@ -1,3 +1,4 @@
+import { feedStudentPath } from './paths/feed-student-path';
 import { addStudentParamsSchema } from './schemas/add-student-params-schema';
 import { signUpParamsSchema } from './schemas/signup-params-schema';
 import { signUpPath } from './paths/signup-path';
@@ -35,7 +36,8 @@ export default {
   paths: {
     '/login': loginPath,
     '/signup': signUpPath,
-    '/students': studentPath
+    '/students': studentPath,
+    '/feed/students': feedStudentPath
   },
   schemas: {
     account: accountSchema,
