@@ -1,3 +1,6 @@
+import { ufsSchema } from './schemas/ufs-schema';
+import { ufSchema } from './schemas/uf-schema';
+import { ufPath } from './paths/uf-path';
 import { donateParamsSchema } from './schemas/donate-params-schema';
 import { donationSchema } from './schemas/donation-schema';
 import { donationItemSchema } from './schemas/donation-item-schema';
@@ -44,15 +47,21 @@ export default {
   }, {
     name: 'Doação'
   }, {
+    name: 'Localidade'
+  }, {
     name: 'Função'
   }],
   paths: {
     '/login': loginPath,
     '/signup': signUpPath,
     '/students': studentPath,
-    '/feed/students': feedStudentPath,
+    '/feed/students/': feedStudentPath,
+    '/feed/students/{uf}': feedStudentPath,
+    '/feed/students/{uf}/{city}': feedStudentPath,
+    '/feed/students/{uf}/{city}/{school}': feedStudentPath,
     '/role': rolePath,
-    '/donate': donationPath
+    '/donate': donationPath,
+    '/ufs': ufPath
   },
   schemas: {
     account: accountSchema,
@@ -69,7 +78,9 @@ export default {
     roles: rolesSchema,
     donation: donationSchema,
     donationItem: donationItemSchema,
-    donateParams: donateParamsSchema
+    donateParams: donateParamsSchema,
+    uf: ufSchema,
+    ufs: ufsSchema
   },
   components: {
     securitySchemes: {
