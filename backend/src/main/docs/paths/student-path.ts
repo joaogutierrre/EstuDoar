@@ -108,5 +108,39 @@ export const studentPath = {
         $ref: '#/components/serverError'
       }
     }
+  },
+
+  delete: {
+    tags: ['Estudante'],
+    summary: 'API para remover um estudante',
+    security: [{
+      apiKeyAuth: []
+    }],
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/schemas/deleteStudentParams'
+          }
+        }
+      }
+    },
+    responses: {
+      204: {
+        $ref: '#/components/noContent'
+      },
+      400: {
+        $ref: '#/components/badRequest'
+      },
+      403: {
+        $ref: '#/components/forbidden'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
+      }
+    }
   }
 }
