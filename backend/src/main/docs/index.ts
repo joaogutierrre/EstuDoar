@@ -1,3 +1,4 @@
+import { updateStudentParamsSchema } from './schemas/update-student-params-schema';
 import { feedStudentPath } from './paths/feed-student-path';
 import { addStudentParamsSchema } from './schemas/add-student-params-schema';
 import { signUpParamsSchema } from './schemas/signup-params-schema';
@@ -47,7 +48,8 @@ export default {
     student: studentSchema,
     students: studentsSchema,
     studentItem: studentItemSchema,
-    addStudentParams: addStudentParamsSchema
+    addStudentParams: addStudentParamsSchema,
+    updateStudentParams: updateStudentParamsSchema
   },
   components: {
     securitySchemes: {

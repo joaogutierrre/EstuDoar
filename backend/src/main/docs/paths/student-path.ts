@@ -67,5 +67,46 @@ export const studentPath = {
         $ref: '#/components/serverError'
       }
     }
+  },
+
+  put: {
+    tags: ['Estudante'],
+    summary: 'API para atualizar um estudante',
+    security: [{
+      apiKeyAuth: []
+    }],
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/schemas/updateStudentParams'
+          }
+        }
+      }
+    },
+    responses: {
+      200: {
+        description: 'Sucesso',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/schemas/student'
+            }
+          }
+        }
+      },
+      400: {
+        $ref: '#/components/badRequest'
+      },
+      403: {
+        $ref: '#/components/forbidden'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
+      }
+    }
   }
 }
