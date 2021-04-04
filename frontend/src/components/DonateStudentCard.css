@@ -16,7 +16,7 @@
     overflow: hidden;
     margin: 20px;
     max-width: 100%;
-    height: 12vh;
+    height: auto;
     border-radius: 10px;
 }
 
@@ -27,6 +27,7 @@
 
 .student-about {
     margin: 5px 20px 30px;
+    text-overflow: ellipsis;
     text-align: justify;
 }
 

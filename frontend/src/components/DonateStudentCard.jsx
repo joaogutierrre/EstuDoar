@@ -1,34 +1,69 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './DonateStudentCard.css';
 import { FaBirthdayCake, FaHome } from "react-icons/fa";
 class DonateStudentCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        percent: 0,
+    }
+    this.setPercentDonated = this.setPercentDonated.bind(this);
+  }
+  setPercentDonated() {
+    const { student } = this.props
+    const { items } = student
+    const totalItens = items.reduce((acc, currentValue) => acc += currentValue.quantity, 0);
+    const totalDonated = items.reduce((acc, currentValue) => acc += currentValue.donated, 0);
+    const percent = (totalDonated * 100) / totalItens;
+    this.setState({ percent });
+  }
+
+  componentDidMount(){
+    this.setPercentDonated();
+  }
+
   render() {
+    const { percent } = this.state;
+    const { student } = this.props 
+    const {name, image, about, id} = student;
+
     return (
       <div className="card-container">
         <div className="grid-two">
             <div className="image-container">
               <img
-                src="https://images.unsplash.com/photo-1499323888381-7fd102a793de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"
+                src={image === "" ? "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1356&q=80" : image}
                 alt="Foto do Estudante"
               />
             </div>
               <div className="student-data">
-                <h3>Bruna Souza</h3>
+                <h3>{ name }</h3>
                 <p><FaHome /> São Paulo - SP</p>
                 <p><FaBirthdayCake />10 anos</p>
               </div>
         </div>
           <div className="student-about">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque ea eum minus, obcaecati eius possimus? Quibusdam eveniet</p>
+            <p>{ about.slice(0, 150) }</p>
           </div>
           <div className="grid-two">
             <div className="list-progress-bar">
-              <progress id="file" value="32" max="100" />
+              <progress id="file" value={percent} max="100" />
             </div>
             <div className="donate-button">
-              <button>Doar</button>
-            </div>
+              <Link
+                data-testid="product-detail-link"
+                to={{
+                      pathname: `/donation-feed/donate/${id}`,
+                      state: {
+                      student,
+                    },
+                }}
+              >
+                <button>Contribuir</button>
+              </Link>
           </div>
+      </div>
       </div>
     );
   }
