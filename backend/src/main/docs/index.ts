@@ -1,3 +1,9 @@
+import { apiKeyAuthSchema } from './schemas/api-key-auth-schema';
+import { noContent } from './components/no-content';
+import { studentsSchema } from './schemas/students-schema';
+import { forbidden } from './components/forbidden';
+import { studentItemSchema } from './schemas/student-item-schema';
+import { studentSchema } from './schemas/student-schema';
 import { notFound } from './components/not-found';
 import { unauthorized } from './components/unauthorized';
 import { serverError } from './components/server-error';
@@ -6,6 +12,7 @@ import { errorSchema } from './schemas/error-schema';
 import { loginParamsSchema } from './schemas/login-params-schema';
 import { accountSchema } from './schemas/account-schema';
 import { loginPath } from './paths/login-path'
+import { studentPath } from './paths/student-path';
 
 export default {
   openapi: '3.0.0',
@@ -19,19 +26,30 @@ export default {
   }],
   tags: [{
     name: 'Login'
+  }, {
+    name: 'Estudante'
   }],
   paths: {
-    '/login': loginPath
+    '/login': loginPath,
+    '/students': studentPath
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
-    error: errorSchema
+    error: errorSchema,
+    student: studentSchema,
+    students: studentsSchema,
+    studentItem: studentItemSchema
   },
   components: {
+    securitySchemes: {
+      apiKeyAuth: apiKeyAuthSchema
+    },
     badRequest,
     serverError,
     unauthorized,
-    notFound
+    notFound,
+    forbidden,
+    noContent
   }
 }
