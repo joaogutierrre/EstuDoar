@@ -5,10 +5,10 @@ export const studentItemSchema = {
       type: 'string'
     },
     quantity: {
-      type: 'string'
+      type: 'number'
     },
     donated: {
-      type: 'string'
+      type: 'number'
     }
   }
 }

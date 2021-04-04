@@ -1,3 +1,5 @@
+import { signUpParamsSchema } from './schemas/signup-params-schema';
+import { signUpPath } from './paths/signup-path';
 import { apiKeyAuthSchema } from './schemas/api-key-auth-schema';
 import { noContent } from './components/no-content';
 import { studentsSchema } from './schemas/students-schema';
@@ -31,11 +33,13 @@ export default {
   }],
   paths: {
     '/login': loginPath,
+    '/signup': signUpPath,
     '/students': studentPath
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
+    signUpParams: signUpParamsSchema,
     error: errorSchema,
     student: studentSchema,
     students: studentsSchema,
