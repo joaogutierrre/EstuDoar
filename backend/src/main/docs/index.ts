@@ -1,3 +1,7 @@
+import { serviceUnavaible } from './components/service-unavaible';
+import { citiesSchema } from './schemas/cities-schema';
+import { citySchema } from './schemas/city-schema';
+import { cityPath } from './paths/city-path';
 import { ufsSchema } from './schemas/ufs-schema';
 import { ufSchema } from './schemas/uf-schema';
 import { ufPath } from './paths/uf-path';
@@ -41,7 +45,7 @@ export default {
     url: '/api'
   }],
   tags: [{
-    name: 'Login'
+    name: 'Autenticação'
   }, {
     name: 'Estudante'
   }, {
@@ -61,7 +65,8 @@ export default {
     '/feed/students/{uf}/{city}/{school}': feedStudentPath,
     '/role': rolePath,
     '/donate': donationPath,
-    '/ufs': ufPath
+    '/ufs': ufPath,
+    '/cities/{uf}': cityPath
   },
   schemas: {
     account: accountSchema,
@@ -80,7 +85,9 @@ export default {
     donationItem: donationItemSchema,
     donateParams: donateParamsSchema,
     uf: ufSchema,
-    ufs: ufsSchema
+    ufs: ufsSchema,
+    city: citySchema,
+    cities: citiesSchema
   },
   components: {
     securitySchemes: {
@@ -91,6 +98,7 @@ export default {
     unauthorized,
     notFound,
     forbidden,
-    noContent
+    noContent,
+    serviceUnavaible
   }
 }
