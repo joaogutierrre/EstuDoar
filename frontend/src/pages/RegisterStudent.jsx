@@ -9,11 +9,17 @@ class RegisterStudent extends Component {
         super(props);
         this.state = {
             name: '',
+            age: '',
             school: '',
             about: '',
             items: [],
             supplyCategories: [],
+            ufs: [],
+            cities: [],
             isDone: false,
+            currentUFValues: '',
+            newData: false,
+            city: '',
         }
         this.addItemToList = this.addItemToList.bind(this);
         this.removeItemFromList = this.removeItemFromList.bind(this);
@@ -22,7 +28,20 @@ class RegisterStudent extends Component {
         this.getSupplyCategories = this.getSupplyCategories.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
         this.isInvalidFields = this.isInvalidFields.bind(this);
+        this.getCitiesList = this.getCitiesList.bind(this);
+        this.getUFsList = this.getUFsList.bind(this);
     }
+
+    getUFsList(){
+        database.getBrazilUFs().then((ufs) => this.setState({ ufs }));
+      }
+  
+      getCitiesList(){
+        const { currentUFValues } = this.state;
+        const id = currentUFValues.split(",", 1);
+        database.getBrazilCitiesByUF(id).then((cities) => this.setState({ cities }));
+        this.setState({newData: false})
+      }
 
     setItem(index, event) {
         const { items } = this.state;
@@ -57,6 +76,8 @@ class RegisterStudent extends Component {
         this.setState({
           [name]: value
         });
+
+        this.setState({newData: true})
     }
 
     getSupplyCategories() {
@@ -75,10 +96,14 @@ class RegisterStudent extends Component {
 
     handleRegister(event) {
         event.preventDefault();
-        const {name, school, about, items} = this.state;
+        const {name, school, about, items, age, city, currentUFValues} = this.state;
+        const uf = currentUFValues.split(',')[1];
         const accessToken = localStorage.getItem("estudoar");
         const student = {
             name,
+            age,
+            uf,
+            city,
             school,
             about,
             image: "",
@@ -93,26 +118,21 @@ class RegisterStudent extends Component {
             }
             return 0;
          });
-        if(!this.isInvalidFields(student)){
-            database.setStudent(student, accessToken);
-            this.setState({ isDone: true })
-        }
-        
-    }
 
-    isInvalidFields(student) {
-        const { items } = student;
-        const checkTextInputs = Object.values(student).splice(4, 1).map((element) => element.length === 0 ? false : true ).includes(false);
-        const checkSelectInputs = items.map((item) => item.category === '' ? false : true).includes(false);
-        return (checkSelectInputs || checkTextInputs)
+            database.setStudent(student, accessToken);
+            this.setState({ isDone: true }) 
     }
 
     componentDidMount(){
         this.getSupplyCategories();
+        this.getUFsList();
     }
 
     render () {
-        const { name, school, about, items, supplyCategories, isDone } = this.state;
+        const { name, school, about, items, supplyCategories, age, isDone, ufs, cities, currentUFValues, newData} = this.state;
+        if (currentUFValues.length && newData) {
+            this.getCitiesList();
+        }
         return(
             <form className='student-register-form'>
                 <h2 className="bg-marker default-title">ADICIONAR ESTUDANTE</h2>
@@ -124,6 +144,25 @@ class RegisterStudent extends Component {
                         onChange={this.handleInputChange}
                         placeholder="Nome do estudante"
                     />
+                    <label className="f-column">
+                        Data de nascimento
+                        <input
+                            className="txt-input"
+                            type="date"
+                            name="age"
+                            value={age} 
+                            onChange={this.handleInputChange}
+                            placeholder="Data de nascimento"
+                        />
+                    </label>
+                    <select id="ufs" className="txt-input" name="currentUFValues" onChange={this.handleInputChange}>
+                    <option value='35'>Selecione o Estado</option>
+                        {ufs.map((uf) => (<option key={ uf.id } value={ [uf.id, uf.sigla] }>{ uf.nome }</option>))}
+                    </select>
+                    <select id="cities" className="txt-input" name="city" onChange={this.handleInputChange}>
+                    <option value="all">Todas as Cidades</option>
+                        {cities.map((city) => (<option key={ city.id } value={ city.nome }>{ city.nome }</option>))}
+                    </select>
                     <input
                         className="txt-input"
                         type="text"
