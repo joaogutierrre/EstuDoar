@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import students from '../fakeStudents';
 import './DonatePage.css';
 import { FaBirthdayCake, FaHome } from "react-icons/fa";
 class DonatePage extends Component {

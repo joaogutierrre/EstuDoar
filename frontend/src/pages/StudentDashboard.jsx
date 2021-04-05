@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DashboardStudentCard from '../components/DashboardStudentCard';
-import './StudentDashboard.css'
-import * as database from '../services/databaseApi'
-import { GrAddCircle } from "react-icons/gr"
+import './StudentDashboard.css';
+import * as database from '../services/databaseApi';
 class StudentDashboard extends Component {
     constructor(props) {
         super(props);

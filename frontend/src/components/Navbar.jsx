@@ -30,7 +30,7 @@ class Navbar extends Component {
             <nav className="navbar bg-white txt-purple-dark">
                 <Link to="/" className="navbar-container">
 
-                        <img src={logo}></img>
+                        <img src={logo} alt="Logo da Estudoar"></img>
                         <span>EstuDoar</span> 
                 </Link>
                 <div className='menu-icon' onClick={this.handleClick}>
