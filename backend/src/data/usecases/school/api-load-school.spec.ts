@@ -24,21 +24,27 @@ const makeSut = (): SutTypes => {
 describe('ApiLoadSchool', () => {
     test('should call LoadMapRepository', async () => {
         const { sut, loadMapRepositorySpy } = makeSut()
-        await sut.load('city')
+        await sut.load('any_code')
         expect(loadMapRepositorySpy.wasCalled).toBe(true)
     });
 
     test('should throw if LoadMapRepository throws', async () => {
         const { sut, loadMapRepositorySpy } = makeSut()
         jest.spyOn(loadMapRepositorySpy, 'loadMap').mockImplementation(throwError)
-        const promise = sut.load('city')
+        const promise = sut.load('any_code')
         await expect(promise).rejects.toThrow()
     });
 
     test('should return null if LoadMapRepository returns null', async () => {
         const { sut, loadMapRepositorySpy } = makeSut()
         jest.spyOn(loadMapRepositorySpy, 'loadMap').mockReturnValueOnce(null)
-        const promise = await sut.load('city')
+        const promise = await sut.load('any_code')
         await expect(promise).toBeNull()
+    });
+
+    test('should call LoadSchoolsService with correct values', async () => {
+        const { sut, loadSchoolServiceSpy } = makeSut()
+        await sut.load('any_code')
+        expect(loadSchoolServiceSpy.data).toBe('any_external_code')
     });
 })
