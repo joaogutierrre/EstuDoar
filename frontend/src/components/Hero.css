@@ -1,5 +1,5 @@
 .hero-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1509062522246-3755977927d7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1404&q=80);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/bg-hero.jpg");
     height: 60vh;
     width: 100%;
     background-position: center;
@@ -7,35 +7,25 @@
     background-size: cover;
     position: relative;
     color: rgb(236, 240, 241);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-shadow: 0px 2px 4px #29292B;
+    justify-content: space-between;
 }
 
 .hero-buttons-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 4vh;
 }
 
 .hero-buttons-container button{
-    background-color: #4CAF50; /* Green */
     border: none;
-    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     margin: 1vh;
     width: 50vh;
 }
 
 .hero-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
     font-size: 3vh;
     margin: 5vh;

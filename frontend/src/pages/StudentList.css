@@ -1,0 +1,13 @@
+.dashboard-my-list {
+    text-align: justify;
+    font-weight: 700;
+}
+
+.list-card {
+    margin: 40px 0;
+}
+
+.list-container li{
+    font-size: medium;
+    margin: 30px;
+}

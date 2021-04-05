@@ -1,9 +1,12 @@
 .card-container {
-    width: 200px;
+    border: 1px solid #5B2C96;
+    border-radius: 10px;
+    width: 330px;
     overflow: hidden;
     box-shadow: 0px 0px 15px -5px;
     transition: 0.5s;
     animation: ease-in-out;
+    padding-bottom: 10px;
 }
 
 .card-container:hover {
@@ -11,40 +14,54 @@
     box-shadow: 0px 0px 15px -2px;
 }
 
-.image-container img{
+.image-container {
+    width: 18vh;
+}
+.image-container img {
     overflow: hidden;
+    margin: 20px;
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
 }
 
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.student-data {
+    margin: 20px;
+    line-height: 3vh
 }
 
-.list-progress-bar {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.student-about {
+    margin: 5px 40px 30px;
+    text-align: justify;
+    height: 10vh;
 }
-.donate-button button{
-    background-color: white; 
-    border-radius: 5px;
-    border: 2px solid #4CAF50;
-    color: #4CAF50;
-    padding: 16px 32px;
+
+.donate-button {
+    float: right;
+    margin-right: 3vh;
+}
+.donate-button button {
+    background-color: rgb(91,44,150); 
+    border: none;
+    border-radius: 10px;
+    color: rgb(254, 254, 254);
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 10px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
+    margin-left: 80px;
+    width: 15vh;
 }
 
-.donate-button button:hover {
-    background-color: #4CAF50;
-    color: white;
+.grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 500px) {
+    .card-container {
+        width: 380px;
+    }  
 }

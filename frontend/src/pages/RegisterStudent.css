@@ -4,3 +4,9 @@
     align-items: center;
     margin: 20px;
 }
+
+.btn-add-list {
+    height: 5vh;
+    margin: 1vh 0;
+    width: 23vh;
+}

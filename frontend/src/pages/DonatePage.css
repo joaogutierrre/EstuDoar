@@ -16,14 +16,15 @@
 }
 
 .item-container {
-    display: flex;
-    margin: 10px;
+    border-radius: 10px;
+    margin: 30px;
     justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
     list-style-type: none;
     background-color: #ecf0f1;
-    border: 2px solid #7f8c8d;
+}
+
+.donate-page-select {
+    width: 25vh;
 }
 
 .supply-donate{
@@ -35,9 +36,18 @@
 }
 
 .about-student {
+    margin: 5vh 10vh;
+    max-width: 700px;
+    text-align: justify;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.btn-finish-donation {
+    width: 30vh;
+    height: 5vh;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width: 960px) {

@@ -5,20 +5,19 @@ import './Hero.css';
 class Hero extends Component {
   render() {
     return (
-      <section className="hero-container">
-        <div className="hero-text-container">
+      <section className="hero-container f-column">
+        <div className="hero-text-container f-column">
           <h1>
-            Bem-Vindo <br /> a <br /> Estudoar
+          A melhor forma de <br /> <span className="bg-marker">doar conhecimento</span> 
           </h1>
-          <p>auxiliando a educação ao seu redor</p>
         </div>
 
-        <div className="hero-buttons-container">
-          <Link to='/student-login'>
-          <button type="button">Quero Receber uma Doação</button>
-          </Link>
+        <div className="hero-buttons-container f-column">
           <Link to='/donation-feed'>
-          <button type="button">Quero Doar</button>
+          <button className="button-round purple-dark" type="button">QUERO DOAR</button>
+          </Link>
+          <Link to='/student-login'>
+          <button className="button-round purple-dark" type="button purple-dark">RECEBER DOAÇÃO</button>
           </Link>
         </div>
       </section>

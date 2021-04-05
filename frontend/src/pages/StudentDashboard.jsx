@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DashboardStudentCard from '../components/DashboardStudentCard';
 import './StudentDashboard.css'
 import * as database from '../services/databaseApi'
-
+import { GrAddCircle } from "react-icons/gr"
 class StudentDashboard extends Component {
     constructor(props) {
         super(props);
@@ -40,14 +40,17 @@ class StudentDashboard extends Component {
         ));
         return(
             <div className="dashboard-container">
-                {studentList}
-                <div className="card-container">
-                    <div className="add-student-button">
-                        <Link to="/student-dashboard/add-student">
-                            <button>Adicionar Novo Estudante</button>
-                        </Link>
-                    </div>
-                 </div>
+                <div className="f-column">
+                    <h1 className="bg-marker">MEU PERFIL</h1>
+                </div>
+                <div className="dashboard-list-container">
+                    {studentList}
+                        <div className="btn-add-student-container">
+                            <Link to="/student-dashboard/add-student">
+                                <button className="purple-dark button-round btn-add-student">ADICIONAR NOVO ESTUDANTE</button>
+                            </Link>
+                        </div>
+                </div>
             </div>
         )
     }
