@@ -1,10 +1,11 @@
 import { MapModel } from "../../domain/model/map";
 import { LoadMapRepository } from "../protocols/db/map/load-map-repository";
 
-export class LoadMapsRepositorySpy implements LoadMapRepository {
-    data: string
+export class LoadMapRepositorySpy implements LoadMapRepository {
+    wasCalled: boolean
     result: object
-    async loadMap(city: string): Promise<MapModel[]> {
+    async loadMap(): Promise<MapModel[]> {
+        this.wasCalled = true
         const fakeMap =
             [{
                 id: 'any_id',
