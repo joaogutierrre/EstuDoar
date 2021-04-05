@@ -7,15 +7,15 @@ import { SchoolsModel } from "../../../domain/model/school"
 export class ApiLoadSchool implements LoadSchools {
 
     constructor(
-        private readonly loadMapsRepository: LoadMapRepository,
+        private readonly loadMapRepository: LoadMapRepository,
         private readonly loadSchoolService: LoadSchoolService
     ) { }
 
     async load(city: string): Promise<SchoolsModel> {
-        const maps = await this.loadMapsRepository.loadMap(city)
-
+        const map = await this.loadMapRepository.loadMap()
+        /*
         let result
-        result = maps.find(element => {
+        result = map.find(element => {
             if (city == element.cityCode) {
                return element.externalCityCode
             }
@@ -25,5 +25,7 @@ export class ApiLoadSchool implements LoadSchools {
         }
         const schoolsByCity = await this.loadSchoolService.loadSchool(result)
         return schoolsByCity
+        */
+       return null
     }
 }
