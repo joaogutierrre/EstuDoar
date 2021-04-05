@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import students from '../fakeStudents';
-import './DonatePage.css'
+import './DonatePage.css';
+import { FaBirthdayCake, FaHome } from "react-icons/fa";
 class DonatePage extends Component {
   constructor(props) {
     super(props);
@@ -33,18 +34,17 @@ componentDidMount() {
   render() {
     const { location } = this.props;
     const { student } = location.state;
-    console.log(student);
     const { name, about, school, items, image } = student;
     const itemsList = items.map((item, index) => {
       const maxDonateQuantity = [...Array(item.quantity - item.donated + 1).keys()];
       return (
-      <div className="item-container" key={index}>
+      <div className="item-container f-column" key={index}>
         <li className="supply-item">
-          {item.quantity} x {item.category}(s)
+          {item.quantity} x {item.category.toUpperCase()}
         </li>
         <label className="supply-donate">
-          Doar:
-          <select onChange={event => this.setItemDonated(index, event)}>
+          <span>Doar: </span>
+          <select className="txt-input donate-page-select" onChange={event => this.setItemDonated(index, event)}>
             {maxDonateQuantity.map((unit, index) => (<option key={index} value={unit}>{unit} Unidade(s)</option>))}
           </select>
         </label>
@@ -52,25 +52,31 @@ componentDidMount() {
     )});
     return (
       <div className="donate-page">
-        <div className="image-container">
-          <img
-            src={image === "" ? "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1356&q=80" : image}
-            alt="Foto do Estudante"
-          />
-        </div>
-        <div className="about-student">
-          <h3>{ name }</h3>
-          <h4>Escola: {school}</h4>
-          <p>
-            {about}
-          </p>
-        </div>
+        <div className="grid-two">
+          <div className="image-container">
+            <img
+              src={image === "" ? "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1356&q=80" : image}
+              alt="Foto do Estudante"
+            />
+          </div>
+          <div className="student-data">
+                        <h3>{ name }</h3>
+                        <h4>Escola: {school}</h4>
+                        <p><FaHome /> São Paulo - SP</p>
+                        <p><FaBirthdayCake />10 anos</p>
+          </div>
+          </div>
+          <div className="about-student">
+            <p>
+              {about}
+            </p>
+          </div>
         <div className="list-container">
-          <h3>Lista de Materiais</h3>
+          <h3 className="bg-marker">Lista de Materiais</h3>
           <ul>{itemsList}</ul>
         </div>
         <div className="button-container">
-          <button>Finalizar Doação</button>
+          <button className="button-round purple-dark btn-finish-donation">FINALIZAR DOAÇÃO</button>
         </div>
       </div>
     );
