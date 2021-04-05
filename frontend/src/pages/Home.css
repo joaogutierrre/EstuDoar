@@ -1,6 +1,6 @@
 .history-container {
     width: 90%;
-    max-width: 1240px;
+    max-width: 900px;
     margin: 20px auto;
 
     display: grid;
@@ -23,4 +23,12 @@
 .home-title {
     margin: 20px 0;
     justify-self: flex-start;
+}
+
+.home-content {
+    text-align: justify;
+}
+
+.home-content:last-child {
+    margin-top: 10px;
 }
