@@ -50,33 +50,37 @@ class Login extends Component {
     const { email, password, loggedIn } = this.state;
     const isButtonDisabled = !this.validateLoginFields(email, password);
     return (
-      <div className="login-container">
+      <div className="f-column login-container">
+        <h1 className="h1-login"><span className="txt-circle">Já s</span>ou cadastrado</h1>
         <input
+          className="login-input"
           id="input-email"
           name="email"
           type="email"
           value={ email }
           onChange={ this.handleInputChange }
-          placeholder="Login"
+          placeholder="E-mail"
         />
         <input
+          className="login-input"
           id="input-password"
           name="password"
           type="password"
           value={ password }
           onChange={ this.handleInputChange }
-          placeholder="Password"
+          placeholder="Senha"
         />
         {loggedIn ? (
           <Redirect to="/student-dashboard" />
         )
           : (
             <button
+              className="button-round purple-dark btn-login"
               type="button"
               disabled={ isButtonDisabled }
               onClick={ this.handleClick }
             >
-              Entrar
+              ENTRAR
             </button>
           )}
       </div>

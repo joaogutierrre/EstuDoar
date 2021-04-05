@@ -117,7 +117,12 @@ class RegisterStudent extends Component {
             <form className='student-register-form'>
                 <label>
                     Nome:
-                    <input type="text" name="name" value={name} onChange={this.handleInputChange} />
+                    <input
+                        type="text"
+                        name="name"
+                        value={name} 
+                        onChange={this.handleInputChange}
+                    />
                 </label>
                 <label>
                     Escola:
