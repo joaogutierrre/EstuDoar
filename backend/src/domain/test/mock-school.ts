@@ -1,7 +1,7 @@
-import { SubdistrictsModel } from "../model/subdistrict";
+import { SchoolsModel } from "../model/school";
 
-export const mockSubdistrictModel = (): SubdistrictsModel => ({
-    subdistricts: [{
+export const mockSchoolsModel = (): SchoolsModel => ({
+    schools: [{
         id: 'any_id',
         code: 'any_code',
         name: 'any_name'
