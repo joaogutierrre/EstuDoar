@@ -13,19 +13,13 @@ export class ApiLoadSchool implements LoadSchools {
 
     async load(city: string): Promise<SchoolsModel> {
         const map = await this.loadMapRepository.loadMap()
-        /*
-        let result
-        result = map.find(element => {
-            if (city == element.cityCode) {
-               return element.externalCityCode
+        if (map) {
+            let result = map.find(element => element.cityCode === city)
+            if (result) {
+                const schoolsByCity = await this.loadSchoolService.loadSchool(result.externalCityCode)
+                return schoolsByCity
             }
-        })
-        if(result == null){
-            result = {}
         }
-        const schoolsByCity = await this.loadSchoolService.loadSchool(result)
-        return schoolsByCity
-        */
-       return null
+        return null
     }
 }
