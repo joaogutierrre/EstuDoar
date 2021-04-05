@@ -1,11 +1,11 @@
 import { SchoolsModel } from "../../domain/model/school";
 import { mockSchoolsModel } from "../../domain/test/mock-school";
-import { LoadSchoolService } from "../protocols/service/load-school-service";
+import { LoadSchoolsService } from "../protocols/service/load-school-service";
 
-export class LoadSchoolServiceSpy implements LoadSchoolService {
+export class LoadSchoolsServiceSpy implements LoadSchoolsService {
     data: string
     result: object
-    async loadSchool (city: string): Promise<SchoolsModel> {
+    async loadSchools (city: string): Promise<SchoolsModel> {
         this.data = city
         return mockSchoolsModel()
     }

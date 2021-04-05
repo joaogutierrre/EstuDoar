@@ -1,5 +1,5 @@
 import { SchoolsModel } from "../../../domain/model/school";
 
-export interface LoadSchoolService {
-    loadSchool: (city: string) => Promise<SchoolsModel>
+export interface LoadSchoolsService {
+    loadSchools: (city: string) => Promise<SchoolsModel>
 }

@@ -21,13 +21,13 @@ describe('loadSchool', () => {
           statusCode: 200
         }
       }))
-      const schools = await sut.loadSchool('city')
+      const schools = await sut.loadSchools('city')
       expect(schools).toBeTruthy()
     });
 
     test('should return a list of schools on success', async () => {
       const { sut } = makeSut()
-      const schools = await sut.loadSchool('2309')
+      const schools = await sut.loadSchools('2309')
       expect(schools).toBeTruthy()
     });
   });
