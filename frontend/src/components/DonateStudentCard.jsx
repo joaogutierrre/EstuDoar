@@ -44,7 +44,7 @@ class DonateStudentCard extends Component {
               </div>
         </div>
           <div className="student-about">
-            <p>{ about.slice(0, 150) }</p>
+            <p>{ about.length > 150 ? `${about.slice(0, 150)}...` : about }</p>
           </div>
           <div className="grid-two">
             <div className="list-progress-bar">
