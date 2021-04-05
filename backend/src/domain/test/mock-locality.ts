@@ -1,4 +1,5 @@
 import { UfsModel, CitiesModel } from './../model/locality';
+import { SchoolsModel } from '../model/school'
 
 export const mockUfsModel = (): UfsModel => ({
   ufs: [{
