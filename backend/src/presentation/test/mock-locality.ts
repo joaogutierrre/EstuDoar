@@ -1,10 +1,10 @@
 import { LoadCitiesByUf } from './../../domain/usecases/locality/load-cities-by-uf';
-import { LoadSubdistricts } from './../../domain/usecases/subdistricts/load-subdistricts';
+import { LoadSchools } from '../../domain/usecases/school/load-schools';
 import { mockUfsModel, mockCitiesModel } from './../../domain/test/mock-locality';
 import { UfsModel, CitiesModel } from './../../domain/model/locality';
 import { LoadUfs } from './../../domain/usecases/locality/load-ufs';
-import { SubdistrictsModel } from '../../domain/model/subdistrict';
-import { mockSubdistrictModel } from '../../domain/test/mock-subdistrict';
+import { SchoolsModel } from '../../domain/model/school';
+import { mockSchoolsModel } from '../../domain/test/mock-school';
 
 export class LoadUfsSpy implements LoadUfs {
   wasCalled: boolean
@@ -22,10 +22,10 @@ export class LoadCitiesByUfSpy implements LoadCitiesByUf {
   }
 }
 
-export class LoadSubdistrictsSpy implements LoadSubdistricts {
+export class LoadSchoolsSpy implements LoadSchools {
   data: string
-  async load (city: string): Promise<SubdistrictsModel> {
+  async load (city: string): Promise<SchoolsModel> {
     this.data = city
-    return mockSubdistrictModel()
+    return mockSchoolsModel()
   }
 }
