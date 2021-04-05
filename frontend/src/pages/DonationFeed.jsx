@@ -54,7 +54,7 @@ class DonationFeed extends Component {
         <section className="feed-hero-container f-column">
           <div className="hero-text-container f-column">
             <h1>
-            Agradecemos pelo seu <br /><span className="bg-marker">interesse em doar!</span> 
+              Agradecemos pelo seu <br /><span className="bg-marker">interesse em doar!</span> 
             </h1>
           </div>
       </section>

@@ -25,7 +25,7 @@ class DonateStudentCard extends Component {
 
   render() {
     const { student } = this.props 
-    const {name, image, about, id} = student;
+    const {name, image, about, age, city, uf, id} = student;
 
     return (
       <div className="card-container">
@@ -38,8 +38,8 @@ class DonateStudentCard extends Component {
             </div>
               <div className="student-data">
                 <h3>{ name }</h3>
-                <p><FaHome /> São Paulo - SP</p>
-                <p><FaBirthdayCake />10 anos</p>
+                <p><FaHome /> {city} - {uf}</p>
+                <p><FaBirthdayCake /> { 2020 - age.split('-')[0] } anos</p>
               </div>
         </div>
           <div className="student-about">
