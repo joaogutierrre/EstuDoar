@@ -54,4 +54,10 @@ describe('ApiLoadSchool', () => {
         const promise = sut.load('any_code')
         await expect(promise).rejects.toThrow()
     });
+
+    test('should return a list of schools on success', async () => {
+        const { sut } = makeSut()
+        const schools = await sut.load('any_code')
+        expect(schools).toEqual(mockSchoolsModel())
+    });
 })
