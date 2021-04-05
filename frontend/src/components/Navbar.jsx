@@ -39,17 +39,22 @@ class Navbar extends Component {
                 <ul className={click ? 'nav-menu active bg-white' : 'nav-menu'}>
                     <li className='nav-item'>
                         <Link to='/donation-feed' className='nav-links' onClick={this.closeMobileMenu}>
-                            Quero Doar
+                            DOAR MATERIAL
                         </Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to='/get-donation' className='nav-links' onClick={this.closeMobileMenu}>
-                            Receber Doação
+                        <Link to='/student-login' className='nav-links' onClick={this.closeMobileMenu}>
+                            RECEBER DOAÇÃO
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/stories' className='nav-links' onClick={this.closeMobileMenu}>
+                            INSPIRE-SE
                         </Link>
                     </li>
                     <li className='nav-item'>
                         <Link to='/about' className='nav-links' onClick={this.closeMobileMenu}>
-                            Sobre Nós
+                            FALE CONOSCO
                         </Link>
                     </li>
                 </ul>

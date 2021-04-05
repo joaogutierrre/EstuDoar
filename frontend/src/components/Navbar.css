@@ -13,6 +13,10 @@ Source:https://github.com/briancodex/react-website-v1/blob/163f81957ac5e32eb01a1
     top: 0;
     z-index: 999;
   }
+
+  .navbar a {
+    color: rgb(43,16,76);
+  }
   
   .navbar-container {
     font-size: 1.5rem;
