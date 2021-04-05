@@ -24,7 +24,6 @@ class DonateStudentCard extends Component {
   }
 
   render() {
-    const { percent } = this.state;
     const { student } = this.props 
     const {name, image, about, id} = student;
 
@@ -46,10 +45,6 @@ class DonateStudentCard extends Component {
           <div className="student-about">
             <p>{ about.length > 150 ? `${about.slice(0, 150)}...` : about }</p>
           </div>
-          <div className="grid-two">
-            <div className="list-progress-bar">
-              <progress id="file" value={percent} max="100" />
-            </div>
             <div className="donate-button">
               <Link
                 data-testid="product-detail-link"
@@ -60,10 +55,9 @@ class DonateStudentCard extends Component {
                     },
                 }}
               >
-                <button>Contribuir</button>
+                <button>Doar</button>
               </Link>
           </div>
-      </div>
       </div>
     );
   }
