@@ -17,3 +17,9 @@
     border-radius: 10px;
     padding: 10px;
 }
+
+.btn-filter {
+    margin: 20px;
+    height: 7vh;
+    width: 25vh;
+}

@@ -52,7 +52,7 @@ class FeedFilter extends Component {
       this.getCitiesList();
     }
     return (
-      <div>
+      <div className="f-column">
         <form className="filter-form">
             <select id="ufs" className="select-input" name="currentUFValues" onChange={this.handleInputChange}>
               <option value='35'>Selecione o Estado</option>
@@ -66,7 +66,7 @@ class FeedFilter extends Component {
               <option value="all">Todas as Escolas</option>
             </select>
         </form>
-        <button type="button" onClick={() => handleFilters(currentUF, currentCity, currentSchool)}>Filtrar</button>
+        <button className="btn-filter button-round purple-dark"type="button" onClick={() => handleFilters(currentUF, currentCity, currentSchool)}>Filtrar</button>
       </div>
     );
   }

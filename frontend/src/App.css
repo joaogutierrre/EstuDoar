@@ -24,6 +24,7 @@
 }
 
 .button-round {
+  border: none;
   border-radius: 12px;
   font-family: Public Sans;
   font-style: normal;
