@@ -27,7 +27,7 @@ describe('loadSchool', () => {
 
     test('should return a list of schools on success', async () => {
       const { sut } = makeSut()
-      const schools = await sut.loadSchool('3304557')
+      const schools = await sut.loadSchool('2309')
       expect(schools).toBeTruthy()
     });
   });

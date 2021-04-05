@@ -3,8 +3,8 @@ import { LoadSchoolService } from "../../../data/protocols/service/load-school-s
 import { SchoolsModel } from "../../../domain/model/school";
 
 export class SchoolService implements LoadSchoolService{
-    async loadSchool (city: string): Promise<SchoolsModel>{
-        const response = await axios.get(`http://www.qedu.org.br/api/cities/${city}/schools/?limit=200&count=1`)
-        return response.data
-      }
+  async loadSchool (city: string): Promise<any>{
+    const response = await axios.get(`http://www.qedu.org.br/api/cities/${city}/schools?limit=200000`)
+    return response.data
+  }
 }
