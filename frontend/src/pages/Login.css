@@ -1,18 +1,6 @@
-.login-input {
-    background-color: rgba(196, 196, 196, 0.33);
-    border: none;
-    border-radius: 10px;
-    margin: 1vh;
-    width: 50vh;
-    height: 5vh;
-}
-
 .btn-login {
     margin-top: 5vh;
     height: 7vh;
     width: 50vh;
 }
 
-.h1-login {
-    margin-bottom: 5vh;
-}

@@ -13,6 +13,7 @@
 
 .select-input {
     background-color: rgba(196, 196, 196, 0.171);
+    border: none;
     mix-blend-mode: normal;
     border-radius: 10px;
     padding: 10px;

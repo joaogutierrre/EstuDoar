@@ -1,0 +1,30 @@
+.add-list-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    border-radius: 10px;
+}
+
+.select-list {
+    background-color: rgba(196, 196, 196, 0.33);
+    border: none;
+    border-radius: 10px;
+    height: 5vh;
+    width: 50vh;
+    margin: 10px;
+}
+
+.input-quantity {
+    background-color: rgba(196, 196, 196, 0.33);
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    height: 5vh;
+    padding: 10px;
+}
+
+.btn-remove {
+    height: 5vh;
+    margin-left: 20px;
+    width: 18vh;
+}

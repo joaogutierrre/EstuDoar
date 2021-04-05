@@ -51,9 +51,9 @@ class Login extends Component {
     const isButtonDisabled = !this.validateLoginFields(email, password);
     return (
       <div className="f-column login-container">
-        <h1 className="h1-login"><span className="txt-circle">Já s</span>ou cadastrado</h1>
+        <h1 className="h1-login default-title"><span className="txt-circle">Já s</span>ou cadastrado</h1>
         <input
-          className="login-input"
+          className="txt-input"
           id="input-email"
           name="email"
           type="email"
@@ -62,7 +62,7 @@ class Login extends Component {
           placeholder="E-mail"
         />
         <input
-          className="login-input"
+          className="txt-input"
           id="input-password"
           name="password"
           type="password"

@@ -115,28 +115,30 @@ class RegisterStudent extends Component {
         const { name, school, about, items, supplyCategories, isDone } = this.state;
         return(
             <form className='student-register-form'>
-                <label>
-                    Nome:
+                <h2 className="bg-marker default-title">ADICIONAR ESTUDANTE</h2>
                     <input
+                        className="txt-input"
                         type="text"
                         name="name"
                         value={name} 
                         onChange={this.handleInputChange}
+                        placeholder="Nome do estudante"
                     />
-                </label>
-                <label>
-                    Escola:
-                    <input type="text" name="school" value={school} onChange={this.handleInputChange} />
-                </label>
-                <label>
-                    Sobre:
+                    <input
+                        className="txt-input"
+                        type="text"
+                        name="school"
+                        value={school}
+                        onChange={this.handleInputChange}
+                        placeholder="Escola atual"
+                    />
                     <textarea 
+                        className="txt-input txt-area"
                         name="about" 
                         value={about} 
                         onChange={this.handleInputChange} 
-                        placeholder="Escreva um resumo sobre o estudante"    
+                        placeholder="Escreva sua hitória aqui"    
                     />
-                </label>
                 <div className="list-container">
                     {items.map((item , index) => (
                     <SelectSchoolSupply 
@@ -147,8 +149,8 @@ class RegisterStudent extends Component {
                         categories={supplyCategories}
                     />))}
                 </div>
-                <button onClick={this.addItemToList}>Novo Item</button>
-                {isDone ? <Redirect to="/student-dashboard"/> :<button onClick={this.handleRegister}>Finalizar Cadastro</button>}
+                <button className="button-round purple-dark btn-add-list" onClick={this.addItemToList}>Novo Item</button>
+                {isDone ? <Redirect to="/student-dashboard"/> :<button className="button-round success btn-add-list" onClick={this.handleRegister}>Finalizar Cadastro</button>}
             </form>
         )
     }

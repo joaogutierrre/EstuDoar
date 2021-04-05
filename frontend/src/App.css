@@ -36,6 +36,16 @@
   color: rgb(254,254,254);
 }
 
+.danger {
+  background-color: rgb(233,77,77);
+  color: rgb(254,254,254);
+}
+
+.success {
+  background-color: rgb(76,190,81);
+  color: rgb(254,254,254);
+}
+
 .f-column {
     display: flex;
     flex-direction: column;
@@ -50,4 +60,22 @@
   padding: 80px 0;
   padding-left: 50px;
   margin-left: -30px;
+}
+
+.txt-input {
+  background-color: rgba(196, 196, 196, 0.33);
+  border: none;
+  border-radius: 10px;
+  margin: 1vh;
+  width: 50vh;
+  height: 5vh;
+  padding: 10px;
+}
+
+.txt-area {
+  height: 25vh;
+}
+
+.default-title {
+    margin: 5vh 0;
 }
