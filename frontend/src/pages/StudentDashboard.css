@@ -1,12 +1,31 @@
-.dashboard-container {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+.dashboard-list-container {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
     justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
     margin: 20px;
 }
 
-.add-student-button {
-    
+.btn-add-student {
+    height: 8vh;
+    width: 40vh;
 }
+
+@media only screen and (min-width: 860px) {
+    .dashboard-list-container {
+      grid-template-columns: 1fr 1fr;
+    }  
+}
+
+@media only screen and (min-width: 1200px) {
+    .dashboard-list-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 

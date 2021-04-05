@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import './StudentList.css';
 class StudentList extends Component {
     render(){
         const { location } = this.props;
@@ -8,7 +8,7 @@ class StudentList extends Component {
             <p key={ index }>Item: {item.category} Requisitado: {item.quantity} Doados: {item.donated}</p>
         ));
         return(
-            <div>
+            <div className="dashboard-my-list">
                 {listView}
             </div>
         )

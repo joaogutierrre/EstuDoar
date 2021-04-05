@@ -1,7 +1,7 @@
 .card-container {
     border: 1px solid #5B2C96;
     border-radius: 10px;
-    width: 380px;
+    width: 330px;
     overflow: hidden;
     box-shadow: 0px 0px 15px -5px;
     transition: 0.5s;
@@ -58,4 +58,10 @@
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (min-width: 500px) {
+    .card-container {
+        width: 380px;
+    }  
 }

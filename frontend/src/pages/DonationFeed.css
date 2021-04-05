@@ -40,7 +40,7 @@
     }  
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1200px) {
     .card-list {
       grid-template-columns: repeat(3, 1fr);
     }
