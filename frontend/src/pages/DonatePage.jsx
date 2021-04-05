@@ -34,7 +34,7 @@ componentDidMount() {
   render() {
     const { location } = this.props;
     const { student } = location.state;
-    const { name, about, school, items, image } = student;
+    const { name, about, school, items, image, city, uf ,age } = student;
     const itemsList = items.map((item, index) => {
       const maxDonateQuantity = [...Array(item.quantity - item.donated + 1).keys()];
       return (
@@ -62,8 +62,8 @@ componentDidMount() {
           <div className="student-data">
                         <h3>{ name }</h3>
                         <h4>Escola: {school}</h4>
-                        <p><FaHome /> São Paulo - SP</p>
-                        <p><FaBirthdayCake />10 anos</p>
+                        <p><FaHome /> {city} - {uf}</p>
+                        <p><FaBirthdayCake /> { 2020 - age.split('-')[0] } anos</p>
           </div>
           </div>
           <div className="about-student">

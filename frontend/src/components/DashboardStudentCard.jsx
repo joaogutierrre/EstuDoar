@@ -25,7 +25,7 @@ class DashboardStudentCard extends Component {
 
     render() {
         const { percent } = this.state;
-        const {name, image, items, id} = this.props;
+        const {name, image, items, city, uf, age, id} = this.props;
         return(
             <div className="card-container dashboard-card">
                 <div className="grid-two">
@@ -37,8 +37,8 @@ class DashboardStudentCard extends Component {
                     </div>
                     <div className="student-data">
                         <h3>{ name }</h3>
-                        <p><FaHome /> São Paulo - SP</p>
-                        <p><FaBirthdayCake />10 anos</p>
+                        <p><FaHome /> {city} - {uf}</p>
+                        <p><FaBirthdayCake /> { 2020 - age.split('-')[0] } anos</p>
                     </div>
                 </div>
                 <div className="f-column">

@@ -13,7 +13,8 @@ class Home extends Component {
                     <div className="history-image-container">
                         <img src={imgObjetivo} alt=""/>
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit beatae est quas quasi totam delectus ipsum, omnis, assumenda distinctio doloribus corrupti iste? Excepturi, hic. Aperiam libero recusandae aspernatur eveniet hic.</p>
+                        <h4 className="home-content">Uma forma diferenciada de doar conhecimento através de materiais escolares. </h4>
+                    <p className="home-content">O foco é suprir a carência de acesso aos meios que ajudam na promoção de uma educação de qualidade: materiais didáticos, artigos de papelaria e até recursos tecnológicos (devido ao "novo normal").</p>
                 </div>
                 <div className="history-container">
                     <h2 className="home-title"><span className="txt-circle">Por </span>que doar material é importante?</h2>
@@ -21,7 +22,8 @@ class Home extends Component {
                         <img src={imgMotivo} alt=""/>
                     </div>
                     <div>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit beatae est quas quasi totam delectus ipsum, omnis, assumenda distinctio doloribus corrupti iste? Excepturi, hic. Aperiam libero recusandae aspernatur eveniet hic.</p>
+                    <h4 className="home-content">A lista de materiais escolares se torna cada vez mais cara, principalmente para os estudantes da educação pública. </h4>
+                        <p className="home-content last-p">Pesquisas indicam que gastos com materiais consome 22% do salário do salário médio do país, evidenciando a desigualdade educacional brasileira. A pandemia também prejudica os estudantes com recursos tecnológicos limitados, tornando a utilização de materiais escolares e didáticos ainda mais imprescindível. </p>
                     </div>
                 </div>
             </div>

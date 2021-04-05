@@ -55,15 +55,15 @@ class FeedFilter extends Component {
       <div className="f-column">
         <form className="filter-form">
             <select id="ufs" className="select-input" name="currentUFValues" onChange={this.handleInputChange}>
-              <option value='35'>Selecione o Estado</option>
+              <option value=''>Selecione o Estado</option>
               {ufs.map((uf) => (<option key={ uf.id } value={ [uf.id, uf.sigla] }>{ uf.nome }</option>))}
             </select>
             <select id="cities" className="select-input" name="currentCity" onChange={this.handleInputChange}>
-              <option value="all">Todas as Cidades</option>
+              <option value="">Todas as Cidades</option>
               {cities.map((city) => (<option key={ city.id } value={ city.nome }>{ city.nome }</option>))}
             </select>
             <select id="schools" className="select-input" name="currentSchool" onChange={this.handleInputChange}>
-              <option value="all">Todas as Escolas</option>
+              <option value="">Todas as Escolas</option>
             </select>
         </form>
         <button className="btn-filter button-round purple-dark"type="button" onClick={() => handleFilters(currentUF, currentCity, currentSchool)}>Filtrar</button>
