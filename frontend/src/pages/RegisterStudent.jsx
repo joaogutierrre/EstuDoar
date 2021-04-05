@@ -27,7 +27,6 @@ class RegisterStudent extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.getSupplyCategories = this.getSupplyCategories.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
-        this.isInvalidFields = this.isInvalidFields.bind(this);
         this.getCitiesList = this.getCitiesList.bind(this);
         this.getUFsList = this.getUFsList.bind(this);
     }
