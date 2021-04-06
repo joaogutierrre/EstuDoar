@@ -33,7 +33,7 @@
 .student-about {
     margin: 5px 40px 30px;
     text-align: justify;
-    height: 10vh;
+    height: 15vh;
 }
 
 .donate-button {
@@ -63,5 +63,8 @@
 @media only screen and (min-width: 500px) {
     .card-container {
         width: 380px;
-    }  
+    }
+    .student-about {
+        height: 10vh;
+    }
 }
