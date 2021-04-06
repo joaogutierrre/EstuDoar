@@ -23,7 +23,7 @@
 </ol>
 <h2 id="sobre">Sobre</h2>
 
-<p text="justify">EstuDoar é uma plataforma WEB desenvolvida durante o hackathon do Programa de Formação da FCamara, num período de 15 dias, com o intuito de faliciltar a doação de materiais escolares, assim como o acesso dos materiais doados para quem precisa. O objetivo é que por meio da plataforma seja possível doar tendo como perspectiva a necessidade específica dos estudantes cadastrados na aplicação, tornando viável a chegada fácil dos materias àqueles que necessitam, integrando a solução lógica, desenvolvida por meio de software com o mundo físico.</p>
+<p text="justify">EstuDoar é uma plataforma WEB desenvolvida durante o hackathon do Programa de Formação da FCamara, num período de 15 dias, com o intuito de facilitar a doação de materiais escolares, assim como o acesso dos materiais doados para quem precisa. O objetivo é que por meio da plataforma seja possível doar tendo como perspectiva a necessidade específica dos estudantes cadastrados na aplicação, tornando viável a chegada fácil dos materiais aqueles que necessitam, integrando a solução lógica, desenvolvida por meio de software com o mundo físico.</p>
 
 <hr>
 
