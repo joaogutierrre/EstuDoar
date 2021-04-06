@@ -1,0 +1,70 @@
+.card-container {
+    border: 1px solid #5B2C96;
+    border-radius: 10px;
+    width: 330px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px -5px;
+    transition: 0.5s;
+    animation: ease-in-out;
+    padding-bottom: 10px;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px -2px;
+}
+
+.image-container {
+    width: 18vh;
+}
+.image-container img {
+    overflow: hidden;
+    margin: 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.student-data {
+    margin: 20px;
+    line-height: 3vh
+}
+
+.student-about {
+    margin: 5px 40px 30px;
+    text-align: justify;
+    height: 15vh;
+}
+
+.donate-button {
+    float: right;
+    margin-right: 3vh;
+}
+.donate-button button {
+    background-color: rgb(91,44,150); 
+    border: none;
+    border-radius: 10px;
+    color: rgb(254, 254, 254);
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 80px;
+    width: 15vh;
+}
+
+.grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 500px) {
+    .card-container {
+        width: 380px;
+    }
+    .student-about {
+        height: 10vh;
+    }
+}

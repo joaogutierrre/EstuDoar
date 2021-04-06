@@ -1,0 +1,26 @@
+.filter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.filter-form select{
+    margin: 10px;
+    width: 40vh;
+    max-width: 400px;
+}
+
+.select-input {
+    background-color: rgba(196, 196, 196, 0.171);
+    border: none;
+    mix-blend-mode: normal;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.btn-filter {
+    margin: 20px;
+    height: 7vh;
+    width: 25vh;
+}
