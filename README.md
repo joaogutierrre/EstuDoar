@@ -7,6 +7,7 @@
 ![Badge](https://img.shields.io/github/stars/joaogutierrre/EstuDoar?&style=for-the-badge)
 ![Badge](https://img.shields.io/static/v1?label=React.js&message=v17.0.2&color=blue&logo=react&style=for-the-badge)
 ![Badge](https://img.shields.io/static/v1?label=Swagger&message=Docs&color=green&logo=swagger&style=for-the-badge)
+![Badge](https://img.shields.io/static/v1?label=Docker&message=v20.10.5&color=blue&logo=docker&style=for-the-badge)
 
 # EstuDoar -  A melhor forma de doar conhecimento
 
@@ -106,7 +107,18 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 >#### 05 - Entre no diretório /backend e inicie o docker:
 
 ```docker
-$ npm run up
+> npm run up
+```
+
+>#### [Opcional] Caso queria desligar o docker rode o comando:
+
+```docker
+> npm run down
+```
+>#### [Opcional] Caso queria visualizar os testes, execute o comando:
+
+```npm
+> npm test
 ```
 
 >#### 06 - Agora, está na hora de instalar o frontend: 
