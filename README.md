@@ -79,7 +79,7 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 <li> Foram criados dois vídeos para a iniciativa: um vídeo pitch e outro demonstrando a ideia inicial por meio de protótipo desenvolvido pelos UXs. Vale a pena conferir:
 <ul>
 <a href="https://youtu.be/onNDhSUu84M"><li>Vídeo pitch</li></a>
-<a href="#"><li>Vídeo de demonstração de funcionalidades</li></a>
+<a href="https://youtu.be/HUIReKpRHig"><li>Vídeo de demonstração de funcionalidades</li></a>
 </ul>
 </li>
 </li>
