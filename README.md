@@ -33,7 +33,6 @@ O backend da aplicação foi codificado utilizando Node.js com Typescript, utili
 Architecture, utilizando DDD (Domain Driven Design) como design pattern e TDD (Test Driven Development) como metodologia de trabalho. Conceitos de Conventional Commits, foram
 utilizados para mapear melhor o histórico de implementação de código. O frontend foi codificado utilizando React para criação das interações do usuário.
 O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizaddo para padronização de código. Além disso, utilizamos Husky para criar gatilhos pré-commit, garantindo a eficiência dos testes.
-<br><br>Para fazer a plataforma rodar localmente você precisrá instalar:
   
 <h3> Requisitos backend </h3>
 <h4>
@@ -89,13 +88,11 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 
 <h2 id="instalacao-backend">Instalação de Backend</h2>
 
->#### 01 - Instale o Node.js <a href="https://nodejs.org/en/download/"> AQUI; </a>
+>#### 01 - Instale o docker. Posteriormente ele instalará o Node.js e o MondoDB;
 
->#### 02 - Após instalar o node, instale o MongoDB <a href="https://www.mongodb.com/try/download/community"> AQUI; </a>
+>#### 02 - Instale o Typescript. Este precisa ser instalado globalemnte;
 
->#### 04 - Instale o docker;
-
->#### 03 - Instale o Typescript;
+>#### 03 - Instale o docker;
 
 >#### 04 - Após a instalação do tyspescript, dê um fork ou clone este repositório em sua máquina local;
 
@@ -104,7 +101,7 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 ```npm
 > npm install
 ```
->#### 05 - Entre no diretório /backend e inicie o docker:
+>#### 06 - Entre no diretório /backend e inicie o docker:
 
 ```docker
 > npm run up
@@ -121,7 +118,7 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 > npm test
 ```
 
->#### 06 - Agora, está na hora de instalar o frontend: 
+>#### 07 - Agora, está na hora de instalar o frontend: 
 
 <hr>
 
