@@ -88,9 +88,9 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 
 <h2 id="instalacao-backend">Instalação de Backend</h2>
 
->#### 01 - Instale o docker. Posteriormente ele instalará o Node.js e o MondoDB;
+>#### 01 - Instale o docker. Posteriormente ele instalará o Node.js e o MongoDB;
 
->#### 02 - Instale o Typescript. Este precisa ser instalado globalemnte;
+>#### 02 - Instale o Typescript. Este precisa ser instalado globalmente;
 
 >#### 03 - Instale o docker;
 
@@ -161,6 +161,6 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 
 >#### 08 - [ ] Utilização de eslint no frontend.
 
->#### <h2 id="licencas"> Licença </h2>
+<h4 id="licencas"> Licença </h4>
 
 >#### <a href="https://choosealicense.com/licenses/mit/">MIT License Copyright (c) [2021] [EstuDoar]</a>
