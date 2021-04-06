@@ -78,10 +78,17 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 </li>
 <li> Foram criados dois vídeos para a iniciativa: um vídeo pitch e outro demonstrando a ideia inicial por meio de protótipo desenvolvido pelos UXs. Vale a pena conferir:
 <ul>
+<h3>
 <a href="https://youtu.be/onNDhSUu84M"><li>Vídeo pitch</li></a>
 <a href="https://youtu.be/HUIReKpRHig"><li>Vídeo de demonstração de funcionalidades</li></a>
+</h3>
 </ul>
 </li>
+<li>
+<p>Também escrevemos um artigo documentando todo o processo de criação das telas e interface do usuário</p>
+<h3>
+<a href="https://natachaandrade.medium.com/estudoar-facilitando-a-doa%C3%A7%C3%A3o-de-materiais-escolares-com-ux-4fc3abd566f">Artigo do Medium</a>
+</h3>
 </li>
 </ol>
 <br>
