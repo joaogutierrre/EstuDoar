@@ -156,7 +156,7 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 
 >#### 04 - [ ] Modernização da escrita do frontend em React;
 
->#### 05 - [ ] Padroniczação de classes CSS;
+>#### 05 - [ ] Padronização de classes CSS;
 
 >#### 06 - [ ] Implementação de React context;
 
