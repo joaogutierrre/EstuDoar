@@ -152,7 +152,7 @@ O Jest foi utilizado para executar os testes unitários e o Eslint foi utilizadd
 
 <h2 id="features-furutas"> Features futuras </h2>
 
->#### 01 - [ ] mplementação de listagem dinâmica das escolas por meio do banco de dados; 
+>#### 01 - [ ] Implementação de listagem dinâmica das escolas por meio do banco de dados; 
 
 >#### 02 - [ ] Gameficação da experiência do usário em relação às doações feitas, onde o usuário desbloqueia medalhas de acordo com o número de doações que faz;
 
